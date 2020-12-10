@@ -137,7 +137,4 @@ class courses(students):
 
         ws_student_courses["F" + str(student_course_row)] = g1
         ws_student_courses["G" + str(student_course_row)] = g2
-        ws_student_courses["H" + str(student_course_row)] = g3
-
-
-#helllllllllllllllooooooooooooooooo
+        ws_student_courses["H" + str(student_course_row)] = g
