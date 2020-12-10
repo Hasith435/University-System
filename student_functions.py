@@ -126,7 +126,7 @@ class courses(students):
         list_index_students = cls.student_ID.index(student_ID)
         list_index_courses = cls.course_id.index(Course_ID)
 
-        ws_student_courses["A" + str(student_course_row)] = cls.student_ID[list_index_students]
+        ws_student_courses["A" + str(student_course_row)] = 
         ws_student_courses["B" + str(student_course_row)] = cls.fname[list_index_students]
         ws_student_courses["C" + str(student_course_row)] = cls.lname[list_index_students]
 
