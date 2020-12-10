@@ -36,10 +36,9 @@ class students:
         self.guardian_telephone = guardian_telephone
         self.address = address
 
-
-
     @classmethod
     def register_students(cls, student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
+
         cls.student_ID.append(student_ID)
         cls.fname.append(fname)
         cls.lname.append(lname)
@@ -48,6 +47,7 @@ class students:
         cls.guardian_names.append(guardian_names)
         cls.guardian_telephone.append(guardian_telephone)
         cls.address.append(address)
+
 
         list_index = cls.student_ID.index(student_ID)
 
@@ -90,7 +90,6 @@ class courses(students):
         self.course_duration = course_duration
         self.prerequisistes = prerequisistes
         self.instructors = instructors
-
 
     @classmethod
     def register_course(cls, course_ID, course_name, course_duration, prerequisites, instructors):

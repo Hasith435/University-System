@@ -30,7 +30,7 @@ while 1:
         guardian_telephone = input('Guardian Telephone Number: ')
         address = input('Address: ')
 
-        students.register_students(student_ID, fname, lname, DoB, gender, guardian_name, guardian_telephone, address)
+        students.register_students(student_ID,fname, lname, DoB, gender, guardian_name, guardian_telephone, address)
 
     if action == "2":
         student_id = input('Student ID:')
@@ -60,9 +60,11 @@ while 1:
         student_ID = input('Student_ID:')
         course_ID = input('Course ID: ')
 
-        g1 = input("Grade 1 mark:")
-        g2 = input('Grade 2 mark:')
-        g3 = input('Grade 3 mark: ')
+        g1 = input("Term 1 mark:")
+        g2 = input('Term 2 mark:')
+        g3 = input('Term 3 mark: ')
+        g4 = input('Term 4 mark:')
+        g5 = input('Term 5 mark:')
 
-        courses.add_student_courses(student_ID,course_ID, g1, g2, g3)
+        courses.add_student_courses(student_ID,course_ID, g1, g2, g3, g4, g5)
 
