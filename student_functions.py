@@ -122,19 +122,23 @@ class courses(students):
         print(f'Instructors: {cls.instructors[list_index]}')
 
     @classmethod
-    def add_student_courses(cls, student_ID, Course_ID, g1, g2, g3):
+    def add_student_courses(cls, student_ID, Course_ID, g1, g2, g3, g4, g5):
         list_index_students = cls.student_ID.index(student_ID)
         list_index_courses = cls.course_id.index(Course_ID)
 
-        for x in range(2, 100000):
 
-        ws_student_courses["A" + str(student_course_row)] = 
-        ws_student_courses["B" + str(student_course_row)] = 
-        ws_student_courses["C" + str(student_course_row)] = 
+        ws_student_courses["A" + str(student_course_row)] = cls.student_ID[list_index_students]
+        ws_student_courses["B" + str(student_course_row)] = cls.fname[list_index_students]
+        ws_student_courses["C" + str(student_course_row)] = cls.lname[list_index_students]
 
-        ws_student_courses["D" + str(student_course_row)] = 
-        ws_student_courses["E" + str(student_course_row)] = 
+        ws_student_courses["D" + str(student_course_row)] = cls.course_id[list_index_courses]
+        ws_student_courses["E" + str(student_course_row)] = cls.course_name[list_index_courses]
 
         ws_student_courses["F" + str(student_course_row)] = g1
         ws_student_courses["G" + str(student_course_row)] = g2
-        ws_student_courses["H" + str(student_course_row)] = g
+        ws_student_courses["H" + str(student_course_row)] = g3
+        ws_student_courses["I" + str(student_course_row)] = g4
+        ws_student_courses["J" + str(student_course_row)] = g5
+
+        ws_student_courses["L4"] = num_student_courses + 1
+        wb.save(filename="university.xlsx")
