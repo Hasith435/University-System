@@ -126,12 +126,14 @@ class courses(students):
         list_index_students = cls.student_ID.index(student_ID)
         list_index_courses = cls.course_id.index(Course_ID)
 
-        ws_student_courses["A" + str(student_course_row)] = 
-        ws_student_courses["B" + str(student_course_row)] = cls.fname[list_index_students]
-        ws_student_courses["C" + str(student_course_row)] = cls.lname[list_index_students]
+        for x in range(2, 100000):
 
-        ws_student_courses["D" + str(student_course_row)] = cls.course_id[list_index_courses]
-        ws_student_courses["E" + str(student_course_row)] = cls.course_name[list_index_courses]
+        ws_student_courses["A" + str(student_course_row)] = 
+        ws_student_courses["B" + str(student_course_row)] = 
+        ws_student_courses["C" + str(student_course_row)] = 
+
+        ws_student_courses["D" + str(student_course_row)] = 
+        ws_student_courses["E" + str(student_course_row)] = 
 
         ws_student_courses["F" + str(student_course_row)] = g1
         ws_student_courses["G" + str(student_course_row)] = g2
