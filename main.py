@@ -10,7 +10,8 @@ action = ("""These are the actions that you can perform:
 2. View student Details
 3. Add new courses
 4. View Course Details
-5. Add Students to courses""")
+5. Add Students to courses
+6. Remove Students from a Course""")
 
 print('')
 print(action)

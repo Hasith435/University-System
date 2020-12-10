@@ -17,6 +17,7 @@ student_course_row = num_student_courses + 2
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
 class students:
+
     student_ID = []
     fname = []
     lname = []
@@ -78,6 +79,7 @@ class students:
       
 
 class courses(students):
+
     course_id = []
     course_name = []
     course_duration = []
@@ -141,3 +143,7 @@ class courses(students):
 
         ws_student_courses["L4"] = num_student_courses + 1
         wb.save(filename="university.xlsx")
+
+    @staticmethod
+    def remove_student_courses(student_ID, Course_ID):
+        pass
