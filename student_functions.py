@@ -14,6 +14,7 @@ course_row = num_courses + 2
 num_student_courses = ws_student_courses["L4"].value
 student_course_row = num_student_courses + 2
 
+column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
 class students:
     student_ID = []
@@ -74,7 +75,7 @@ class students:
         print('Guardian Names:', cls.guardian_names[list_index])
         print('Guardian Telephone:', cls.guardian_telephone[list_index])
         print('Address: ', cls.address[list_index])
-
+      
 
 class courses(students):
     course_id = []
