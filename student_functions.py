@@ -4,6 +4,7 @@ wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
 ws_courses = wb['courses']
 ws_student_courses = wb['student_courses']
+ws_student_clubs = wb['student_clubs']
 
 num_students = ws["J3"].value
 student_row = num_students + 2
@@ -13,6 +14,9 @@ course_row = num_courses + 2
 
 num_student_courses = ws_student_courses["L4"].value
 student_course_row = num_student_courses + 2
+
+num_student_clubs = ws_student_clubs["H4"].value
+student_club_row = num_student_clubs + 2
 
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
@@ -144,6 +148,10 @@ class courses(students):
         ws_student_courses["L4"] = num_student_courses + 1
         wb.save(filename="university.xlsx")
 
+
+
+
+    #this function is not done yet
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
         for i in range(2, 100000):
@@ -164,3 +172,54 @@ class courses(students):
                 print('Student_ID and Course_ID not found')
 
             wb.save(filename="university.xlsx")
+
+class clubs(students, courses):
+
+    club_id = []
+    club_name = []
+    subject = []
+    description = []
+
+    @classmethod
+    def register_club(cls, club_id, club_name, subject, description):
+        cls.club_id.append(club_id)
+        cls.club_name.append(club_name)
+        cls.subject.append(subject)
+        cls.description.append(description)
+
+        list_index = cls.club_id.index(club_id)
+
+        ws_student_clubs["A" + str(student_club_row)] = cls.club_id[list_index]
+        ws_student_clubs["B" + str(student_club_row)] = cls.club_name[list_index]
+        ws_student_clubs["C" + str(student_club_row)] = cls.subject[list_index]
+        ws_student_clubs["D" + str(student_club_row)] = cls.description[list_index]
+
+        ws["F4"] = num_student_clubs + 1
+
+        wb.save(filename="university.xlsx")
+
+    @classmethod
+    def view_club_details(cls, club_id):
+        list_index = cls.club_id.index(club_id)
+
+        print('')
+        print(f"Club ID: {cls.club_id[list_index]}")
+        print(f"Club Name: {cls.club_name[list_index]}")
+        print(f"Subject: {cls.subject[list_index]}")
+        print(f"Description: {cls.description[list_index]}")
+
+    @classmethod
+    def add_student_club(cls, student_ID, club_ID):
+        list_index_students = cls.student_ID.index(student_ID)
+        list_index_club = cls.club_id.index(club_ID)
+
+        ws_student_clubs["A" + str(student_club_row)] = cls.student_ID[list_index_students]
+        ws_student_clubs["B" + str(student_club_row)] = cls.fname[list_index_students]
+        ws_student_clubs["C" + str(student_club_row)] = cls.lname[list_index_students]
+
+        ws_student_clubs["D" + str(student_club_row)] = cls.club_id[list_index_club]
+        ws_student_clubs["E" + str(student_club_row)] = cls.club_name[list_index_club]
+
+        ws_student_clubs["H4"] = num_student_clubs + 1
+
+        wb.save(filename = "university.xlsx")

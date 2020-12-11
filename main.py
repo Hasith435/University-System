@@ -11,7 +11,10 @@ action = ("""These are the actions that you can perform:
 3. Add new courses
 4. View Course Details
 5. Add Students to courses
-6. Remove Students from a Course""")
+6. Remove Students from a Course
+7. Add clubs to the university
+8. View club details
+9. Add students to clubs""")
 
 print('')
 print(action)
@@ -74,4 +77,16 @@ while 1:
         course_ID = input("Course ID:")
     
         courses.remove_student_courses(student_ID, course_ID)
-        
+
+    if action == "7":
+        print('')
+        print('Please fill in this information')
+        print('')
+
+        club_id = input('Club ID:')
+        club_name = input('Club Name:')
+        subject =  input('Subject:')
+        description = input('Description: ')
+
+        clubs.register_club(club_id, club_name, subject,  description)
+
