@@ -69,3 +69,9 @@ while 1:
 
         courses.add_student_courses(student_ID,course_ID, g1, g2, g3, g4, g5)
 
+    if action == "6":
+        student_ID = input('Student ID:')
+        course_ID = input("Course ID:")
+    
+        courses.remove_student_courses(student_ID, course_ID)
+        

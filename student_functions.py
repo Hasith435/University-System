@@ -146,4 +146,21 @@ class courses(students):
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
-        pass
+        for i in range(2, 100000):
+            if ws_student_courses["A" + str(i)].value == student_ID and ws_student_courses["D" + str(i)].value == Course_ID:
+
+                ws_student_courses["A" + str(i)] = ""
+                ws_student_courses["B" + str(i)] = ""
+                ws_student_courses["C" + str(i)] = ""
+                ws_student_courses["D" + str(i)] = ""
+                ws_student_courses["E" + str(i)] = ""
+                ws_student_courses["F" + str(i)] = ""
+                ws_student_courses["G" + str(i)] = ""
+                ws_student_courses["H" + str(i)] = ""
+                ws_student_courses["I" + str(i)] = ""
+                ws_student_courses["J" + str(i)] = ""
+
+            else:
+                print('Student_ID and Course_ID not found')
+
+            wb.save(filename="university.xlsx")
