@@ -154,9 +154,13 @@ class courses(students):
     #this function is not done yet
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
-        for i in range(2, 100000):
+        print('Function')
+        print(num_student_courses)
+        for i in range(2, num_student_courses + 2):
+            print('For loop')
             if ws_student_courses["A" + str(i)].value == student_ID and ws_student_courses["D" + str(i)].value == Course_ID:
 
+                print('works')
                 ws_student_courses["A" + str(i)] = ""
                 ws_student_courses["B" + str(i)] = ""
                 ws_student_courses["C" + str(i)] = ""
@@ -168,12 +172,14 @@ class courses(students):
                 ws_student_courses["I" + str(i)] = ""
                 ws_student_courses["J" + str(i)] = ""
 
+                wb.save(filename="university.xlsx")
+
             else:
-                print('Student_ID and Course_ID not found')
+                continue
 
-            wb.save(filename="university.xlsx")
 
-class clubs(students, courses):
+
+class clubs(students):
 
     club_id = []
     club_name = []

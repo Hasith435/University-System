@@ -61,14 +61,14 @@ while 1:
     if action == "5":
         print("Please enter the below details:")
 
-        student_ID = input('Student_ID:')
-        course_ID = input('Course ID: ')
+        student_ID = int(input('Student_ID:'))
+        course_ID = int(input('Course ID: '))
 
-        g1 = input("Term 1 mark:")
-        g2 = input('Term 2 mark:')
-        g3 = input('Term 3 mark: ')
-        g4 = input('Term 4 mark:')
-        g5 = input('Term 5 mark:')
+        g1 = float(input("Term 1 mark:"))
+        g2 = float(input('Term 2 mark:'))
+        g3 = float(input('Term 3 mark: '))
+        g4 = float(input('Term 4 mark:'))
+        g5 = float(input('Term 5 mark:'))
 
         courses.add_student_courses(student_ID,course_ID, g1, g2, g3, g4, g5)
 
