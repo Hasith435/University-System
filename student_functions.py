@@ -156,10 +156,9 @@ class courses(students):
     def remove_student_courses(student_ID, Course_ID):
         print('Function')
         print(num_student_courses)
-        for i in range(2, num_student_courses + 2):
+        for i in range(2, 100000):
             print('For loop')
-            if ws_student_courses["A" + str(i)].value == student_ID and ws_student_courses["D" + str(i)].value == Course_ID:
-
+            if int(ws_student_courses["A" + str(i)].value) == student_ID and int(ws_student_courses["D" + str(i)].value) == Course_ID:
                 print('works')
                 ws_student_courses["A" + str(i)] = ""
                 ws_student_courses["B" + str(i)] = ""
@@ -173,6 +172,7 @@ class courses(students):
                 ws_student_courses["J" + str(i)] = ""
 
                 wb.save(filename="university.xlsx")
+                break
 
             else:
                 continue
