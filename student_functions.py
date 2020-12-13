@@ -148,10 +148,6 @@ class courses(students):
         ws_student_courses["L4"] = num_student_courses + 1
         wb.save(filename="university.xlsx")
 
-
-
-
-    #this function is not done yet
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
         print('Function')
