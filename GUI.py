@@ -151,6 +151,14 @@ class register(GridLayout):
         ws['J3'] = num_students + 1
         wb.save(filename="university.xlsx")
 
+        self.student_ID.text = ''
+        self.first_name.text = ''
+        self.last_name.text = ''
+        self.Date_of_Birth.text = ''
+        self.Gender.text = ''
+        self.guardian_names.text = ''
+        self.guardian_telephone.text = ''
+        self.address.text = ''
 
 
 
