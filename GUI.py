@@ -31,6 +31,8 @@ student_course_row = num_student_courses + 2
 num_student_clubs = ws_student_clubs["H4"].value
 student_club_row = num_student_clubs + 2
 
+column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
+
 class MyGrid(GridLayout):
 
     def __init__(self, **kwargs):
@@ -58,8 +60,12 @@ class MyGrid(GridLayout):
         self.add_widget(self.register_students)
 
         self.view_student_details = Button(text= "View Student Details")
+        self.view_student_details.bind(on_press = view_student_details.show_pop)
+        self.add_widget(self.view_student_details)
 
         self.add_course = Button(text= "Add Course")
+        self.add_course.bind(on_press = add_course.show_pop)
+        self.add_widget(self.add_course)
 
         self.view_course_details = Button(text= "View Course Details")
 
@@ -160,9 +166,10 @@ class register(GridLayout):
         self.guardian_telephone.text = ''
         self.address.text = ''
 
+#This is not done yet
 class view_student_details(GridLayout):
     def __init__(self, **kwargs):
-        super(MyGrid, self).__init__(**kwargs)
+        super(view_student_details, self).__init__(**kwargs)
 
         self.cols = 2
 
@@ -170,17 +177,85 @@ class view_student_details(GridLayout):
         self.student_ID = TextInput(multiline = False)
         self.add_widget(self.student_ID)
 
-    def show_pop(self):
-        show = register()
+        self.submit = Button(text="Enter", font_size="20")
+        self.submit.bind(on_press=self.view_details)
+        self.add_widget(self.submit)
 
-        register_pop = Popup(title="Register Students", content = show, size_hint=(None, None), size = (400,400))
+        self.fields = Label(text= str(self.view_details))
+        self.add_widget(self.fields)
+
+    def show_pop(self):
+        show = view_student_details()
+
+        register_pop = Popup(title="View student Details", content = show, size_hint=(None, None), size = (400,400))
 
         register_pop.open()
 
-    def view_details(self):
+    def view_details(self, instances):
         student_ID = self.student_ID.text
 
-        #Create the view student details stuff here
+        for i in range(2, num_students + 2):
+            if ws["A" + str(i)].value == student_ID:
+                for x in range(1, 9):
+                    field = ws[str(column_headers[x]) + str(i)].value
+
+class add_course(GridLayout):
+    def __init__(self, **kwargs):
+        super(add_course, self).__init__(**kwargs)
+
+        self.cols = 2
+
+        self.course_ID = Label(text= "Course_ID:")
+        self.add_widget(self.course_ID)
+        self.course_ID = TextInput(multiline=False)
+        self.add_widget(self.course_ID)
+
+        self.course_name = Label(text= "Course Name:")
+        self.add_widget(self.course_name)
+        self.course_name = TextInput(multiline=False)
+        self.add_widget(self.course_name)
+
+        self.course_duration = Label(text= "Course Duration:")
+        self.add_widget(self.course_duration)
+        self.course_duration = TextInput(multiline=False)
+        self.add_widget(self.course_duration)
+
+        self.prerequisites = Label(text= "Prerequisites: ")
+        self.add_widget(self.prerequisites)
+        self.prerequisites = TextInput(multiline=False)
+        self.add_widget(self.prerequisites)
+
+        self.instructors = Label(text= "Instructors: ")
+        self.add_widget(self.instructors)
+        self.instructors = TextInput(multiline=False)
+        self.add_widget(self.instructors)
+
+        self.enter = Button(text="Enter")
+        self.enter.bind(on_press = add_course)
+        self.add_widget(self.enter)
+
+    def show_pop(self):
+        show = add_course()
+
+        show_pop_window = Popup(title= "Add Course", content= show, size_hint = (None, None), size = (400,400))
+
+        show_pop_window.open()
+
+    def add_course(self, instances):
+        course_ID = self.course_ID.text
+        course_name = self.course_name.text
+        course_duration = self.course_duration.text
+        prerequisites = self.prerequisites.text
+        instructors = self.instructors.text
+
+        ws_courses["A" + str(course_row)] = course_ID
+        ws_courses["B" + str(course_row)] = course_name
+        ws_courses["C" + str(course_row)] = course_duration
+        ws_courses["D" + str(course_row)] = prerequisites
+        ws_courses["E" + str(course_row)] = instructors
+
+        ws_courses['F4'] = num_courses + 1
+        wb.save(filename="university.xlsx")
 
 
 
