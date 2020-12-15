@@ -160,6 +160,28 @@ class register(GridLayout):
         self.guardian_telephone.text = ''
         self.address.text = ''
 
+class view_student_details(GridLayout):
+    def __init__(self, **kwargs):
+        super(MyGrid, self).__init__(**kwargs)
+
+        self.cols = 2
+
+        self.add_widget(Label(text="Student_ID:"))
+        self.student_ID = TextInput(multiline = False)
+        self.add_widget(self.student_ID)
+
+    def show_pop(self):
+        show = register()
+
+        register_pop = Popup(title="Register Students", content = show, size_hint=(None, None), size = (400,400))
+
+        register_pop.open()
+
+    def view_details(self):
+        student_ID = self.student_ID.text
+
+        #Create the view student details stuff here
+
 
 
 class GUI(App):
