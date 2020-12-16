@@ -57,25 +57,32 @@ class MyGrid(GridLayout):
         #defining all the buttons
         self.register_students = Button(text = "Register Student")
         self.register_students.bind(on_press = register.show_pop)
-        self.add_widget(self.register_students)
+        self.options.add_widget(self.register_students)
 
         self.view_student_details = Button(text= "View Student Details")
         self.view_student_details.bind(on_press = view_student_details.show_pop)
-        self.add_widget(self.view_student_details)
+        self.options.add_widget(self.view_student_details)
 
         self.add_course = Button(text= "Add Course")
         self.add_course.bind(on_press = add_course.show_pop)
-        self.add_widget(self.add_course)
+        self.options.add_widget(self.add_course)
 
         self.view_course_details = Button(text= "View Course Details")
+        self.options.add_widget(self.view_course_details)
 
         self.add_student_course = Button(text= "Add Student to a Course")
+        self.options.add_widget(self.add_student_course)
 
         self.add_club = Button(text= "Add a Club")
+        self.options.add_widget(self.add_club)
 
         self.view_club_details = Button(text= "View Club Details")
+        self.options.add_widget(self.view_club_details)
 
         self.add_student_club = Button(text= "Add student to a club")
+        self.options.add_widget(self.add_student_club)
+
+        self.add_widget(self.options)
 
 class register(GridLayout):
 
