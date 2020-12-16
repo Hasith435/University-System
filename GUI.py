@@ -91,49 +91,9 @@ class register(GridLayout):
 
         self.cols = 2
 
-        self.student_ID = Label(text="Student_ID:")
-        self.add_widget(self.student_ID)
-        self.student_ID = TextInput(multiline=False)
-        self.add_widget(self.student_ID)
-
-        self.first_name = Label(text="First Name:")
-        self.add_widget(self.first_name)
-        self.first_name = TextInput(multiline=False)
-        self.add_widget(self.first_name)
-
-        self.last_name = Label(text="Last Name:")
-        self.add_widget(self.last_name)
-        self.last_name = TextInput(multiline=False)
-        self.add_widget(self.last_name)
-
-        self.Date_of_Birth = Label(text="Date of Birth (mm/dd/yyyy):")
-        self.add_widget(self.Date_of_Birth)
-        self.Date_of_Birth = TextInput(multiline=False)
-        self.add_widget(self.Date_of_Birth)
-
-        self.Gender = Label(text="Gender:")
-        self.add_widget(self.Gender)
-        self.Gender = TextInput(multiline=False)
-        self.add_widget(self.Gender)
-
-        self.guardian_names = Label(text="Guardian Names:")
-        self.add_widget(self.guardian_names)
-        self.guardian_names = TextInput(multiline=False)
-        self.add_widget(self.guardian_names)
-
-        self.guardian_telephone = Label(text="Guardian Telephone Number:")
-        self.add_widget(self.guardian_telephone)
-        self.guardian_telephone = TextInput(multiline=False)
-        self.add_widget(self.guardian_telephone)
-
-        self.address = Label(text="Address:")
-        self.add_widget(self.address)
-        self.address = TextInput(multiline=False)
-        self.add_widget(self.address)
-
-        self.submit = Button(text= "Submit", font_size= "20")
-        self.submit.bind(on_press = self.register_press)
-        self.add_widget(self.submit)
+        # self.submit = Button(text= "Submit", font_size= "20")
+        # self.submit.bind(on_press = self.register_press)
+        # self.add_widget(self.submit)
 
     def show_pop(self):
         show = register()
@@ -185,11 +145,44 @@ class view_student_details(GridLayout):
         self.add_widget(self.student_ID)
 
         self.submit = Button(text="Enter", font_size="20")
-        self.submit.bind(on_press=self.view_details)
+        self.submit.bind(on_press= view_student_details.show_pop)
         self.add_widget(self.submit)
 
-        self.fields = Label(text= str(self.view_details))
-        self.add_widget(self.fields)
+        self.fname_details_label = Label(text="First Name:")
+        self.add_widget(self.fname_details_label)
+        self.fname_details_details = Label(text= str())
+        self.add_widget(self.fname_details_details)
+
+        self.lname_details_label = Label(text="Last Name:")
+        self.add_widget(self.fname_details_label)
+        self.lname_details_details = Label(text=str(self.lname))
+        self.add_widget(self.lname_details_details)
+
+        self.dob_details_label = Label(text="Date of Birth:")
+        self.add_widget(self.fname_details_label)
+        self.dob_details_details = Label(text=str(self.dob))
+        self.add_widget(self.dob_details_details)
+
+        self.gender_details_label = Label(text="Gender:")
+        self.add_widget(self.fname_details_label)
+        self.gender_details_details = Label(text=str(self.gender))
+        self.add_widget(self.gender_details_details)
+
+        self.guardian_names_details_label = Label(text="Guardian Name:")
+        self.add_widget(self.fname_details_label)
+        self.guardian_name_details_details = Label(text=str(self.guardian_name))
+        self.add_widget(self.guardian_name_details_details)
+
+        self.guardian_telephone_details_label = Label(text="Guardian Telephone:")
+        self.add_widget(self.fname_details_label)
+        self.guardian_telephone_details_details = Label(text=str(self.guardian_telephone))
+        self.add_widget(self.fname_details_details)
+
+        self.address_details_label = Label(text="Address:")
+        self.add_widget(self.fname_details_label)
+        self.address_details_details = Label(text=str(self.address))
+        self.add_widget(self.address_details_details)
+
 
     def show_pop(self):
         show = view_student_details()
@@ -198,13 +191,32 @@ class view_student_details(GridLayout):
 
         register_pop.open()
 
-    def view_details(self, instances):
+    def view_details(self, instance):
         student_ID = self.student_ID.text
+
+        y = 0
 
         for i in range(2, num_students + 2):
             if ws["A" + str(i)].value == student_ID:
-                for x in range(1, 9):
-                    field = ws[str(column_headers[x]) + str(i)].value
+                fname =  ws[column_headers[y + 1] + str(i)].value
+                lname = ws[column_headers[y + 2] + str(i)].value
+                dob = ws[column_headers[y + 3] + str(i)].value
+                gender = ws[column_headers[y + 4] + str(i)].value
+                guardian_name = ws[column_headers[y + 5] + str(i)].value
+                guardian_telephone = ws[column_headers[y + 6] + str(i)].value
+                address = ws[column_headers[y + 7] + str(i)].value
+
+        return fname, lname, dob, gender, guardian_name, guardian_telephone, address
+
+        self.fname_details = Label(text= str(self.fname))
+        self.lname_details = Label(text=str(self.lname))
+        self.dob_details = Label(text=str(self.dob))
+        self.gender_details = Label(text=str(self.gender))
+        self.guardian_name_details = Label(text=str(self.guardian_name))
+        self.guardian_telephone_details = Label(text=str(self.guardian_telephone))
+        self.address_details = Label(text=str(self.address))
+
+
 
 class add_course(GridLayout):
     def __init__(self, **kwargs):
