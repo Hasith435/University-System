@@ -53,6 +53,19 @@ view_club_details_button.grid(row=4, column=0)
 add_student_to_club_button.grid(row=4, column=1)
 
 def register_student():
-    pass
+    window = Toplevel()
+
+    tkvar = StringVar(root)
+
+    choices = {"M", "F"}
+
+    student_ID = Label(text= "Student ID:")
+    fname = Label(text= "First Name:")
+    lname = Label(text= "Last Name:")
+    dob = Label(text= "Date of Birth (dd/mm/yyyy):")
+    gender = OptionMenu(window, tkvar, *choices)
+    guardian_names = Label(text= "Guardian Names:")
+    guardian_telephone = Label(text= "Guardian Telephone:")
+    address = Label(text= "Address:")
 
 root.mainloop()

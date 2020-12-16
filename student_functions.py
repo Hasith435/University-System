@@ -42,9 +42,8 @@ class students:
         self.address = address
 
     @classmethod
-    def register_students(cls, student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
+    def register_students(cls, fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
 
-        cls.student_ID.append(student_ID)
         cls.fname.append(fname)
         cls.lname.append(lname)
         cls.DoB.append(DoB)
@@ -54,18 +53,19 @@ class students:
         cls.address.append(address)
 
 
-        list_index = cls.student_ID.index(student_ID)
+        #list_index = cls.student_ID.index(student_ID)
 
-        ws["A" + str(student_row)] = cls.student_ID[list_index]
-        ws["B" + str(student_row)] = cls.fname[list_index]
-        ws["C" + str(student_row)] = cls.lname[list_index]
-        ws["D" + str(student_row)] = cls.DoB[list_index]
-        ws["E" + str(student_row)] = cls.gender[list_index]
-        ws["F" + str(student_row)] = cls.guardian_names[list_index]
-        ws["G" + str(student_row)] = cls.guardian_telephone[list_index]
-        ws["H" + str(student_row)] = cls.address[list_index]
+        ws["B" + str(student_row)] = fname
+        ws["C" + str(student_row)] = lname
+        ws["D" + str(student_row)] = DoB
+        ws["E" + str(student_row)] = gender
+        ws["F" + str(student_row)] = guardian_names
+        ws["G" + str(student_row)] = guardian_telephone
+        ws["H" + str(student_row)] = address
 
         ws['J3'] = num_students + 1
+
+        ws["A" + str(student_row)] = ws['J3'].value
         wb.save(filename="university.xlsx")
 
     @classmethod

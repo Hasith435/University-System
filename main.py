@@ -25,7 +25,7 @@ while 1:
 
     if action == "1":
         print("Please Enter the below Details:")
-        student_ID = input('student_id:')
+        #student_ID = input('student_id:')
         fname = input('First Name:')
         lname = input('Last Name: ')
         DoB = input('Date of Birth (dd/mm/yyyy): ')
@@ -34,7 +34,7 @@ while 1:
         guardian_telephone = input('Guardian Telephone Number: ')
         address = input('Address: ')
 
-        students.register_students(student_ID,fname, lname, DoB, gender, guardian_name, guardian_telephone, address)
+        students.register_students(fname, lname, DoB, gender, guardian_name, guardian_telephone, address)
 
     if action == "2":
         student_id = input('Student ID:')
