@@ -22,14 +22,6 @@ column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
 class students:
 
-    student_ID = []
-    fname = []
-    lname = []
-    DoB = []
-    gender = []
-    guardian_names = []
-    guardian_telephone = []
-    address = []
 
     def __init__(self, student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
         self.student_ID = student_ID
@@ -41,17 +33,8 @@ class students:
         self.guardian_telephone = guardian_telephone
         self.address = address
 
-    @classmethod
-    def register_students(cls, fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
-
-        cls.fname.append(fname)
-        cls.lname.append(lname)
-        cls.DoB.append(DoB)
-        cls.gender.append(gender)
-        cls.guardian_names.append(guardian_names)
-        cls.guardian_telephone.append(guardian_telephone)
-        cls.address.append(address)
-
+    @staticmethod
+    def register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
 
         #list_index = cls.student_ID.index(student_ID)
 
@@ -70,25 +53,27 @@ class students:
 
     @classmethod
     def view_student_details(cls, ID):
-        list_index = cls.student_ID.index(ID)
 
-        print('student id: ', cls.student_ID[list_index])
-        print('First Name:', cls.fname[list_index])
-        print('Last Name:', cls.lname[list_index])
-        print('Date of Birth:', cls.DoB[list_index])
-        print('Gender:', cls.gender[list_index])
-        print('Guardian Names:', cls.guardian_names[list_index])
-        print('Guardian Telephone:', cls.guardian_telephone[list_index])
-        print('Address: ', cls.address[list_index])
-      
+        for i in range(2, num_students + 2):
+            if ws["A" + str(i)] == ID:
+                student_ID = ws["A" + str(i)].value
+                fname = ws["B" + str(i)].value
+                lname = ws["B" + str(i)].value
+                DoB = ws["B" + str(i)].value
+                gender = ws["B" + str(i)].value
+                guardian_names = ws["B" + str(i)].value
+                guardian_telephone = ws["B" + str(i)].value
+                address = ws["B" + str(i)].value
+                break
+
+            else:
+                continue
+
+
 
 class courses(students):
 
-    course_id = []
-    course_name = []
-    course_duration = []
-    prerequisistes = []
-    instructors = []
+
 
     def __init__(self, course_ID, course_name, course_duration, prerequisistes, instructors):
         self.course_ID = course_ID
@@ -99,54 +84,51 @@ class courses(students):
 
     @classmethod
     def register_course(cls, course_ID, course_name, course_duration, prerequisites, instructors):
-        cls.course_id.append(course_ID)
-        cls.course_name.append(course_name)
-        cls.course_duration.append(course_duration)
-        cls.prerequisistes.append(prerequisites)
-        cls.instructors.append(instructors)
 
-        list_index = cls.course_id.index(course_ID)
-
-        ws_courses["A" + str(course_row)] = cls.course_id[list_index]
-        ws_courses["B" + str(course_row)] = cls.course_name[list_index]
-        ws_courses["C" + str(course_row)] = cls.course_duration[list_index]
-        ws_courses["D" + str(course_row)] = cls.prerequisistes[list_index]
-        ws_courses["E" + str(course_row)] = cls.instructors[list_index]
+        ws_courses["A" + str(course_row)] = course_ID
+        ws_courses["B" + str(course_row)] = course_name
+        ws_courses["C" + str(course_row)] = course_duration
+        ws_courses["D" + str(course_row)] = prerequisites
+        ws_courses["E" + str(course_row)] = instructors
 
         ws_courses['F4'] = num_courses + 1
         wb.save(filename="university.xlsx")
 
     @classmethod
     def view_course_details(cls, course_ID):
-        list_index = cls.course_id.index(course_ID)
 
-        print(f'Course ID: {cls.course_id[list_index]}')
-        print(f'Course Name: {cls.course_name[list_index]}')
-        print(f'Course Duration: {cls.course_duration[list_index]}')
-        print(f'Prerequisites: {cls.prerequisistes[list_index]}')
-        print(f'Instructors: {cls.instructors[list_index]}')
+        for i in range(2, num_students + 2):
+            if ws["A" + str(i)] == course_ID:
+                course_ID = ws["A" + str(i)].value
+                course_name = ws["B" + str(i)].value
+                course_duration = ws["B" + str(i)].value
+                prerequisites = ws["B" + str(i)].value
+                instructors = ws["B" + str(i)].value
+                break
+
+            else:
+                continue
 
     @classmethod
     def add_student_courses(cls, student_ID, Course_ID, g1, g2, g3, g4, g5):
-        list_index_students = cls.student_ID.index(student_ID)
-        list_index_courses = cls.course_id.index(Course_ID)
+        pass
 
 
-        ws_student_courses["A" + str(student_course_row)] = cls.student_ID[list_index_students]
-        ws_student_courses["B" + str(student_course_row)] = cls.fname[list_index_students]
-        ws_student_courses["C" + str(student_course_row)] = cls.lname[list_index_students]
-
-        ws_student_courses["D" + str(student_course_row)] = cls.course_id[list_index_courses]
-        ws_student_courses["E" + str(student_course_row)] = cls.course_name[list_index_courses]
-
-        ws_student_courses["F" + str(student_course_row)] = g1
-        ws_student_courses["G" + str(student_course_row)] = g2
-        ws_student_courses["H" + str(student_course_row)] = g3
-        ws_student_courses["I" + str(student_course_row)] = g4
-        ws_student_courses["J" + str(student_course_row)] = g5
-
-        ws_student_courses["L4"] = num_student_courses + 1
-        wb.save(filename="university.xlsx")
+        # ws_student_courses["A" + str(student_course_row)] =
+        # ws_student_courses["B" + str(student_course_row)] =
+        # ws_student_courses["C" + str(student_course_row)] =
+        #
+        # ws_student_courses["D" + str(student_course_row)] =
+        # ws_student_courses["E" + str(student_course_row)] =
+        #
+        # ws_student_courses["F" + str(student_course_row)] = g1
+        # ws_student_courses["G" + str(student_course_row)] = g2
+        # ws_student_courses["H" + str(student_course_row)] = g3
+        # ws_student_courses["I" + str(student_course_row)] = g4
+        # ws_student_courses["J" + str(student_course_row)] = g5
+        #
+        # ws_student_courses["L4"] = num_student_courses + 1
+        # wb.save(filename="university.xlsx")
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):

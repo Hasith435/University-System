@@ -4,6 +4,10 @@ import tkinter.font as tkFont
 
 import openpyxl as xl
 
+from student_functions import students
+from student_functions import courses
+from student_functions import clubs
+
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
 ws_courses = wb['courses']
@@ -38,13 +42,6 @@ class student_functions:
         window = Toplevel()
         window.configure(bg="#000000")
 
-        f = StringVar()
-        l = StringVar()
-        d = StringVar()
-        ge = StringVar()
-        gu = StringVar()
-        gt = StringVar()
-        a = StringVar()
         #tkvar = StringVar(root)
 
         #choices = {"M", "F"}
@@ -61,13 +58,13 @@ class student_functions:
         submit_button = Button(window,text= "Submit",bg="#393939", foreground="white", width=50, font=font_style_popup_button, command= student_functions.submit, borderwidth=0 )
 
         #Assigning the Entry Fields
-        fname_entry = Entry(window, textvariable= f)
-        lname_entry =Entry(window, textvariable= l)
-        dob_entry =Entry(window, textvariable= d)
-        gender_entry = Entry(window, textvariable= ge)
-        guardian_names_entry =Entry(window, textvariable= gu)
-        guardian_telephone_entry =Entry(window, textvariable= gt)
-        address_entry =Entry(window, textvariable= a)
+        fname_entry = Entry(window)
+        lname_entry =Entry(window)
+        dob_entry =Entry(window)
+        gender_entry = Entry(window)
+        guardian_names_entry =Entry(window)
+        guardian_telephone_entry =Entry(window)
+        address_entry =Entry(window)
 
         #Positioning the Labels
         fname_lbl.grid(row=0, column=0)
@@ -90,7 +87,9 @@ class student_functions:
 
         submit_button.grid(columnspan= 2)
 
-        #Getting the text that the user entered in the entry fields
+
+
+    #Getting the text that the user entered in the entry fields
     @staticmethod
     def submit():
         global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
@@ -104,31 +103,20 @@ class student_functions:
         guardian_telephone = guardian_telephone_entry.get()
         address = address_entry.get()
 
-        #Assining the values to the Excel sheet
-        ws["B" + str(student_row)] = fname
-        ws["C" + str(student_row)] = lname
-        ws["D" + str(student_row)] = DoB
-        ws["E" + str(student_row)] = gender
-        ws["F" + str(student_row)] = guardian_names
-        ws["G" + str(student_row)] = guardian_telephone
-        ws["H" + str(student_row)] = address
-
-
-        ws['J3'] = num_students + 1
-
-        ws["A" + str(student_row)] = ws['J3'].value
-        wb.save(filename="university.xlsx")
-
+        students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
 
     @staticmethod
     def view_details():
+
         window_details_ID = Toplevel()
         window_details_ID.configure(bg="#393939")
 
-        window_details = Toplevel()
-        window_details.configure(bg="#393939")
+        # window_details = Toplevel()
+        # window_details.configure(bg="#393939")
 
+        student_ID_label = Label(text= "Student ID:")
         student_ID_entry = Entry(window_details_ID)
+        #student_ID_entry.grid(row= )
         student_ID_get = student_ID_entry.get()
 
         for i in range(2, num_students + 2):
@@ -144,25 +132,27 @@ class student_functions:
                 break
 
             else:
-                print('Student ID not Found!')
+                continue
 
-        student_ID_details = Label(text= str(student_ID))
-        fname_details = Label(text=str(fname))
-        lname_details = Label(text=str(lname))
-        DoB_details = Label(text=str(DoB))
-        gender_details = Label(text=str(gender))
-        guardian_names_details = Label(text=str(guardian_names))
-        guardian_telephone_details = Label(text=str(guardian_telephone))
-        address_details = Label(text=str(address))
+        student_ID_details_lbl = Label(window_details_ID, text="Student ID:")
+        fname_details_lbl = Label(window_details_ID, text="First Name:")
+        lname_details_lbl = Label(window_details_ID, text="Last Name:")
+        DoB_details_lbl = Label(window_details_ID, text="Date of Birth:")
+        gender_details_lbl = Label(window_details_ID, text="Gender:")
+        guardian_details_lbl = Label(window_details_ID, text="Guardain Names:")
+        guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:")
+        address_details_lbl = Label(window_details_ID, text="Address:")
 
-        student_ID_details_lbl = Label(text= "Student ID:")
-        fname_details_lbl = Label(text="Student ID:")
-        lname_details_lbl = Label(text="Student ID:")
-        DoB_details_lbl = Label(text="Student ID:")
-        gender_details_lbl = Label(text="Student ID:")
-        guardian_details_lbl = Label(text="Student ID:")
-        guardian_telephone_lbl = Label(text="Student ID:")
-        address_details_lbl = Label(text="Student ID:")
+        student_ID_details = Label(window_details_ID,text= str(student_ID))
+        fname_details = Label(window_details_ID,text=str(fname))
+        lname_details = Label(window_details_ID,text=str(lname))
+        DoB_details = Label(window_details_ID,text=str(DoB))
+        gender_details = Label(window_details_ID,text=str(gender))
+        guardian_names_details = Label(window_details_ID,text=str(guardian_names))
+        guardian_telephone_details = Label(window_details_ID,text=str(guardian_telephone))
+        address_details = Label(window_details_ID,text=str(address))
+
+
 
         student_ID_details_lbl.grid(row=0, column=0)
         fname_details_lbl.grid(row=1, column=0)
