@@ -32,6 +32,7 @@ root = Tk()
 root.configure(bg="#000000")
 
 font_style_popup_button = tkFont.Font(family= "cobel light", size=15)
+font_style_main_entry = tkFont.Font(family= "cobel light", size= 20)
 
 class student_functions:
     @staticmethod
@@ -86,10 +87,6 @@ class student_functions:
         address_entry.grid(row=6, column=1)
 
         submit_button.grid(columnspan= 2)
-
-
-
-    #Getting the text that the user entered in the entry fields
     @staticmethod
     def submit():
         global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
@@ -111,66 +108,55 @@ class student_functions:
         window_details_ID = Toplevel()
         window_details_ID.configure(bg="#393939")
 
-        # window_details = Toplevel()
-        # window_details.configure(bg="#393939")
 
-        student_ID_label = Label(text= "Student ID:")
+        student_ID_label = Label(window_details_ID,text= "Student ID:", font=font_style_main_entry, pady= 2, bg="#393939", foreground= "white")
+        student_ID_label.grid(row=0, column=0)
         student_ID_entry = Entry(window_details_ID)
-        #student_ID_entry.grid(row= )
+        student_ID_entry.grid(row= 0 , column= 1)
         student_ID_get = student_ID_entry.get()
 
-        for i in range(2, num_students + 2):
-            if ws["A" + str(i)] == student_ID_get:
-                student_ID = ws["A" + str(i)].value
-                fname = ws["B" + str(i)].value
-                lname = ws["B" + str(i)].value
-                DoB = ws["B" + str(i)].value
-                gender = ws["B" + str(i)].value
-                guardian_names = ws["B" + str(i)].value
-                guardian_telephone = ws["B" + str(i)].value
-                address = ws["B" + str(i)].value
-                break
 
-            else:
-                continue
+        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command= students.view_student_details(student_ID_get), bg="#393939", foreground= "white")
+        enter_button.grid(row=9, column=0)
 
-        student_ID_details_lbl = Label(window_details_ID, text="Student ID:")
-        fname_details_lbl = Label(window_details_ID, text="First Name:")
-        lname_details_lbl = Label(window_details_ID, text="Last Name:")
-        DoB_details_lbl = Label(window_details_ID, text="Date of Birth:")
-        gender_details_lbl = Label(window_details_ID, text="Gender:")
-        guardian_details_lbl = Label(window_details_ID, text="Guardain Names:")
-        guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:")
-        address_details_lbl = Label(window_details_ID, text="Address:")
 
-        student_ID_details = Label(window_details_ID,text= str(student_ID))
-        fname_details = Label(window_details_ID,text=str(fname))
-        lname_details = Label(window_details_ID,text=str(lname))
-        DoB_details = Label(window_details_ID,text=str(DoB))
-        gender_details = Label(window_details_ID,text=str(gender))
-        guardian_names_details = Label(window_details_ID,text=str(guardian_names))
-        guardian_telephone_details = Label(window_details_ID,text=str(guardian_telephone))
-        address_details = Label(window_details_ID,text=str(address))
+        student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground= "white")
+        fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground= "white")
+        lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground= "white")
+        DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground= "white")
+        gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground= "white")
+        guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground= "white")
+        guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939", foreground= "white")
+        address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground= "white")
+
+        student_ID_details = Label(window_details_ID,text= str(students.view_student_details([0])), bg="#393939", foreground= "white")
+        fname_details = Label(window_details_ID,text=str(students.view_student_details([1])), bg="#393939", foreground= "white")
+        lname_details = Label(window_details_ID,text=str(students.view_student_details([2])), bg="#393939", foreground= "white")
+        DoB_details = Label(window_details_ID,text=str(students.view_student_details([3])), bg="#393939", foreground= "white")
+        gender_details = Label(window_details_ID,text=str(students.view_student_details([4])), bg="#393939", foreground= "white")
+        guardian_names_details = Label(window_details_ID,text=str(students.view_student_details([5])), bg="#393939", foreground= "white")
+        guardian_telephone_details = Label(window_details_ID,text=str(students.view_student_details([6])), bg="#393939", foreground= "white")
+        address_details = Label(window_details_ID,text=str(students.view_student_details([7])), bg="#393939", foreground= "white")
 
 
 
-        student_ID_details_lbl.grid(row=0, column=0)
-        fname_details_lbl.grid(row=1, column=0)
-        lname_details_lbl.grid(row=2, column=0)
-        DoB_details_lbl.grid(row=3, column=0)
-        gender_details_lbl.grid(row=4, column=0)
-        guardian_details_lbl.grid(row=5, column=0)
-        guardian_telephone_lbl.grid(row=6, column=0)
-        address_details_lbl.grid(row=7, column=0)
+        student_ID_details_lbl.grid(row=1, column=0)
+        fname_details_lbl.grid(row=2, column=0)
+        lname_details_lbl.grid(row=3, column=0)
+        DoB_details_lbl.grid(row=4, column=0)
+        gender_details_lbl.grid(row=5, column=0)
+        guardian_details_lbl.grid(row=6, column=0)
+        guardian_telephone_lbl.grid(row=7, column=0)
+        address_details_lbl.grid(row=8, column=0)
 
-        student_ID_details.grid(row= 0, column= 1)
-        fname_details.grid(row=1, column=1)
-        lname_details.grid(row=2, column=1)
-        DoB_details.grid(row=3, column=1)
-        gender_details.grid(row=4, column=1)
-        guardian_names_details.grid(row=5, column=1)
-        guardian_telephone_details.grid(row=6, column=1)
-        address_details.grid(row=7, column=1)
+        student_ID_details.grid(row= 1, column= 1)
+        fname_details.grid(row=2, column=1)
+        lname_details.grid(row=3, column=1)
+        DoB_details.grid(row=4, column=1)
+        gender_details.grid(row=5, column=1)
+        guardian_names_details.grid(row=6, column=1)
+        guardian_telephone_details.grid(row=7, column=1)
+        address_details.grid(row=8, column=1)
 
 
 

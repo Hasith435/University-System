@@ -1,4 +1,7 @@
 import openpyxl as xl
+from GUI import student_functions
+from tkinter import *
+from tkinter.font import Font
 
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
@@ -64,10 +67,12 @@ class students:
                 guardian_names = ws["B" + str(i)].value
                 guardian_telephone = ws["B" + str(i)].value
                 address = ws["B" + str(i)].value
+
+                return student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
+
                 break
 
-            else:
-                continue
+
 
 
 
