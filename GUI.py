@@ -109,22 +109,6 @@ class student_functions:
         students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
 
     @staticmethod
-    def view_details_get_entry():
-
-        window_details_ID = Toplevel()
-        window_details_ID.configure(bg="#393939")
-
-
-        student_ID_label = Label(window_details_ID,text= "Student ID:", font=font_style_main_entry, pady= 2, bg="#393939", foreground= "white")
-        student_ID_label.grid(row=0, column=0)
-        student_ID_entry = Entry(window_details_ID)
-        student_ID_entry.grid(row= 0 , column= 1)
-        student_ID_get = student_ID_entry.get()
-
-
-        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command= lambda:[students.view_student_details(student_ID_get), student_functions.view_details], bg="#393939", foreground= "white")
-        enter_button.grid(row=9, column=0)
-    @staticmethod
     def view_details():
 
         view_details_window = Toplevel()
@@ -139,7 +123,8 @@ class student_functions:
         guardian_telephone_lbl = Label(view_details_window, text="Guardian Telephone:", bg="#393939", foreground= "white")
         address_details_lbl = Label(view_details_window, text="Address:", bg="#393939", foreground= "white")
 
-        student_ID_details = Label(view_details_window,text= str(students.view_student_details([0])), bg="#393939", foreground= "white")
+        print(students.view_student_details(1))
+        student_ID_details = Label(view_details_window,text= str(print(students.view_student_details([0]))), bg="#393939", foreground= "white")
         fname_details = Label(view_details_window,text=str(students.view_student_details([1])), bg="#393939", foreground= "white")
         lname_details = Label(view_details_window,text=str(students.view_student_details([2])), bg="#393939", foreground= "white")
         DoB_details = Label(view_details_window,text=str(students.view_student_details([3])), bg="#393939", foreground= "white")
@@ -166,6 +151,23 @@ class student_functions:
         guardian_names_details.grid(row=6, column=1)
         guardian_telephone_details.grid(row=7, column=1)
         address_details.grid(row=8, column=1)
+    @staticmethod
+    def view_details_get_entry():
+
+        window_details_ID = Toplevel()
+        window_details_ID.configure(bg="#393939")
+
+
+        student_ID_label = Label(window_details_ID,text= "Student ID:", font=font_style_main_entry, pady= 2, bg="#393939", foreground= "white")
+        student_ID_label.grid(row=0, column=0)
+        student_ID_entry = Entry(window_details_ID)
+        student_ID_entry.grid(row= 0 , column= 1)
+        student_ID_get = student_ID_entry.get()
+
+
+        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command= lambda:[print(students.view_student_details(student_ID_get)), print(student_functions.view_details())], bg="#393939", foreground= "white")
+        enter_button.grid(row=9, column=0)
+    
 
 
 
