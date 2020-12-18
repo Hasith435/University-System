@@ -1,5 +1,4 @@
 import openpyxl as xl
-from GUI import student_functions
 from tkinter import *
 from tkinter.font import Font
 
@@ -39,7 +38,6 @@ class students:
     @staticmethod
     def register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
 
-        #list_index = cls.student_ID.index(student_ID)
 
         ws["B" + str(student_row)] = fname
         ws["C" + str(student_row)] = lname
@@ -54,8 +52,8 @@ class students:
         ws["A" + str(student_row)] = ws['J3'].value
         wb.save(filename="university.xlsx")
 
-    @classmethod
-    def view_student_details(cls, ID):
+    @staticmethod
+    def view_student_details(ID):
 
         for i in range(2, num_students + 2):
             if ws["A" + str(i)] == ID:

@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 import tkinter.font as tkFont
+import os
 
 import openpyxl as xl
 
@@ -28,8 +29,13 @@ student_club_row = num_student_clubs + 2
 
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using :0.0')
+    os.environ.__setitem__('DISPLAY', ':0.0')
+
 root = Tk()
 root.configure(bg="#000000")
+
 
 font_style_popup_button = tkFont.Font(family= "cobel light", size=15)
 font_style_main_entry = tkFont.Font(family= "cobel light", size= 20)
@@ -103,7 +109,7 @@ class student_functions:
         students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
 
     @staticmethod
-    def view_details():
+    def view_details_get_entry():
 
         window_details_ID = Toplevel()
         window_details_ID.configure(bg="#393939")
@@ -116,28 +122,31 @@ class student_functions:
         student_ID_get = student_ID_entry.get()
 
 
-        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command= students.view_student_details(student_ID_get), bg="#393939", foreground= "white")
+        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command= lambda:[students.view_student_details(student_ID_get), student_functions.view_details], bg="#393939", foreground= "white")
         enter_button.grid(row=9, column=0)
+    @staticmethod
+    def view_details():
 
+        view_details_window = Toplevel()
+        view_details_window.configure(bg="#393939")
 
-        student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground= "white")
-        fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground= "white")
-        lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground= "white")
-        DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground= "white")
-        gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground= "white")
-        guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground= "white")
-        guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939", foreground= "white")
-        address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground= "white")
+        student_ID_details_lbl = Label(view_details_window, text="Student ID:", bg="#393939", foreground= "white")
+        fname_details_lbl = Label(view_details_window, text="First Name:", bg="#393939", foreground= "white")
+        lname_details_lbl = Label(view_details_window, text="Last Name:", bg="#393939", foreground= "white")
+        DoB_details_lbl = Label(view_details_window, text="Date of Birth:", bg="#393939", foreground= "white")
+        gender_details_lbl = Label(view_details_window, text="Gender:", bg="#393939", foreground= "white")
+        guardian_details_lbl = Label(view_details_window, text="Guardain Names:", bg="#393939", foreground= "white")
+        guardian_telephone_lbl = Label(view_details_window, text="Guardian Telephone:", bg="#393939", foreground= "white")
+        address_details_lbl = Label(view_details_window, text="Address:", bg="#393939", foreground= "white")
 
-        student_ID_details = Label(window_details_ID,text= str(students.view_student_details([0])), bg="#393939", foreground= "white")
-        fname_details = Label(window_details_ID,text=str(students.view_student_details([1])), bg="#393939", foreground= "white")
-        lname_details = Label(window_details_ID,text=str(students.view_student_details([2])), bg="#393939", foreground= "white")
-        DoB_details = Label(window_details_ID,text=str(students.view_student_details([3])), bg="#393939", foreground= "white")
-        gender_details = Label(window_details_ID,text=str(students.view_student_details([4])), bg="#393939", foreground= "white")
-        guardian_names_details = Label(window_details_ID,text=str(students.view_student_details([5])), bg="#393939", foreground= "white")
-        guardian_telephone_details = Label(window_details_ID,text=str(students.view_student_details([6])), bg="#393939", foreground= "white")
-        address_details = Label(window_details_ID,text=str(students.view_student_details([7])), bg="#393939", foreground= "white")
-
+        student_ID_details = Label(view_details_window,text= str(students.view_student_details([0])), bg="#393939", foreground= "white")
+        fname_details = Label(view_details_window,text=str(students.view_student_details([1])), bg="#393939", foreground= "white")
+        lname_details = Label(view_details_window,text=str(students.view_student_details([2])), bg="#393939", foreground= "white")
+        DoB_details = Label(view_details_window,text=str(students.view_student_details([3])), bg="#393939", foreground= "white")
+        gender_details = Label(view_details_window,text=str(students.view_student_details([4])), bg="#393939", foreground= "white")
+        guardian_names_details = Label(view_details_window,text=str(students.view_student_details([5])), bg="#393939", foreground= "white")
+        guardian_telephone_details = Label(view_details_window,text=str(students.view_student_details([6])), bg="#393939", foreground= "white")
+        address_details = Label(view_details_window,text=str(students.view_student_details([7])), bg="#393939", foreground= "white")
 
 
         student_ID_details_lbl.grid(row=1, column=0)
@@ -168,7 +177,7 @@ welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_ti
 
 
 register_student_button = Button(root, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0, padx= 2, pady= 2)
-view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details, borderwidth=0, padx= 2, pady= 2)
+view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0, padx= 2, pady= 2)
 add_course_button = Button(root,text= "Add a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 , padx= 2, pady= 2)
 view_course_details_button = Button(root,text= "View Course Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 , padx= 2, pady= 2)
 add_student_to_course_button = Button(root,text= "Add student to a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 , padx= 2, pady= 2)
