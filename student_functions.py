@@ -65,7 +65,7 @@ class students:
                 guardian_names = ws["B" + str(i)].value
                 guardian_telephone = ws["B" + str(i)].value
                 address = ws["B" + str(i)].value
-
+                print(student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
                 
                 return student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
             
