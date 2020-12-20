@@ -39,7 +39,7 @@ while 1:
     if action == "2":
         student_id = input('Student ID:')
 
-        students.view_student_details(student_id)
+        print(students.view_student_details(student_id))
 
     if action == "3":
         print('Please enter the below information:')

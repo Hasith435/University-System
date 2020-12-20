@@ -129,7 +129,7 @@ class student_functions:
 
             student_ID_get = int(student_ID_entry.get())
 
-            #returned_list = students.view_student_details(student_ID_get)
+            returned_list = students.view_student_details(student_ID_get)
 
             # view_details_window = Toplevel()
             # view_details_window.configure(bg="#393939")
@@ -144,14 +144,14 @@ class student_functions:
             address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
 
             print(students.view_student_details(student_ID_get))
-            # student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white")
-            # fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white")
-            # lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white")
-            # DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white")
-            # gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white")
-            # guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white")
-            # guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white")
-            # address_details = Label(window_details_IDq, text=returned_list[7], bg="#393939", foreground="white")
+            student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white")
+            fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white")
+            lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white")
+            DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white")
+            gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white")
+            guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white")
+            guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white")
+            address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white")
 
             student_ID_details_lbl.grid(row=1, column=0)
             fname_details_lbl.grid(row=2, column=0)
@@ -162,14 +162,14 @@ class student_functions:
             guardian_telephone_lbl.grid(row=7, column=0)
             address_details_lbl.grid(row=8, column=0)
 
-            # student_ID_details.grid(row=1, column=1)
-            # fname_details.grid(row=2, column=1)
-            # lname_details.grid(row=3, column=1)
-            # DoB_details.grid(row=4, column=1)
-            # gender_details.grid(row=5, column=1)
-            # guardian_names_details.grid(row=6, column=1)
-            # guardian_telephone_details.grid(row=7, column=1)
-            # address_details.grid(row=8, column=1)
+            student_ID_details.grid(row=1, column=1)
+            fname_details.grid(row=2, column=1)
+            lname_details.grid(row=3, column=1)
+            DoB_details.grid(row=4, column=1)
+            gender_details.grid(row=5, column=1)
+            guardian_names_details.grid(row=6, column=1)
+            guardian_telephone_details.grid(row=7, column=1)
+            address_details.grid(row=8, column=1)
 
             
             print(type(student_ID_get))
