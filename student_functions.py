@@ -55,7 +55,6 @@ class students:
     @staticmethod
     def view_student_details(ID):
 
-        #global student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
 
         for i in range(2, num_students + 2):
             if ws["A" + str(i)].value == int(ID):

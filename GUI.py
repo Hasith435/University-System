@@ -35,6 +35,8 @@ if os.environ.get('DISPLAY','') == '':
 
 root = Tk()
 root.configure(bg="#000000")
+root.title("Welcome to the University")
+root.iconbitmap('D:\download.png')
 
 
 font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
@@ -46,7 +48,7 @@ class student_functions:
     @staticmethod
     def register_student():
         global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
-            guardian_telephone_entry, address_entry
+            guardian_telephone_entry, address_entry, window
 
         window = Toplevel()
         window.configure(bg="#393939")
@@ -54,22 +56,29 @@ class student_functions:
         submit_button = Button(window,text= "Submit",bg="#24e1f2", foreground="white", width=50, font=font_style_submit_button, command= student_functions.submit, borderwidth=0 )
 
         #Assigning the Entry Fields
-        fname_entry = Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        lname_entry =Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        dob_entry =Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        gender_entry = Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_names_entry =Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_telephone_entry =Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        address_entry =Entry(window, width = 80, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        fname_entry = Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        lname_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        dob_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        gender_entry = Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_names_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_telephone_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        address_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
 
-        fname_entry.insert(0, "First Name:")
-        lname_entry.insert(0, "Last Name:")
-        dob_entry.insert(0, "Date of Birth (dd/mm/yyyy):")
-        gender_entry.insert(0, "Gender:")
-        guardian_names_entry.insert(0, "Guardian Names:")
-        guardian_telephone_entry.insert(0, "Guardian Telephone:")
-        address_entry.insert(0, "Address:")
+        fname_lbl = Label(window, text= "First Name:", font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        lname_lbl = Label(window,text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        dob_lbl = Label(window,text="Date of Birth:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        gender_lbl = Label(window,text="Gender:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_names_lbl = Label(window,text="Guardian Names:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_telephone_lbl = Label(window,text="Guardian Telephone:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        address_lbl = Label(window,text="Address:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
 
+        fname_lbl.grid(row=0, column=0, sticky=W)
+        lname_lbl.grid(row=1, column=0, sticky=W)
+        dob_lbl.grid(row=2, column=0, sticky=W)
+        gender_lbl.grid(row=3, column=0, sticky=W)
+        guardian_names_lbl.grid(row=4, column=0, sticky=W)
+        guardian_telephone_lbl.grid(row=5, column=0, sticky=W)
+        address_lbl.grid(row=6, column=0, sticky=W)
 
         #Positionning the Entry Fields
         fname_entry.grid(row=0, column=1)
@@ -84,15 +93,15 @@ class student_functions:
     @staticmethod
     def submit():
         global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
-            guardian_telephone_entry, address_entry
+            guardian_telephone_entry, address_entry, window
 
-        fname = fname_entry.get()[11:]
-        lname = lname_entry.get()[11:]
-        DoB = dob_entry.get()[27:]
-        gender = gender_entry.get()[7:]
-        guardian_names = guardian_names_entry.get()[15:]
-        guardian_telephone = guardian_telephone_entry.get()[19]
-        address = address_entry.get()[8:]
+        fname = fname_entry.get()
+        lname = lname_entry.get()
+        DoB = dob_entry.get()
+        gender = gender_entry.get()
+        guardian_names = guardian_names_entry.get()
+        guardian_telephone = guardian_telephone_entry.get()
+        address = address_entry.get()
 
         fname = fname[11:]
         lname = lname[11:]
@@ -102,7 +111,7 @@ class student_functions:
         guardian_telephone = guardian_telephone[19:]
         address = address[8:]
 
-        submit_button = Button(window,text= "Registered")
+        submit_button = Button(window,text= "Registered", bg= "#393939", foreground= "white")
         submit_button.grid(columnspan= 2, pady= 10)
 
         students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
@@ -181,8 +190,8 @@ class student_functions:
     
 
 
-font_style_title = tkFont.Font(family= "corbel light", size= 20)
-font_style_button = tkFont.Font(family= "corbel light", size= 15)
+font_style_title = tkFont.Font(family= "corbel light", size= 40)
+font_style_button = tkFont.Font(family= "corbel light", size= 30)
 
 
 welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
@@ -199,14 +208,14 @@ add_student_to_club_button = Button(root,text= "Add student to Club", width=20, 
 
 welcome_lbl.grid(columnspan=6)
 
-register_student_button.grid(row=1, column=0)
-view_student_details_button.grid(row=1, column=1)
-add_course_button.grid(row=2, column=0)
-view_course_details_button.grid(row=2, column=1)
-add_student_to_course_button.grid(row=3, column=0)
-add_club_button.grid(row=3, column=1)
-view_club_details_button.grid(row=4, column=0)
-add_student_to_club_button.grid(row=4, column=1)
+register_student_button.grid(row=1, column=0, padx=2, pady=2)
+view_student_details_button.grid(row=1, column=1, padx=2, pady=2)
+add_course_button.grid(row=2, column=0, padx=2, pady=2)
+view_course_details_button.grid(row=2, column=1, padx=2, pady=2)
+add_student_to_course_button.grid(row=3, column=0, padx=2, pady=2)
+add_club_button.grid(row=3, column=1, padx=2, pady=2)
+view_club_details_button.grid(row=4, column=0, padx=2, pady=2)
+add_student_to_club_button.grid(row=4, column=1, padx=2, pady=2)
 
 
 root.mainloop()
