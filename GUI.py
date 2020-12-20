@@ -102,6 +102,9 @@ class student_functions:
         guardian_telephone = guardian_telephone[19:]
         address = address[8:]
 
+        submit_button = Button(window,text= "Registered")
+        submit_button.grid(columnspan= 2, pady= 10)
+
         students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
 
 
@@ -123,29 +126,32 @@ class student_functions:
 
 
         def view_details():
-            view_details_window = Toplevel()
-            view_details_window.configure(bg="#393939")
 
-            student_ID_details_lbl = Label(view_details_window, text="Student ID:", bg="#393939", foreground="white")
-            fname_details_lbl = Label(view_details_window, text="First Name:", bg="#393939", foreground="white")
-            lname_details_lbl = Label(view_details_window, text="Last Name:", bg="#393939", foreground="white")
-            DoB_details_lbl = Label(view_details_window, text="Date of Birth:", bg="#393939", foreground="white")
-            gender_details_lbl = Label(view_details_window, text="Gender:", bg="#393939", foreground="white")
-            guardian_details_lbl = Label(view_details_window, text="Guardain Names:", bg="#393939", foreground="white")
-            guardian_telephone_lbl = Label(view_details_window, text="Guardian Telephone:", bg="#393939",
-                                           foreground="white")
-            address_details_lbl = Label(view_details_window, text="Address:", bg="#393939", foreground="white")
+            student_ID_get = int(student_ID_entry.get())
 
-            print(students.view_student_details(1))
-            returned_list = students.view_student_details()
-            student_ID_details = Label(view_details_window, text=students.view_student_details(),bg="#393939", foreground="white")
-            fname_details = Label(view_details_window, text=str(students.view_student_details([1])), bg="#393939",foreground="white")
-            lname_details = Label(view_details_window, text=str(students.view_student_details([2])), bg="#393939", foreground="white")
-            DoB_details = Label(view_details_window, text=str(students.view_student_details([3])), bg="#393939",foreground="white")
-            gender_details = Label(view_details_window, text=str(students.view_student_details([4])), bg="#393939",foreground="white")
-            guardian_names_details = Label(view_details_window, text=str(students.view_student_details([5])),bg="#393939", foreground="white")
-            guardian_telephone_details = Label(view_details_window, text=str(students.view_student_details([6])),bg="#393939", foreground="white")
-            address_details = Label(view_details_window, text=str(students.view_student_details([7])), bg="#393939", foreground="white")
+            #returned_list = students.view_student_details(student_ID_get)
+
+            # view_details_window = Toplevel()
+            # view_details_window.configure(bg="#393939")
+
+            student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
+            fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
+            lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
+            DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
+            gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
+            guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground="white")
+            guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",foreground="white")
+            address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
+
+            print(students.view_student_details(student_ID_get))
+            # student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white")
+            # fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white")
+            # lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white")
+            # DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white")
+            # gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white")
+            # guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white")
+            # guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white")
+            # address_details = Label(window_details_IDq, text=returned_list[7], bg="#393939", foreground="white")
 
             student_ID_details_lbl.grid(row=1, column=0)
             fname_details_lbl.grid(row=2, column=0)
@@ -156,19 +162,19 @@ class student_functions:
             guardian_telephone_lbl.grid(row=7, column=0)
             address_details_lbl.grid(row=8, column=0)
 
-            student_ID_details.grid(row=1, column=1)
-            fname_details.grid(row=2, column=1)
-            lname_details.grid(row=3, column=1)
-            DoB_details.grid(row=4, column=1)
-            gender_details.grid(row=5, column=1)
-            guardian_names_details.grid(row=6, column=1)
-            guardian_telephone_details.grid(row=7, column=1)
-            address_details.grid(row=8, column=1)
+            # student_ID_details.grid(row=1, column=1)
+            # fname_details.grid(row=2, column=1)
+            # lname_details.grid(row=3, column=1)
+            # DoB_details.grid(row=4, column=1)
+            # gender_details.grid(row=5, column=1)
+            # guardian_names_details.grid(row=6, column=1)
+            # guardian_telephone_details.grid(row=7, column=1)
+            # address_details.grid(row=8, column=1)
 
-            student_ID_get = int(student_ID_entry.get())
+            
             print(type(student_ID_get))
 
-            students.view_student_details(student_ID_get)
+            
 
         enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command=view_details, bg="#393939", foreground= "white")
         enter_button.grid(row=9, column=0)

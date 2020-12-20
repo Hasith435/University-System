@@ -54,9 +54,11 @@ class students:
 
     @staticmethod
     def view_student_details(ID):
+        
+        global student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
 
         for i in range(2, num_students + 2):
-            if ws["A" + str(i)] == ID:
+            if ws["A" + str(i)] == int(ID):
                 student_ID = ws["A" + str(i)].value
                 fname = ws["B" + str(i)].value
                 lname = ws["B" + str(i)].value
@@ -65,13 +67,17 @@ class students:
                 guardian_names = ws["B" + str(i)].value
                 guardian_telephone = ws["B" + str(i)].value
                 address = ws["B" + str(i)].value
-                print(student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
-                
-                return student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
-            
                 break
+
+                return student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
+                
+            
             else:
-                print('Error')
+                continue
+
+        
+            
+            
         
 
 
