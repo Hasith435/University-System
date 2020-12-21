@@ -35,8 +35,8 @@ if os.environ.get('DISPLAY','') == '':
 
 root = Tk()
 root.configure(bg="#000000")
-root.title("Welcome to the University")
-root.iconbitmap('D:\download.png')
+# root.title("Welcome to the University")
+# root.iconbitmap('D:\download.png')
 
 
 font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
