@@ -74,6 +74,24 @@ class students:
             else:
                 continue
 
+    @staticmethod
+    def remove_student(ID):
+        for i in range(2, 100000):
+            if int(ws_student_courses["A" + str(i)].value) == ID:
+                ws["A" + str(i)] = ""
+                ws["B" + str(i)] = ""
+                ws["C" + str(i)] = ""
+                ws["D" + str(i)] = ""
+                ws["E" + str(i)] = ""
+                ws["F" + str(i)] = ""
+                ws["G" + str(i)] = ""
+                ws["H" + str(i)] = ""
+
+                wb.save(filename="university.xlsx")
+                break
+
+            else:
+                continue
         
 
 

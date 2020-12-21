@@ -43,6 +43,9 @@ font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
 font_style_main_entry = tkFont.Font(family= "corbel light", size= 20)
 font_style_user_input_lbl = tkFont.Font(family= "corbel light", size= 13)
 font_style_submit_button = tkFont.Font(family= "corbel light", size = 15, weight= "bold")
+font_style_title = tkFont.Font(family= "corbel light", size= 40)
+font_style_button = tkFont.Font(family= "corbel light", size= 20)
+font_style_welcome_frame_title = tkFont.Font(family= "corbel", size=30 )
 
 class student_functions:
     @staticmethod
@@ -53,7 +56,7 @@ class student_functions:
         window = Toplevel()
         window.configure(bg="#393939")
 
-        submit_button = Button(window,text= "Submit",bg="#24e1f2", foreground="white", width=50, font=font_style_submit_button, command= student_functions.submit, borderwidth=0 )
+
 
         #Assigning the Entry Fields
         fname_entry = Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
@@ -89,32 +92,27 @@ class student_functions:
         guardian_telephone_entry.grid(row=5, column=1)
         address_entry.grid(row=6, column=1)
 
-        submit_button.grid(columnspan= 2, pady= 10)
-    @staticmethod
-    def submit():
-        global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
-            guardian_telephone_entry, address_entry, window
 
-        fname = fname_entry.get()
-        lname = lname_entry.get()
-        DoB = dob_entry.get()
-        gender = gender_entry.get()
-        guardian_names = guardian_names_entry.get()
-        guardian_telephone = guardian_telephone_entry.get()
-        address = address_entry.get()
 
-        fname = fname[11:]
-        lname = lname[11:]
-        DoB = DoB[27:]
-        gender = gender[7:]
-        guardian_names = guardian_names[15:]
-        guardian_telephone = guardian_telephone[19:]
-        address = address[8:]
+        def submit():
+            global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
+                guardian_telephone_entry, address_entry, window
 
-        submit_button = Button(window,text= "Registered", bg= "#393939", foreground= "white")
-        submit_button.grid(columnspan= 2, pady= 10)
+            fname = fname_entry.get()
+            lname = lname_entry.get()
+            DoB = dob_entry.get()
+            gender = gender_entry.get()
+            guardian_names = guardian_names_entry.get()
+            guardian_telephone = guardian_telephone_entry.get()
+            address = address_entry.get()
 
-        students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
+            submit_button = Button(window,text= "Registered", bg= "#393939", foreground= "white")
+            submit_button.grid(columnspan= 2, pady= 10)
+
+            students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
+
+        submit_button = Button(window, text="Submit", bg="#24e1f2", foreground="white", width=50,font=font_style_submit_button, command= submit, borderwidth=0)
+        submit_button.grid(columnspan=2, pady=10)
 
 
     @staticmethod
@@ -187,35 +185,49 @@ class student_functions:
 
         enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command=view_details, bg="#393939", foreground= "white")
         enter_button.grid(row=9, column=0)
+
+
+    @staticmethod
+    def remove_student():
+        window_remove_student = Toplevel()
+        window_remove_student.configure(bg="#393939")
+
+        Student_ID_lbl = Label(text= "Student ID:")
+        Student_ID_lbl.pack()
     
 
-
-font_style_title = tkFont.Font(family= "corbel light", size= 40)
-font_style_button = tkFont.Font(family= "corbel light", size= 30)
 
 
 welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
 
+students_frame = LabelFrame(text= "STUDENTS", font=font_style_welcome_frame_title, padx=230, pady=5, bg="#000000", foreground= "white")
+students_frame.grid(row=1, column=0)
 
-register_student_button = Button(root, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
-view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-add_course_button = Button(root,text= "Add a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-view_course_details_button = Button(root,text= "View Course Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-add_student_to_course_button = Button(root,text= "Add student to a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-add_club_button = Button(root,text= "Add a Club", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-view_club_details_button = Button(root,text= "View Club Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0)
-add_student_to_club_button = Button(root,text= "Add student to Club", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
+course_frame = LabelFrame(text= "COURSES", font=font_style_welcome_frame_title, padx= 80, pady=5, bg="#000000", foreground= "white")
+course_frame.grid(row=5, column=0)
 
-welcome_lbl.grid(columnspan=6)
 
+register_student_button = Button(students_frame, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
+view_student_details_button = Button(students_frame,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
+add_course_button = Button(course_frame,text= "Add a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
+view_course_details_button = Button(course_frame,text= "View Course Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
+add_student_to_course_button = Button(course_frame,text= "Enroll in Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
+# add_club_button = Button(root,text= "Add a Club", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
+# view_club_details_button = Button(root,text= "View Club Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0)
+# add_student_to_club_button = Button(root,text= "Add student to Club", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
+
+#welcome_lbl.grid(columnspan=6)
+#
 register_student_button.grid(row=1, column=0, padx=2, pady=2)
 view_student_details_button.grid(row=1, column=1, padx=2, pady=2)
-add_course_button.grid(row=2, column=0, padx=2, pady=2)
-view_course_details_button.grid(row=2, column=1, padx=2, pady=2)
-add_student_to_course_button.grid(row=3, column=0, padx=2, pady=2)
-add_club_button.grid(row=3, column=1, padx=2, pady=2)
-view_club_details_button.grid(row=4, column=0, padx=2, pady=2)
-add_student_to_club_button.grid(row=4, column=1, padx=2, pady=2)
+add_course_button.grid(row=1, column=0, padx=2, pady=2)
+view_course_details_button.grid(row=1, column=1, padx=2, pady=2)
+add_student_to_course_button.grid(row=1, column=2, padx=2, pady=2)
+# add_club_button.grid(row=3, column=1, padx=2, pady=2)
+# view_club_details_button.grid(row=4, column=0, padx=2, pady=2)
+# add_student_to_club_button.grid(row=4, column=1, padx=2, pady=2)
+
+
 
 
 root.mainloop()
