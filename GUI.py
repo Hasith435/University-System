@@ -176,14 +176,14 @@ class student_functions:
             guardian_telephone_lbl.grid(row=7, column=0)
             address_details_lbl.grid(row=8, column=0)
 
-            student_ID_details.grid(row=1, column=1)
-            fname_details.grid(row=2, column=1)
-            lname_details.grid(row=3, column=1)
-            DoB_details.grid(row=4, column=1)
-            gender_details.grid(row=5, column=1)
-            guardian_names_details.grid(row=6, column=1)
-            guardian_telephone_details.grid(row=7, column=1)
-            address_details.grid(row=8, column=1)
+            student_ID_details.grid(row=1, column=1, sticky= W)
+            fname_details.grid(row=2, column=1, sticky= W)
+            lname_details.grid(row=3, column=1, sticky= W)
+            DoB_details.grid(row=4, column=1, sticky= W)
+            gender_details.grid(row=5, column=1, sticky= W)
+            guardian_names_details.grid(row=6, column=1, sticky= W)
+            guardian_telephone_details.grid(row=7, column=1, sticky= W)
+            address_details.grid(row=8, column=1, sticky= W)
 
             
             print(type(student_ID_get))
@@ -198,6 +198,7 @@ class student_functions:
 
         back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
         back_button.grid(row=9, column=0, pady= 10)
+
 
     @staticmethod
     def remove_student():
@@ -216,8 +217,17 @@ class student_functions:
             student_ID = Student_ID_entry.get()
             print(student_ID)
 
-        enter_button = Button(window_remove_student,text= "Enter", font= font_style_popup_button, command= enter_button,bg="#393939", foreground= "white")
-        enter_button.grid(row= 1, column= 0)
+            removed_lbl = Label(window_remove_student, text= "Removed",bg="#393939", foreground= "white" )
+            removed_lbl.grid(columnspan= 2)
+
+        def back():
+            window_remove_student.destroy()
+
+        back_button = Button(window_remove_student, text="Back", bg="#e84d1a", foreground="white", width=10,font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=1, column=0, pady=10)
+
+        enter_button = Button(window_remove_student,text= "Enter", font= font_style_popup_button, command= enter_button,bg="#393939", foreground= "white", width= 30)
+        enter_button.grid(row= 1, column= 1)
     
 
 
