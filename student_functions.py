@@ -75,7 +75,7 @@ class students:
                 continue
 
     @staticmethod
-    def remove_student(ID):
+    def remove_student_function(ID):
         for i in range(2, 100000):
             if int(ws_student_courses["A" + str(i)].value) == ID:
                 ws["A" + str(i)] = ""
