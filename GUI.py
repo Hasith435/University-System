@@ -106,11 +106,10 @@ class student_functions:
             guardian_telephone = guardian_telephone_entry.get()
             address = address_entry.get()
 
-            submit_label = Label(window,text= "Registered", bg= "#393939", foreground= "white")
-            submit_label.grid(columnspan= 2, pady= 10)
+            submit_button = Button(window,text= "Registered", bg= "#393939", foreground= "white")
+            submit_button.grid(columnspan= 2, pady= 10)
 
             students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
-
 
         submit_button = Button(window, text="Submit", bg="#24e1f2", foreground="white", width=50,font=font_style_submit_button, command= submit, borderwidth=0)
         submit_button.grid(columnspan=2, pady=10)
@@ -127,7 +126,7 @@ class student_functions:
 
         student_ID_label = Label(window_details_ID,text= "Student ID:", font=font_style_main_entry, pady= 2, bg="#393939", foreground= "white")
         student_ID_label.grid(row=0, column=0)
-        student_ID_entry = Entry(window_details_ID, width = 50)
+        student_ID_entry = Entry(window_details_ID)
         student_ID_entry.grid(row= 0 , column= 1)
 
 
@@ -139,6 +138,8 @@ class student_functions:
 
             returned_list = students.view_student_details(student_ID_get)
 
+            # view_details_window = Toplevel()
+            # view_details_window.configure(bg="#393939")
 
             student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
             fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
@@ -150,14 +151,14 @@ class student_functions:
             address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
 
             print(students.view_student_details(student_ID_get))
-            student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white", width=50)
-            fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white", width=50)
-            lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white", width=50)
-            DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white", width=50)
-            gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white", width=50)
-            guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white", width=50)
-            guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white", width=50)
-            address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white", width=50)
+            student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white")
+            fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white")
+            lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white")
+            DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white")
+            gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white")
+            guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white")
+            guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white")
+            address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white")
 
             student_ID_details_lbl.grid(row=1, column=0)
             fname_details_lbl.grid(row=2, column=0)
@@ -191,27 +192,15 @@ class student_functions:
         window_remove_student = Toplevel()
         window_remove_student.configure(bg="#393939")
 
-        Student_ID_lbl = Label(window_remove_student,text= "Student ID:",bg="#393939", font=font_style_main_entry, foreground= "white" )
-        Student_ID_lbl.grid(row= 0, column=0)
-
-        Student_ID_entry = Entry(window_remove_student, width=50)
-        Student_ID_entry.grid(row=0, column=1)
-
-        def enter():
-            Student_ID = Student_ID_entry.get()
-            students.remove_student_function(Student_ID)
-
-            print(Student_ID)
-
-        enter_button = Button(window_remove_student,text= "Enter",bg="#393939", foreground= "white", command= enter )
-        enter_button.grid(row=2, column=0)
+        Student_ID_lbl = Label(text= "Student ID:")
+        Student_ID_lbl.pack()
     
 
 
 
 welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
 
-students_frame = LabelFrame(text= "STUDENTS", font=font_style_welcome_frame_title, padx=80, pady=5, bg="#000000", foreground= "white")
+students_frame = LabelFrame(text= "STUDENTS", font=font_style_welcome_frame_title, padx=230, pady=5, bg="#000000", foreground= "white")
 students_frame.grid(row=1, column=0)
 
 course_frame = LabelFrame(text= "COURSES", font=font_style_welcome_frame_title, padx= 80, pady=5, bg="#000000", foreground= "white")
@@ -220,7 +209,6 @@ course_frame.grid(row=5, column=0)
 
 register_student_button = Button(students_frame, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
 view_student_details_button = Button(students_frame,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-remove_student_button = Button(students_frame, text= "Remove Student", width= 20, font= font_style_button, bg="#393939", foreground= "white",command= student_functions.remove_student, borderwidth=0 )
 add_course_button = Button(course_frame,text= "Add a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
 view_course_details_button = Button(course_frame,text= "View Course Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
 add_student_to_course_button = Button(course_frame,text= "Enroll in Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
@@ -232,7 +220,6 @@ add_student_to_course_button = Button(course_frame,text= "Enroll in Course", wid
 #
 register_student_button.grid(row=1, column=0, padx=2, pady=2)
 view_student_details_button.grid(row=1, column=1, padx=2, pady=2)
-remove_student_button.grid(row= 1, column=2, padx=2, pady=2)
 add_course_button.grid(row=1, column=0, padx=2, pady=2)
 view_course_details_button.grid(row=1, column=1, padx=2, pady=2)
 add_student_to_course_button.grid(row=1, column=2, padx=2, pady=2)
