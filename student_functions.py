@@ -76,21 +76,37 @@ class students:
 
     @staticmethod
     def remove_student_function(ID):
-        for i in range(2, 100000):
-            if int(ws_student_courses["A" + str(i)].value) == ID:
-                ws["A" + str(i)] = ""
-                ws["B" + str(i)] = ""
-                ws["C" + str(i)] = ""
-                ws["D" + str(i)] = ""
-                ws["E" + str(i)] = ""
-                ws["F" + str(i)] = ""
-                ws["G" + str(i)] = ""
-                ws["H" + str(i)] = ""
+        print('Function Works')
+        for i in range(2, num_students + 2):
+            print("For Loop Works")
+            try:
+                if int(ws["A" + str(i)].value) == ID:
+                    print("IF statement Works")
+                    ws["A" + str(i)] = ""
+                    ws["B" + str(i)] = ""
+                    ws["C" + str(i)] = ""
+                    ws["D" + str(i)] = ""
+                    ws["E" + str(i)] = ""
+                    ws["F" + str(i)] = ""
+                    ws["G" + str(i)] = ""
+                    ws["H" + str(i)] = ""
 
-                wb.save(filename="university.xlsx")
-                break
+                    for x in range(i, num_students + 2):
+                        ws["A" + str(x)] = ws["A" + str(x + 1)].value
+                        ws["B" + str(x)] = ws["B" + str(x + 1)].value
+                        ws["C" + str(x)] = ws["C" + str(x + 1)].value
+                        ws["D" + str(x)] = ws["D" + str(x + 1)].value
+                        ws["E" + str(x)] = ws["E" + str(x + 1)].value
+                        ws["F" + str(x)] = ws["F" + str(x + 1)].value
+                        ws["G" + str(x)] = ws["G" + str(x + 1)].value
+                        ws["H" + str(x)] = ws["H" + str(x + 1)].value
 
-            else:
+                    current_num_students = ws["J3"].value
+                    ws["J3"] = current_num_students - 1
+                    wb.save(filename="university.xlsx")
+                    break
+
+            except:
                 continue
         
 

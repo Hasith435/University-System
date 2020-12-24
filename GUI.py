@@ -214,8 +214,9 @@ class student_functions:
 
         def enter_button():
 
-            student_ID = Student_ID_entry.get()
+            student_ID = int(Student_ID_entry.get())
             print(student_ID)
+            students.remove_student_function(student_ID)
 
             removed_lbl = Label(window_remove_student, text= "Removed",bg="#393939", foreground= "white" )
             removed_lbl.grid(columnspan= 2)
