@@ -8,9 +8,6 @@ ws_courses = wb['courses']
 ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
 
-num_students = ws["J3"].value
-student_row = num_students + 2
-
 num_courses = ws_courses["F4"].value
 course_row = num_courses + 2
 
@@ -24,9 +21,8 @@ column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
 class students:
 
-
-    def __init__(self, student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
-        self.student_ID = student_ID
+    #For Registering Students
+    def __init__(self,fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
         self.fname = fname
         self.lname = lname
         self.DoB = DoB
@@ -35,9 +31,8 @@ class students:
         self.guardian_telephone = guardian_telephone
         self.address = address
 
-    @staticmethod
-    def register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address):
-
+        num_students = ws["J3"].value
+        student_row = num_students + 2
 
         ws["B" + str(student_row)] = fname
         ws["C" + str(student_row)] = lname
@@ -47,7 +42,7 @@ class students:
         ws["G" + str(student_row)] = guardian_telephone
         ws["H" + str(student_row)] = address
 
-        ws['J3'] = num_students + 1
+        ws["J3"] = num_students + 1
 
         ws["A" + str(student_row)] = ws['J3'].value
         wb.save(filename="university.xlsx")
@@ -55,6 +50,8 @@ class students:
     @staticmethod
     def view_student_details(ID):
 
+        num_students = ws["J3"].value
+        student_row = num_students + 2
 
         for i in range(2, num_students + 2):
             if ws["A" + str(i)].value == int(ID):
@@ -76,6 +73,10 @@ class students:
 
     @staticmethod
     def remove_student_function(ID):
+
+        num_students = ws["J3"].value
+        student_row = num_students + 2
+
         print('Function Works')
         for i in range(2, num_students + 2):
             print("For Loop Works")
@@ -109,11 +110,6 @@ class students:
             except:
                 continue
         
-
-
-
-
-
 
 class courses(students):
 

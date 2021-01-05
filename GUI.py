@@ -109,7 +109,15 @@ class student_functions:
             submit_label = Label(window,text= "Registered", bg= "#393939", foreground= "white")
             submit_label.grid(columnspan= 2, pady= 10)
 
-            students.register_students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
+            students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
+
+            fname_entry.delete(first=0, last=22)
+            lname_entry.delete(first=0, last=22)
+            dob_entry.delete(first=0, last=22)
+            gender_entry.delete(first=0, last=22)
+            guardian_names_entry.delete(first=0, last=22)
+            guardian_telephone_entry.delete(first=0, last=22)
+            address_entry.delete(first=0, last=22)
 
         def back():
             window.destroy()
@@ -141,49 +149,55 @@ class student_functions:
 
         def view_details():
 
-            student_ID_get = int(student_ID_entry.get())
+            try:
+                student_ID_get = int(student_ID_entry.get())
 
-            returned_list = students.view_student_details(student_ID_get)
+                returned_list = students.view_student_details(student_ID_get)
 
-            # view_details_window = Toplevel()
-            # view_details_window.configure(bg="#393939")
+                # view_details_window = Toplevel()
+                # view_details_window.configure(bg="#393939")
 
-            student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
-            fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
-            lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
-            DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
-            gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
-            guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground="white")
-            guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",foreground="white")
-            address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
+                student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
+                fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
+                lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
+                DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
+                gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
+                guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground="white")
+                guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",foreground="white")
+                address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
 
-            print(students.view_student_details(student_ID_get))
-            student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white", width= 50)
-            fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white", width= 50)
-            lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white", width= 50)
-            DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white", width= 50)
-            gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white", width= 50)
-            guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white", width= 50)
-            guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white", width= 50)
-            address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white", width= 50)
+                print(students.view_student_details(student_ID_get))
+                student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white", width= 50)
+                fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white", width= 50)
+                lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white", width= 50)
+                DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white", width= 50)
+                gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white", width= 50)
+                guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white", width= 50)
+                guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white", width= 50)
+                address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white", width= 50)
 
-            student_ID_details_lbl.grid(row=1, column=0)
-            fname_details_lbl.grid(row=2, column=0)
-            lname_details_lbl.grid(row=3, column=0)
-            DoB_details_lbl.grid(row=4, column=0)
-            gender_details_lbl.grid(row=5, column=0)
-            guardian_details_lbl.grid(row=6, column=0)
-            guardian_telephone_lbl.grid(row=7, column=0)
-            address_details_lbl.grid(row=8, column=0)
+                student_ID_details_lbl.grid(row=1, column=0)
+                fname_details_lbl.grid(row=2, column=0)
+                lname_details_lbl.grid(row=3, column=0)
+                DoB_details_lbl.grid(row=4, column=0)
+                gender_details_lbl.grid(row=5, column=0)
+                guardian_details_lbl.grid(row=6, column=0)
+                guardian_telephone_lbl.grid(row=7, column=0)
+                address_details_lbl.grid(row=8, column=0)
 
-            student_ID_details.grid(row=1, column=1, sticky= W)
-            fname_details.grid(row=2, column=1, sticky= W)
-            lname_details.grid(row=3, column=1, sticky= W)
-            DoB_details.grid(row=4, column=1, sticky= W)
-            gender_details.grid(row=5, column=1, sticky= W)
-            guardian_names_details.grid(row=6, column=1, sticky= W)
-            guardian_telephone_details.grid(row=7, column=1, sticky= W)
-            address_details.grid(row=8, column=1, sticky= W)
+                student_ID_details.grid(row=1, column=1, sticky= W)
+                fname_details.grid(row=2, column=1, sticky= W)
+                lname_details.grid(row=3, column=1, sticky= W)
+                DoB_details.grid(row=4, column=1, sticky= W)
+                gender_details.grid(row=5, column=1, sticky= W)
+                guardian_names_details.grid(row=6, column=1, sticky= W)
+                guardian_telephone_details.grid(row=7, column=1, sticky= W)
+                address_details.grid(row=8, column=1, sticky= W)
+
+            except:
+                student_not_found_lbl = Label(window_details_ID,text= "Student Not Found!",bg="#393939", foreground="white" )
+                student_not_found_lbl.grid(columnspan= 2)
+                print('Student Not found')
 
             
             print(type(student_ID_get))
@@ -213,13 +227,18 @@ class student_functions:
         Student_ID_entry.grid(row= 0, column= 1 )
 
         def enter_button():
+            try:
+                student_ID = int(Student_ID_entry.get())
+                print(student_ID)
+                students.remove_student_function(student_ID)
 
-            student_ID = int(Student_ID_entry.get())
-            print(student_ID)
-            students.remove_student_function(student_ID)
+                removed_lbl = Label(window_remove_student, text= "Removed",bg="#393939", foreground= "white" )
+                removed_lbl.grid(columnspan= 2)
 
-            removed_lbl = Label(window_remove_student, text= "Removed",bg="#393939", foreground= "white" )
-            removed_lbl.grid(columnspan= 2)
+            except:
+                student_not_found_lbl = Label(window_remove_student, text="Student Not Found!", bg="#393939",foreground="white")
+                student_not_found_lbl.grid(columnspan=2)
+                print('Student Not found')
 
         def back():
             window_remove_student.destroy()
