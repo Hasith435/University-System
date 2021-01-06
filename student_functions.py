@@ -7,6 +7,7 @@ ws = wb['students']
 ws_courses = wb['courses']
 ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
+ws_removed_students = wb["removed_students"]
 
 num_courses = ws_courses["F4"].value
 course_row = num_courses + 2
@@ -77,12 +78,26 @@ class students:
         num_students = ws["J3"].value
         student_row = num_students + 2
 
+        num_students_removed = ws_removed_students["J3"].value
+
         print('Function Works')
         for i in range(2, num_students + 2):
             print("For Loop Works")
             try:
                 if int(ws["A" + str(i)].value) == ID:
                     print("IF statement Works")
+
+                    ws_removed_students["A" + str(i)] =  ws["A" + str(i)].value
+                    ws_removed_students["B" + str(i)] = ws["B" + str(i)].value
+                    ws_removed_students["C" + str(i)] = ws["C" + str(i)].value
+                    ws_removed_students["D" + str(i)] = ws["D" + str(i)].value
+                    ws_removed_students["E" + str(i)] = ws["E" + str(i)].value
+                    ws_removed_students["F" + str(i)] = ws["F" + str(i)].value
+                    ws_removed_students["G" + str(i)] = ws["G" + str(i)].value
+                    ws_removed_students["H" + str(i)] = ws["H" + str(i)].value
+
+                    ws_removed_students["J3"] = num_students_removed + 1
+
                     ws["A" + str(i)] = ""
                     ws["B" + str(i)] = ""
                     ws["C" + str(i)] = ""
