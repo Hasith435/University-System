@@ -43,7 +43,7 @@ font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
 font_style_main_entry = tkFont.Font(family= "corbel light", size= 20)
 font_style_user_input_lbl = tkFont.Font(family= "corbel light", size= 13)
 font_style_submit_button = tkFont.Font(family= "corbel light", size = 15, weight= "bold")
-font_style_title = tkFont.Font(family= "corbel light", size= 35)
+font_style_title = tkFont.Font(family= "corbel light", size= 40)
 font_style_button = tkFont.Font(family= "corbel light", size= 20)
 font_style_welcome_frame_title = tkFont.Font(family= "corbel", size=30 )
 font_style_choice = tkFont.Font(family= "corbel light", size=18)
@@ -116,8 +116,8 @@ class student_functions:
             lname_entry.delete(first=0, last=22)
             dob_entry.delete(first=0, last=22)
             gender_entry.delete(first=0, last=22)
-            guardian_names_entry.delete(first=0, last=22)
-            guardian_telephone_entry.delete(first=0, last=22)
+            guardian_names_entry.delete(first=0, last=100)
+            guardian_telephone_entry.delete(first=0, last=100)
             address_entry.delete(first=0, last=22)
 
         def back():
@@ -249,33 +249,34 @@ class student_functions:
 
         enter_button = Button(window_remove_student,text= "Enter", font= font_style_popup_button, command= enter_button,bg="#393939", foreground= "white", width= 30)
         enter_button.grid(row= 1, column= 1)
-    
 
-#def student_button_root():
-    # register_student_button = Button(root, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
-    # remove_student_button = Button(root,text= "Remove a Student", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0, command=student_functions.remove_student )
+def student_button_root():
+    register_student_button = Button(root, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
+    view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
+    remove_student_button = Button(root,text= "Remove a Student", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0, command=student_functions.remove_student )
+    back_button = Button(root, text= "Back", font= font_style_submit_button, bg="#e84d1a", foreground="white"  )
+
+    register_student_button.grid(row=7, column=0, padx=7, pady=10)
+    view_student_details_button.grid(row=7, column=1, padx=7, pady=10)
+    remove_student_button.grid(row=7, column=2, padx=7, pady=10)
+    back_button.grid(row= 8, column=0, padx = 30)
 
 def teacher_button_root():
-    view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-    view_student_details_button.grid(row=7, column=0, pady=2)
+    pass
 
+welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
+choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
 
+student_button = Button(text= "Student", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0)
+teacher_button = Button(text= "Teacher", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
+admin_button = Button(text= "Admin", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
 
-welcome_lbl = Label(root, text= "WELCOME TO THE UNIVERISITY", font= font_style_title, bg="#000000", foreground= "white"  )
-choice_lbl = Label(root, text= "Please choose your Position", font= font_style_choice, bg="#000000", foreground= "white")
+welcome_lbl.grid(columnspan=3)
+choice_lbl.grid(columnspan=3)
 
-student_button = Button(text= "Student", font= font_style_button, bg="#525150", foreground= "white", borderwidth=0, width= 12)
-teacher_button = Button(text= "Teacher", font= font_style_button, bg="#525150", foreground= "white", borderwidth=0, width= 12, command= teacher_button_root)
-admin_button = Button(text= "Admin", font= font_style_button, bg="#525150", foreground= "white", borderwidth=0, width= 12)
-receptionist_button = Button(text= "Receptionist", font= font_style_button, bg="#525150", foreground= "white", borderwidth=0, width= 12)
-
-welcome_lbl.grid(columnspan=4)
-choice_lbl.grid(columnspan=4)
-
-student_button.grid(row=5, column=0, pady= 20, padx= 15)
-teacher_button.grid(row=5, column=1, pady= 20, padx= 15)
-admin_button.grid(row=5, column=2, pady= 20, padx= 15)
-receptionist_button.grid(row=5, column=3, pady= 20, padx= 15)
+student_button.grid(row=5, column=0, pady= 20)
+teacher_button.grid(row=5, column=1, pady= 20)
+admin_button.grid(row=5, column=2, pady= 20)
 
 
 
