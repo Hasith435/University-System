@@ -48,6 +48,7 @@ font_style_button = tkFont.Font(family= "corbel light", size= 20)
 font_style_welcome_frame_title = tkFont.Font(family= "corbel", size=30 )
 font_style_choice = tkFont.Font(family= "corbel light", size=18)
 
+#Features that students can access
 class student_functions:
     @staticmethod
     def register_student():
@@ -264,12 +265,43 @@ def student_button_root():
 def teacher_button_root():
     pass
 
+#Features that Teachers can Access
+class teacher_functions:
+    pass
+
+
+#Features that the Admin can Access
+class admin_functions:
+    pass
+
+def admin_button_root():
+    password_label = Label(root, text= "Password:", font= font_style_user_input_lbl, bg="#000000", foreground= "#FFFFFF")
+    password_entry = Entry(root)
+    enter_button = Button(root, text="Enter",font= font_style_submit_button, borderwidth= 0 )
+
+    password_label.grid(row=7, column=0)
+    password_entry.grid(row=7, column=1)
+    enter_button.grid(row= 8, column= 0)
+
+    password = "12"
+    password_entered = password_entry.get()
+
+    def password_login():
+        print('fdfjkdjfd')
+
+    if password_entered == password:
+        password_login()
+
+    else:
+        print('wrong password')
+
+
 welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
 choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
 
 student_button = Button(text= "Student", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0)
 teacher_button = Button(text= "Teacher", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
-admin_button = Button(text= "Admin", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
+admin_button = Button(text= "Admin", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root,borderwidth= 0)
 
 welcome_lbl.grid(columnspan=3)
 choice_lbl.grid(columnspan=3)
