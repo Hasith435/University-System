@@ -48,6 +48,7 @@ font_style_button = tkFont.Font(family= "corbel light", size= 20)
 font_style_welcome_frame_title = tkFont.Font(family= "corbel", size=30 )
 font_style_choice = tkFont.Font(family= "corbel light", size=18)
 
+
 #Features that students can access
 class student_functions:
     @staticmethod
@@ -255,12 +256,12 @@ def student_button_root():
     register_student_button = Button(root, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
     view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
     remove_student_button = Button(root,text= "Remove a Student", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0, command=student_functions.remove_student )
-    back_button = Button(root, text= "Back", font= font_style_submit_button, bg="#e84d1a", foreground="white"  )
+    back_button = Button(root, text= "Back", font= font_style_submit_button, bg="#e84d1a", foreground="white", borderwidth= 0, width = 80)
 
     register_student_button.grid(row=7, column=0, padx=7, pady=10)
     view_student_details_button.grid(row=7, column=1, padx=7, pady=10)
     remove_student_button.grid(row=7, column=2, padx=7, pady=10)
-    back_button.grid(row= 8, column=0, padx = 30)
+    back_button.grid(columnspan= 3)
 
 def teacher_button_root():
     pass
@@ -296,6 +297,7 @@ def admin_button_root():
         print('wrong password')
 
 
+
 welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
 choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
 
@@ -309,6 +311,9 @@ choice_lbl.grid(columnspan=3)
 student_button.grid(row=5, column=0, pady= 20)
 teacher_button.grid(row=5, column=1, pady= 20)
 admin_button.grid(row=5, column=2, pady= 20)
+
+
+
 
 
 
