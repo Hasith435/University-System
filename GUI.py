@@ -47,91 +47,11 @@ font_style_title = tkFont.Font(family= "corbel light", size= 40)
 font_style_button = tkFont.Font(family= "corbel light", size= 20)
 font_style_welcome_frame_title = tkFont.Font(family= "corbel", size=30 )
 font_style_choice = tkFont.Font(family= "corbel light", size=18)
+font_style_enter_button = tkFont.Font(family= "cobel light", size= 12)
 
 
 #Features that students can access
 class student_functions:
-    @staticmethod
-    def register_student():
-        global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
-            guardian_telephone_entry, address_entry, window
-
-        window = Toplevel()
-        window.configure(bg="#393939")
-        window.title("Register Students")
-
-
-        #Assigning the Entry Fields
-        fname_entry = Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        lname_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        dob_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        gender_entry = Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_names_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_telephone_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        address_entry =Entry(window, width = 40, font= font_style_user_input_lbl, bg="#393939", foreground="white")
-
-        fname_lbl = Label(window, text= "First Name:", font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        lname_lbl = Label(window,text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        dob_lbl = Label(window,text="Date of Birth:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        gender_lbl = Label(window,text="Gender:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_names_lbl = Label(window,text="Guardian Names:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_telephone_lbl = Label(window,text="Guardian Telephone:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        address_lbl = Label(window,text="Address:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-
-        fname_lbl.grid(row=0, column=0, sticky=W)
-        lname_lbl.grid(row=1, column=0, sticky=W)
-        dob_lbl.grid(row=2, column=0, sticky=W)
-        gender_lbl.grid(row=3, column=0, sticky=W)
-        guardian_names_lbl.grid(row=4, column=0, sticky=W)
-        guardian_telephone_lbl.grid(row=5, column=0, sticky=W)
-        address_lbl.grid(row=6, column=0, sticky=W)
-
-        #Positionning the Entry Fields
-        fname_entry.grid(row=0, column=1)
-        lname_entry.grid(row=1, column=1)
-        dob_entry.grid(row=2, column=1)
-        gender_entry.grid(row=3, column=1)
-        guardian_names_entry.grid(row=4, column=1)
-        guardian_telephone_entry.grid(row=5, column=1)
-        address_entry.grid(row=6, column=1)
-
-
-
-        def submit():
-            global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
-                guardian_telephone_entry, address_entry, window
-
-            fname = fname_entry.get()
-            lname = lname_entry.get()
-            DoB = dob_entry.get()
-            gender = gender_entry.get()
-            guardian_names = guardian_names_entry.get()
-            guardian_telephone = guardian_telephone_entry.get()
-            address = address_entry.get()
-
-            submit_label = Label(window,text= "Registered", bg= "#393939", foreground= "white")
-            submit_label.grid(columnspan= 2, pady= 10)
-
-            students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
-
-            fname_entry.delete(first=0, last=22)
-            lname_entry.delete(first=0, last=22)
-            dob_entry.delete(first=0, last=22)
-            gender_entry.delete(first=0, last=22)
-            guardian_names_entry.delete(first=0, last=100)
-            guardian_telephone_entry.delete(first=0, last=100)
-            address_entry.delete(first=0, last=22)
-
-        def back():
-            window.destroy()
-
-        submit_button = Button(window, text="Submit", bg="#24e1f2", foreground="white", width=30,font=font_style_submit_button, command= submit, borderwidth=0)
-        submit_button.grid(row= 7, column=1, pady=5, padx= 10)
-
-        back_button = Button(window, text= "Back", bg="#e84d1a", foreground="white", width=10,font=font_style_submit_button, command= back, borderwidth=0)
-        back_button.grid(row=7, column=0)
-
-
     @staticmethod
     def view_details_get_entry():
 
@@ -217,50 +137,12 @@ class student_functions:
         back_button.grid(row=9, column=0, pady= 10)
 
 
-    @staticmethod
-    def remove_student():
-        window_remove_student = Toplevel()
-        window_remove_student.configure(bg="#393939")
-        window_remove_student.title('Remove Student')
-
-        Student_ID_lbl = Label(window_remove_student, text= "Student ID:",bg="#393939", foreground= "white", font= font_style_main_entry)
-        Student_ID_lbl.grid(row=0, column=0)
-        
-        Student_ID_entry = Entry(window_remove_student, width = 50,bg="#393939", foreground= "white")
-        Student_ID_entry.grid(row= 0, column= 1 )
-
-        def enter_button():
-            try:
-                student_ID = int(Student_ID_entry.get())
-                print(student_ID)
-                students.remove_student_function(student_ID)
-
-                removed_lbl = Label(window_remove_student, text= "Removed",bg="#393939", foreground= "white" )
-                removed_lbl.grid(columnspan= 2)
-
-            except:
-                student_not_found_lbl = Label(window_remove_student, text="Student Not Found!", bg="#393939",foreground="white")
-                student_not_found_lbl.grid(columnspan=2)
-                print('Student Not found')
-
-        def back():
-            window_remove_student.destroy()
-
-        back_button = Button(window_remove_student, text="Back", bg="#e84d1a", foreground="white", width=10,font=font_style_submit_button, command=back, borderwidth=0)
-        back_button.grid(row=1, column=0, pady=10)
-
-        enter_button = Button(window_remove_student,text= "Enter", font= font_style_popup_button, command= enter_button,bg="#393939", foreground= "white", width= 30)
-        enter_button.grid(row= 1, column= 1)
-
 def student_button_root():
-    register_student_button = Button(root, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
-    view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-    remove_student_button = Button(root,text= "Remove a Student", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0, command=student_functions.remove_student )
-    back_button = Button(root, text= "Back", font= font_style_submit_button, bg="#e84d1a", foreground="white", borderwidth= 0, width = 80)
 
-    register_student_button.grid(row=7, column=0, padx=7, pady=10)
+    view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
+    back_button = Button(root, text= "Back", font= font_style_submit_button, bg="#e84d1a", foreground="white", borderwidth= 0, width = 80, command= home)
+
     view_student_details_button.grid(row=7, column=1, padx=7, pady=10)
-    remove_student_button.grid(row=7, column=2, padx=7, pady=10)
     back_button.grid(columnspan= 3)
 
 def teacher_button_root():
@@ -273,44 +155,270 @@ class teacher_functions:
 
 #Features that the Admin can Access
 class admin_functions:
-    pass
 
-def admin_button_root():
+    @staticmethod
+    def register_students():
+        global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
+            guardian_telephone_entry, address_entry, window
+
+        window = Toplevel()
+        window.configure(bg="#393939")
+        window.title("Register Students")
+
+        # Assigning the Entry Fields
+        fname_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        lname_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        dob_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        gender_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_names_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_telephone_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939",
+                                         foreground="white")
+        address_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+
+        fname_lbl = Label(window, text="First Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        lname_lbl = Label(window, text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        dob_lbl = Label(window, text="Date of Birth:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        gender_lbl = Label(window, text="Gender:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        guardian_names_lbl = Label(window, text="Guardian Names:", font=font_style_user_input_lbl, bg="#393939",
+                                   foreground="white")
+        guardian_telephone_lbl = Label(window, text="Guardian Telephone:", font=font_style_user_input_lbl, bg="#393939",
+                                       foreground="white")
+        address_lbl = Label(window, text="Address:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+
+        fname_lbl.grid(row=0, column=0, sticky=W)
+        lname_lbl.grid(row=1, column=0, sticky=W)
+        dob_lbl.grid(row=2, column=0, sticky=W)
+        gender_lbl.grid(row=3, column=0, sticky=W)
+        guardian_names_lbl.grid(row=4, column=0, sticky=W)
+        guardian_telephone_lbl.grid(row=5, column=0, sticky=W)
+        address_lbl.grid(row=6, column=0, sticky=W)
+
+        # Positionning the Entry Fields
+        fname_entry.grid(row=0, column=1)
+        lname_entry.grid(row=1, column=1)
+        dob_entry.grid(row=2, column=1)
+        gender_entry.grid(row=3, column=1)
+        guardian_names_entry.grid(row=4, column=1)
+        guardian_telephone_entry.grid(row=5, column=1)
+        address_entry.grid(row=6, column=1)
+
+        def submit():
+            global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
+                guardian_telephone_entry, address_entry, window
+
+            fname = fname_entry.get()
+            lname = lname_entry.get()
+            DoB = dob_entry.get()
+            gender = gender_entry.get()
+            guardian_names = guardian_names_entry.get()
+            guardian_telephone = guardian_telephone_entry.get()
+            address = address_entry.get()
+
+            submit_label = Label(window, text="Registered", bg="#393939", foreground="white")
+            submit_label.grid(columnspan=2, pady=10)
+
+            students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
+
+            fname_entry.delete(first=0, last=22)
+            lname_entry.delete(first=0, last=22)
+            dob_entry.delete(first=0, last=22)
+            gender_entry.delete(first=0, last=22)
+            guardian_names_entry.delete(first=0, last=100)
+            guardian_telephone_entry.delete(first=0, last=100)
+            address_entry.delete(first=0, last=22)
+
+        def back():
+            window.destroy()
+
+        submit_button = Button(window, text="Submit", bg="#24e1f2", foreground="white", width=30,
+                               font=font_style_submit_button, command=submit, borderwidth=0)
+        submit_button.grid(row=7, column=1, pady=5, padx=10)
+
+        back_button = Button(window, text="Back", bg="#e84d1a", foreground="white", width=10,
+                             font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=7, column=0)
+
+    @staticmethod
+    def view_details_get_entry():
+        student_ID_get = 0
+
+        window_details_ID = Toplevel()
+        window_details_ID.configure(bg="#393939")
+        window_details_ID.title("View student Details")
+
+        student_ID_label = Label(window_details_ID, text="Student ID:", font=font_style_main_entry, pady=2,
+                                 bg="#393939", foreground="white")
+        student_ID_label.grid(row=0, column=0)
+        student_ID_entry = Entry(window_details_ID, width=50, bg="#393939", foreground="white")
+        student_ID_entry.grid(row=0, column=1)
+
+        def view_details():
+
+            try:
+                student_ID_get = int(student_ID_entry.get())
+
+                returned_list = students.view_student_details(student_ID_get)
+
+                # view_details_window = Toplevel()
+                # view_details_window.configure(bg="#393939")
+
+                student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
+                fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
+                lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
+                DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
+                gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
+                guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939",
+                                             foreground="white")
+                guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",
+                                               foreground="white")
+                address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
+
+                print(students.view_student_details(student_ID_get))
+                student_ID_details = Label(window_details_ID, text=returned_list[0], bg="#393939", foreground="white",
+                                           width=50)
+                fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939", foreground="white",
+                                      width=50)
+                lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white",
+                                      width=50)
+                DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939", foreground="white",
+                                    width=50)
+                gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939", foreground="white",
+                                       width=50)
+                guardian_names_details = Label(window_details_ID, text=returned_list[5], bg="#393939",
+                                               foreground="white", width=50)
+                guardian_telephone_details = Label(window_details_ID, text=returned_list[6], bg="#393939",
+                                                   foreground="white", width=50)
+                address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white",
+                                        width=50)
+
+                student_ID_details_lbl.grid(row=1, column=0)
+                fname_details_lbl.grid(row=2, column=0)
+                lname_details_lbl.grid(row=3, column=0)
+                DoB_details_lbl.grid(row=4, column=0)
+                gender_details_lbl.grid(row=5, column=0)
+                guardian_details_lbl.grid(row=6, column=0)
+                guardian_telephone_lbl.grid(row=7, column=0)
+                address_details_lbl.grid(row=8, column=0)
+
+                student_ID_details.grid(row=1, column=1, sticky=W)
+                fname_details.grid(row=2, column=1, sticky=W)
+                lname_details.grid(row=3, column=1, sticky=W)
+                DoB_details.grid(row=4, column=1, sticky=W)
+                gender_details.grid(row=5, column=1, sticky=W)
+                guardian_names_details.grid(row=6, column=1, sticky=W)
+                guardian_telephone_details.grid(row=7, column=1, sticky=W)
+                address_details.grid(row=8, column=1, sticky=W)
+
+            except:
+                student_not_found_lbl = Label(window_details_ID, text="Student Not Found!", bg="#393939",
+                                              foreground="white")
+                student_not_found_lbl.grid(columnspan=2)
+                print('Student Not found')
+
+            print(type(student_ID_get))
+
+        enter_button = Button(window_details_ID, text="Enter", font=font_style_popup_button, command=view_details,
+                              bg="#393939", foreground="white", width=30)
+        enter_button.grid(row=9, column=1, pady=10)
+
+        def back():
+            window_details_ID.destroy()
+
+        back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10,
+                             font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=9, column=0, pady=10)
+
+    @staticmethod
+    def remove_student():
+        window_remove_student = Toplevel()
+        window_remove_student.configure(bg="#393939")
+        window_remove_student.title('Remove Student')
+
+        Student_ID_lbl = Label(window_remove_student, text="Student ID:", bg="#393939", foreground="white",
+                               font=font_style_main_entry)
+        Student_ID_lbl.grid(row=0, column=0)
+
+        Student_ID_entry = Entry(window_remove_student, width=50, bg="#393939", foreground="white")
+        Student_ID_entry.grid(row=0, column=1)
+
+        def enter_button():
+            try:
+                student_ID = int(Student_ID_entry.get())
+                print(student_ID)
+                students.remove_student_function(student_ID)
+
+                removed_lbl = Label(window_remove_student, text="Removed", bg="#393939", foreground="white")
+                removed_lbl.grid(columnspan=2)
+
+            except:
+                student_not_found_lbl = Label(window_remove_student, text="Student Not Found!", bg="#393939",
+                                              foreground="white")
+                student_not_found_lbl.grid(columnspan=2)
+                print('Student Not found')
+
+        def back():
+            window_remove_student.destroy()
+
+        back_button = Button(window_remove_student, text="Back", bg="#e84d1a", foreground="white", width=10,
+                             font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=1, column=0, pady=10)
+
+        enter_button = Button(window_remove_student, text="Enter", font=font_style_popup_button, command=enter_button,
+                              bg="#393939", foreground="white", width=30)
+        enter_button.grid(row=1, column=1)
+
+
+
+def admin_button_root_rest():
+    register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
+    view_student_details_button = Button(root, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
+    remove_student_button = Button(root, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
+    back_button = Button(root, text="Back", font=font_style_submit_button, bg="#e84d1a", foreground="white",borderwidth=0, width=80, command=home)
+
+    register_student_button.grid(row=9, column=0, padx=7, pady=10)
+    view_student_details_button.grid(row=9, column=1, padx=7, pady=10)
+    remove_student_button.grid(row=9, column=2, padx=7, pady=10)
+    back_button.grid(columnspan=3)
+
+def admin_button_root_password():
     password_label = Label(root, text= "Password:", font= font_style_user_input_lbl, bg="#000000", foreground= "#FFFFFF")
     password_entry = Entry(root)
-    enter_button = Button(root, text="Enter",font= font_style_submit_button, borderwidth= 0 )
 
     password_label.grid(row=7, column=0)
     password_entry.grid(row=7, column=1)
-    enter_button.grid(row= 8, column= 0)
-
-    password = "12"
-    password_entered = password_entry.get()
-
-    def password_login():
-        print('fdfjkdjfd')
-
-    if password_entered == password:
-        password_login()
-
-    else:
-        print('wrong password')
 
 
+    def password_verify():
+        password= "12"
+        entered_password = password_entry.get()
 
-welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
-choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
+        if entered_password == password:
+            print('correct')
+            admin_button_root_rest()
 
-student_button = Button(text= "Student", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0)
-teacher_button = Button(text= "Teacher", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
-admin_button = Button(text= "Admin", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root,borderwidth= 0)
+        else:
+            print('incorrect')
 
-welcome_lbl.grid(columnspan=3)
-choice_lbl.grid(columnspan=3)
+    enter_button = Button(root, text="Enter", font=font_style_enter_button, borderwidth=0, width=10, command= password_verify)
+    enter_button.grid(row=8, column=1)
 
-student_button.grid(row=5, column=0, pady= 20)
-teacher_button.grid(row=5, column=1, pady= 20)
-admin_button.grid(row=5, column=2, pady= 20)
+
+def home():
+    welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
+    choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
+
+    student_button = Button(text= "Student", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0)
+    teacher_button = Button(text= "Teacher", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
+    admin_button = Button(text= "Admin", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root_password,borderwidth= 0)
+
+    welcome_lbl.grid(columnspan=3)
+    choice_lbl.grid(columnspan=3)
+
+    student_button.grid(row=5, column=0, pady= 20)
+    teacher_button.grid(row=5, column=1, pady= 20)
+    admin_button.grid(row=5, column=2, pady= 20)
+
+home()
 
 
 
