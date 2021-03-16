@@ -140,10 +140,10 @@ class student_functions:
 def student_button_root():
 
     view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-    back_button = Button(root, text= "Back", font= font_style_submit_button, bg="#e84d1a", foreground="white", borderwidth= 0, width = 80, command= home)
+    view_grades_button= Button(root, text="View Grades", width=20, font=font_style_button,bg="#393939", foreground="white", borderwidth=0)
 
-    view_student_details_button.grid(row=7, column=1, padx=7, pady=10)
-    back_button.grid(columnspan= 3)
+    view_student_details_button.grid(row=7, column=0, padx=7, pady=10)
+    view_grades_button.grid(row=7, column=1, padx=7, pady=10)
 
 def teacher_button_root():
     pass
@@ -373,19 +373,20 @@ def admin_button_root_rest():
     register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
     view_student_details_button = Button(root, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
     remove_student_button = Button(root, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
-    back_button = Button(root, text="Back", font=font_style_submit_button, bg="#e84d1a", foreground="white",borderwidth=0, width=80, command=home)
+    view_grades_button = Button(root, text="View Grades", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
 
     register_student_button.grid(row=9, column=0, padx=7, pady=10)
     view_student_details_button.grid(row=9, column=1, padx=7, pady=10)
     remove_student_button.grid(row=9, column=2, padx=7, pady=10)
-    back_button.grid(columnspan=3)
+    view_grades_button.grid(row=9, column=3, padx=7, pady=10)
+
 
 def admin_button_root_password():
-    password_label = Label(root, text= "Password:", font= font_style_user_input_lbl, bg="#000000", foreground= "#FFFFFF")
+    password_label = Label(root, text= "PASSWORD:", font= font_style_user_input_lbl, bg="#000000", foreground= "#FFFFFF")
     password_entry = Entry(root)
 
-    password_label.grid(row=7, column=0)
-    password_entry.grid(row=7, column=1)
+    password_label.grid(row=7, column=1)
+    password_entry.grid(row=7, column=2)
 
 
     def password_verify():
@@ -405,23 +406,25 @@ def admin_button_root_password():
             password_entry.insert(0, "Incorrect")
 
     enter_button = Button(root, text="Enter", font=font_style_enter_button, borderwidth=0, width=10, command= password_verify)
-    enter_button.grid(row=8, column=1)
+    enter_button.grid(row=8, column=2)
 
 
 def home():
     welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
     choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
 
-    student_button = Button(text= "Student", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0)
-    teacher_button = Button(text= "Teacher", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0)
-    admin_button = Button(text= "Admin", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root_password,borderwidth= 0)
+    student_button = Button(text= "STUDENT", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0, width= 9)
+    teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0, width= 9)
+    admin_button = Button(text= "ADMIN", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root_password,borderwidth= 0, width= 9)
+    parent_button = Button(text="PARENT", font=font_style_button, bg="#545352", foreground="white", borderwidth=0, width= 9)
 
-    welcome_lbl.grid(columnspan=3)
-    choice_lbl.grid(columnspan=3)
+    welcome_lbl.grid(columnspan=4)
+    choice_lbl.grid(columnspan=4)
 
     student_button.grid(row=5, column=0, pady= 20)
     teacher_button.grid(row=5, column=1, pady= 20)
     admin_button.grid(row=5, column=2, pady= 20)
+    parent_button.grid(row= 5, column= 3, pady= 20)
 
 home()
 
