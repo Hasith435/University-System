@@ -396,8 +396,13 @@ def admin_button_root_password():
             print('correct')
             admin_button_root_rest()
 
+            password_entry.delete(0,100)
+            password_entry.insert(0, "correct")
+
         else:
             print('incorrect')
+            password_entry.delete(0, 100)
+            password_entry.insert(0, "Incorrect")
 
     enter_button = Button(root, text="Enter", font=font_style_enter_button, borderwidth=0, width=10, command= password_verify)
     enter_button.grid(row=8, column=1)
