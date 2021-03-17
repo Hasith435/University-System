@@ -243,8 +243,10 @@ class teacher_functions:
 
 def teacher_button_root():
     view_student_details_button = Button(root, text= "View Student Details", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0,command= teacher_functions.view_details_get_entry)
+    add_course_grades_button = Button(root, text= "Add Grades", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0)
 
     view_student_details_button.grid(row= 7, column= 0, padx=7, pady=10 )
+    add_course_grades_button.grid(row= 7, column= 1, padx= 7, pady= 10)
 
 
 
@@ -462,6 +464,13 @@ class admin_functions:
                               bg="#393939", foreground="white", width=30)
         enter_button.grid(row=1, column=1)
 
+    @staticmethod
+    def add_course():
+        course_register_window = Toplevel()
+        course_register_window.configure(bg="#393939")
+        course_register_window.title("Register Course")
+
+        
 
 def admin_button_root_rest():
     register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)

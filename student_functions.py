@@ -9,8 +9,7 @@ ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
 ws_removed_students = wb["removed_students"]
 
-num_courses = ws_courses["F4"].value
-course_row = num_courses + 2
+
 
 num_student_courses = ws_student_courses["L4"].value
 student_course_row = num_student_courses + 2
@@ -130,24 +129,25 @@ class courses(students):
 
 
 
-    def __init__(self, course_ID, course_name, course_duration, prerequisistes, instructors):
-        self.course_ID = course_ID
+    def __init__(self, course_name, course_duration, prerequisistes, instructors):
         self.course_name = course_name
         self.course_duration = course_duration
         self.prerequisistes = prerequisistes
         self.instructors = instructors
 
-    @classmethod
-    def register_course(cls, course_ID, course_name, course_duration, prerequisites, instructors):
+        num_courses = ws_courses["F4"].value
+        course_row = num_courses + 2
 
-        ws_courses["A" + str(course_row)] = course_ID
         ws_courses["B" + str(course_row)] = course_name
         ws_courses["C" + str(course_row)] = course_duration
-        ws_courses["D" + str(course_row)] = prerequisites
+        ws_courses["D" + str(course_row)] = prerequisistes
         ws_courses["E" + str(course_row)] = instructors
 
-        ws_courses['F4'] = num_courses + 1
+        ws_courses["F4"] = num_courses + 1
+
+        ws_courses["A" + str(course_row)] = ws['F3'].value
         wb.save(filename="university.xlsx")
+
 
     @classmethod
     def view_course_details(cls, course_ID):
@@ -164,26 +164,17 @@ class courses(students):
             else:
                 continue
 
-    @classmethod
-    def add_student_courses(cls, student_ID, Course_ID, g1, g2, g3, g4, g5):
+    @staticmethod
+    def add_student_courses(student_ID, ):
         pass
 
 
-        # ws_student_courses["A" + str(student_course_row)] =
-        # ws_student_courses["B" + str(student_course_row)] =
-        # ws_student_courses["C" + str(student_course_row)] =
-        #
-        # ws_student_courses["D" + str(student_course_row)] =
-        # ws_student_courses["E" + str(student_course_row)] =
-        #
-        # ws_student_courses["F" + str(student_course_row)] = g1
-        # ws_student_courses["G" + str(student_course_row)] = g2
-        # ws_student_courses["H" + str(student_course_row)] = g3
-        # ws_student_courses["I" + str(student_course_row)] = g4
-        # ws_student_courses["J" + str(student_course_row)] = g5
-        #
-        # ws_student_courses["L4"] = num_student_courses + 1
-        # wb.save(filename="university.xlsx")
+        ws_student_courses["A" + str(student_course_row)] =
+        ws_student_courses["B" + str(student_course_row)] =
+        ws_student_courses["C" + str(student_course_row)] =
+
+        ws_student_courses["D" + str(student_course_row)] =
+        ws_student_courses["E" + str(student_course_row)] =
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
