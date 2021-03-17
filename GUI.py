@@ -140,17 +140,112 @@ class student_functions:
 def student_button_root():
 
     view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
+    apply_for_course = Button(root, text= "Apply for a Course", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0)
     view_grades_button= Button(root, text="View Grades", width=20, font=font_style_button,bg="#393939", foreground="white", borderwidth=0)
+    apply_for_club = Button(root, text="Apply for a Club", width=20, font=font_style_button,bg="#393939", foreground="white", borderwidth=0)
 
     view_student_details_button.grid(row=7, column=0, padx=7, pady=10)
-    view_grades_button.grid(row=7, column=1, padx=7, pady=10)
+    apply_for_course.grid(row=7, column=1, padx=7, pady=10)
+    view_grades_button.grid(row=7, column=2, padx=7, pady=10)
+    apply_for_club.grid(row=7, column=3, padx=7, pady=10)
 
-def teacher_button_root():
-    pass
+
+
+
 
 #Features that Teachers can Access
 class teacher_functions:
-    pass
+    @staticmethod
+    def view_details_get_entry():
+
+        student_ID_get = 0
+
+        window_details_ID = Toplevel()
+        window_details_ID.configure(bg="#393939")
+        window_details_ID.title("View student Details")
+
+
+        student_ID_label = Label(window_details_ID,text= "Student ID:", font=font_style_main_entry, pady= 2, bg="#393939", foreground= "white")
+        student_ID_label.grid(row=0, column=0)
+        student_ID_entry = Entry(window_details_ID, width= 50,bg="#393939", foreground= "white")
+        student_ID_entry.grid(row= 0 , column= 1)
+
+
+
+
+        def view_details():
+
+            try:
+                student_ID_get = int(student_ID_entry.get())
+
+                returned_list = students.view_student_details(student_ID_get)
+
+                # view_details_window = Toplevel()
+                # view_details_window.configure(bg="#393939")
+
+                student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
+                fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
+                lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
+                DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
+                gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
+                guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground="white")
+                guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",foreground="white")
+                address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
+
+                print(students.view_student_details(student_ID_get))
+                student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white", width= 50)
+                fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white", width= 50)
+                lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white", width= 50)
+                DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white", width= 50)
+                gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white", width= 50)
+                guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white", width= 50)
+                guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white", width= 50)
+                address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white", width= 50)
+
+                student_ID_details_lbl.grid(row=1, column=0)
+                fname_details_lbl.grid(row=2, column=0)
+                lname_details_lbl.grid(row=3, column=0)
+                DoB_details_lbl.grid(row=4, column=0)
+                gender_details_lbl.grid(row=5, column=0)
+                guardian_details_lbl.grid(row=6, column=0)
+                guardian_telephone_lbl.grid(row=7, column=0)
+                address_details_lbl.grid(row=8, column=0)
+
+                student_ID_details.grid(row=1, column=1, sticky= W)
+                fname_details.grid(row=2, column=1, sticky= W)
+                lname_details.grid(row=3, column=1, sticky= W)
+                DoB_details.grid(row=4, column=1, sticky= W)
+                gender_details.grid(row=5, column=1, sticky= W)
+                guardian_names_details.grid(row=6, column=1, sticky= W)
+                guardian_telephone_details.grid(row=7, column=1, sticky= W)
+                address_details.grid(row=8, column=1, sticky= W)
+
+            except:
+                student_not_found_lbl = Label(window_details_ID,text= "Student Not Found!",bg="#393939", foreground="white" )
+                student_not_found_lbl.grid(columnspan= 2)
+                print('Student Not found')
+
+            
+            print(type(student_ID_get))
+
+            
+
+        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command=view_details, bg="#393939", foreground= "white", width= 30)
+        enter_button.grid(row=9, column=1, pady= 10)
+
+        def back():
+            window_details_ID.destroy()
+
+        back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=9, column=0, pady= 10)
+
+
+
+def teacher_button_root():
+    view_student_details_button = Button(root, text= "View Student Details", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0,command= teacher_functions.view_details_get_entry)
+
+    view_student_details_button.grid(row= 7, column= 0, padx=7, pady=10 )
+
 
 
 #Features that the Admin can Access
@@ -368,18 +463,18 @@ class admin_functions:
         enter_button.grid(row=1, column=1)
 
 
-
 def admin_button_root_rest():
     register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
     view_student_details_button = Button(root, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
     remove_student_button = Button(root, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
+    add_course = Button(root, text="Add a Course", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
     view_grades_button = Button(root, text="View Grades", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
 
     register_student_button.grid(row=9, column=0, padx=7, pady=10)
     view_student_details_button.grid(row=9, column=1, padx=7, pady=10)
     remove_student_button.grid(row=9, column=2, padx=7, pady=10)
-    view_grades_button.grid(row=9, column=3, padx=7, pady=10)
-
+    add_course.grid(row=9, column=3, padx=7, pady=10)
+    view_grades_button.grid(row=10, column=0, padx=7, pady=10)
 
 def admin_button_root_password():
     password_label = Label(root, text= "PASSWORD:", font= font_style_user_input_lbl, bg="#000000", foreground= "#FFFFFF")
@@ -414,7 +509,7 @@ def home():
     choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
 
     student_button = Button(text= "STUDENT", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0, width= 9)
-    teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0, width= 9)
+    teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0, width= 9, command= teacher_button_root)
     admin_button = Button(text= "ADMIN", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root_password,borderwidth= 0, width= 9)
     parent_button = Button(text="PARENT", font=font_style_button, bg="#545352", foreground="white", borderwidth=0, width= 9)
 
