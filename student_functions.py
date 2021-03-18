@@ -169,12 +169,12 @@ class courses(students):
         pass
 
 
-        ws_student_courses["A" + str(student_course_row)] =
-        ws_student_courses["B" + str(student_course_row)] =
-        ws_student_courses["C" + str(student_course_row)] =
+        # ws_student_courses["A" + str(student_course_row)] =
+        # ws_student_courses["B" + str(student_course_row)] =
+        # ws_student_courses["C" + str(student_course_row)] =
 
-        ws_student_courses["D" + str(student_course_row)] =
-        ws_student_courses["E" + str(student_course_row)] =
+        # ws_student_courses["D" + str(student_course_row)] =
+        # ws_student_courses["E" + str(student_course_row)] =
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):

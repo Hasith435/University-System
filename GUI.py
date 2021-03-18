@@ -39,7 +39,7 @@ root.title("Welcome to the University")
 # root.iconbitmap('D:\download.png')
 
 
-font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
+font_style_popup_button = tkFont.Font(family= "corberl light", size=15)
 font_style_main_entry = tkFont.Font(family= "corbel light", size= 20)
 font_style_user_input_lbl = tkFont.Font(family= "corbel light", size= 13)
 font_style_submit_button = tkFont.Font(family= "corbel light", size = 15, weight= "bold")
@@ -470,6 +470,38 @@ class admin_functions:
         course_register_window.configure(bg="#393939")
         course_register_window.title("Register Course")
 
+        course_name_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_duration_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        prerequisites_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        instructors_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+
+        course_name_lbl = Label(window, text="Course Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_duration_lbl = Label(window, text="Course Duration:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        prerequisites_lbl = Label(window, text="Prerequisites:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        instructors_lbl = Label(window, text="Instructors:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+
+        course_name_entrygrid(row=0, column=1)
+        course_duration_entry.grid(row=1, column=1)
+        prerequisites_entry.grid(row=2, column=1)
+        instructors_entry.grid(row=3, column=1)
+
+        course_name_lbl.grid(row=0, column=0, sticky=W)
+        course_duration_lbl.grid(row=1, column=0, sticky=W)
+        prerequisites_lbl.grid(row=2, column=0, sticky=W)
+        instructors_lbl.grid(row=3, column=0, sticky=W)
+
+        def submit():
+            course_name = course_name_entry.get()
+            course_duration = course_duration_entry.get()
+            prerequisites = prerequisites_entry.get()
+            instructors = ginstructors_entry.get()
+
+            courses(course_name, course_duration, prerequisites, instructors)
+
+            course_name_entry.delete(0,100)
+            course_duration_entry.delete(0,100)
+            prerequisites_entry.delete(0,100)
+            instructors_entry.delete(0,100)
         
 
 def admin_button_root_rest():
