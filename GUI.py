@@ -239,7 +239,9 @@ class teacher_functions:
         back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
         back_button.grid(row=9, column=0, pady= 10)
 
-
+    @staticmethod
+    def add_student_grades():
+        
 
 def teacher_button_root():
     view_student_details_button = Button(root, text= "View Student Details", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0,command= teacher_functions.view_details_get_entry)
@@ -470,17 +472,17 @@ class admin_functions:
         course_register_window.configure(bg="#393939")
         course_register_window.title("Register Course")
 
-        course_name_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        course_duration_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        prerequisites_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        instructors_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_name_entry = Entry(course_register_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_duration_entry = Entry(course_register_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        prerequisites_entry = Entry(course_register_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        instructors_entry = Entry(course_register_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
 
-        course_name_lbl = Label(window, text="Course Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        course_duration_lbl = Label(window, text="Course Duration:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        prerequisites_lbl = Label(window, text="Prerequisites:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        instructors_lbl = Label(window, text="Instructors:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_name_lbl = Label(course_register_window, text="Course Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_duration_lbl = Label(course_register_window, text="Course Duration:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        prerequisites_lbl = Label(course_register_window, text="Prerequisites:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        instructors_lbl = Label(course_register_window, text="Instructors:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
 
-        course_name_entrygrid(row=0, column=1)
+        course_name_entry.grid(row=0, column=1)
         course_duration_entry.grid(row=1, column=1)
         prerequisites_entry.grid(row=2, column=1)
         instructors_entry.grid(row=3, column=1)
@@ -494,7 +496,10 @@ class admin_functions:
             course_name = course_name_entry.get()
             course_duration = course_duration_entry.get()
             prerequisites = prerequisites_entry.get()
-            instructors = ginstructors_entry.get()
+            instructors = instructors_entry.get()
+
+            registered_label = Label(window, text="Registered", bg="#393939", foreground="white")
+            registered_label.grid(columnspan=2, pady=10)
 
             courses(course_name, course_duration, prerequisites, instructors)
 
@@ -503,12 +508,20 @@ class admin_functions:
             prerequisites_entry.delete(0,100)
             instructors_entry.delete(0,100)
         
+        def back():
+            course_register_window.destroy()
+        
+        submit_button = Button(course_register_window, text="Submit", bg="#24e1f2", foreground="white", width=30,font=font_style_submit_button, command=submit, borderwidth=0)
+        submit_button.grid(row=7, column=1, pady=5, padx=10)
+
+        back_button = Button(course_register_window, text="Back", bg="#e84d1a", foreground="white", width=10,font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=7, column=0)
 
 def admin_button_root_rest():
     register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
     view_student_details_button = Button(root, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
     remove_student_button = Button(root, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
-    add_course = Button(root, text="Add a Course", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+    add_course = Button(root, text="Add a Course", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command= admin_functions.add_course)
     view_grades_button = Button(root, text="View Grades", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
 
     register_student_button.grid(row=9, column=0, padx=7, pady=10)

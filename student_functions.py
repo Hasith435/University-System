@@ -11,8 +11,7 @@ ws_removed_students = wb["removed_students"]
 
 
 
-num_student_courses = ws_student_courses["L4"].value
-student_course_row = num_student_courses + 2
+
 
 num_student_clubs = ws_student_clubs["H4"].value
 student_club_row = num_student_clubs + 2
@@ -145,7 +144,7 @@ class courses(students):
 
         ws_courses["F4"] = num_courses + 1
 
-        ws_courses["A" + str(course_row)] = ws['F3'].value
+        ws_courses["A" + str(course_row)] = ws_courses['F4'].value
         wb.save(filename="university.xlsx")
 
 
@@ -200,6 +199,14 @@ class courses(students):
 
             else:
                 continue
+    
+    @staticmethod
+    def add_student_grades(student_ID):
+
+        num_student_courses = ws_student_courses["L4"].value
+        student_course_row = num_student_courses + 2
+
+        for i in range(0, num_student_courses)
 
 
 
