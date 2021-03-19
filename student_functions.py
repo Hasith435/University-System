@@ -215,6 +215,7 @@ class courses(students):
                ws_courses["J" + str(i)] = g5
         
         ws_courses["L3"] = num_student_courses + 1
+        wb.save(filename= "university.xlsx")
 
 
 class clubs(students):

@@ -245,19 +245,19 @@ class teacher_functions:
         add_student_grades_window.configure(bg="#393939")
         add_student_grades_window.title("Add student Grades")
 
-        student_ID_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g1_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g2_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g3_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g4_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g5_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        student_ID_entry = Entry(add_student_grades_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g1_entry = Entry(add_student_grades_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g2_entry = Entry(add_student_grades_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g3_entry = Entry(add_student_grades_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g4_entry = Entry(add_student_grades_window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g5_entry = Entry(add_student_grades_window, width=40, font=font_style_user_input_lbl, bg="#393939",foreground="white")
 
-        student_ID_lbl = Label(window, text="First Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g1_lbl = Label(window, text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g2_lbl = Label(window, text="Date of Birth:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g3_lbl = Label(window, text="Gender:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        g4_lbl = Label(window, text="Guardian Names:", font=font_style_user_input_lbl, bg="#393939",foreground="white")
-        g5_lbl = Label(window, text="Guardian Telephone:", font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        student_ID_lbl = Label(add_student_grades_window, text="Student_ID:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g1_lbl = Label(add_student_grades_window, text="Term 1 Grade:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g2_lbl = Label(add_student_grades_window, text="Term 2 Grade:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g3_lbl = Label(add_student_grades_window, text="Term 3 Grade:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g4_lbl = Label(add_student_grades_window, text="Term 4 Grade:", font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        g5_lbl = Label(add_student_grades_window, text="Term 5 Grade:", font=font_style_user_input_lbl, bg="#393939",foreground="white")
 
         student_ID_entry.grid(row=0, column=1)
         g1_entry.grid(row=1, column=1)
@@ -281,13 +281,27 @@ class teacher_functions:
             g4 = g4_entry.get()
             g5 = g5_entry.get()
 
+            courses.add_student_grades(student_ID, g1, g2, g3, g4, g5)
+
             student_ID.delete(0,100)
             g1.delete(0,100)
             g2.delete(0,100)
+            g3.delete(0,100)
+            g4.delete(0,100)
+            g5.delete(0,100)
+        
+        def back():
+            add_student_grades_window.destroy()
+        
+        submit_button = Button(add_student_grades_window, text="Submit", bg="#24e1f2", foreground="white", width=30,font=font_style_submit_button, command=submit, borderwidth=0)
+        submit_button.grid(row=7, column=1, pady=5, padx=10)
+
+        back_button = Button(add_student_grades_window, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
+        back_button.grid(row=7, column=0)
 
 def teacher_button_root():
     view_student_details_button = Button(root, text= "View Student Details", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0,command= teacher_functions.view_details_get_entry)
-    add_course_grades_button = Button(root, text= "Add Grades", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0)
+    add_course_grades_button = Button(root, text= "Add Grades", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0, command= teacher_functions.add_student_grades)
 
     view_student_details_button.grid(row= 7, column= 0, padx=7, pady=10 )
     add_course_grades_button.grid(row= 7, column= 1, padx= 7, pady= 10)
