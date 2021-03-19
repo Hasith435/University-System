@@ -241,7 +241,49 @@ class teacher_functions:
 
     @staticmethod
     def add_student_grades():
-        
+        add_student_grades_window = Toplevel()
+        add_student_grades_window.configure(bg="#393939")
+        add_student_grades_window.title("Add student Grades")
+
+        student_ID_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g1_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g2_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g3_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g4_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g5_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+
+        student_ID_lbl = Label(window, text="First Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g1_lbl = Label(window, text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g2_lbl = Label(window, text="Date of Birth:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g3_lbl = Label(window, text="Gender:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        g4_lbl = Label(window, text="Guardian Names:", font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        g5_lbl = Label(window, text="Guardian Telephone:", font=font_style_user_input_lbl, bg="#393939",foreground="white")
+
+        student_ID_entry.grid(row=0, column=1)
+        g1_entry.grid(row=1, column=1)
+        g2_entry.grid(row=2, column=1)
+        g3_entry.grid(row=3, column=1)
+        g4_entry.grid(row=4, column=1)
+        g5_entry.grid(row=5, column=1)
+
+        student_ID_lbl.grid(row=0, column=0, sticky=W)
+        g1_lbl.grid(row=1, column=0, sticky=W)
+        g2_lbl.grid(row=2, column=0, sticky=W)
+        g3_lbl.grid(row=3, column=0, sticky=W)
+        g4_lbl.grid(row=4, column=0, sticky=W)
+        g5_lbl.grid(row=5, column=0, sticky=W)
+
+        def submit():
+            student_ID = student_ID_entry.get()
+            g1 = g1_entry.get()
+            g2 = g2_entry.get()
+            g3 = g3_entry.get()
+            g4 = g4_entry.get()
+            g5 = g5_entry.get()
+
+            student_ID.delete(0,100)
+            g1.delete(0,100)
+            g2.delete(0,100)
 
 def teacher_button_root():
     view_student_details_button = Button(root, text= "View Student Details", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0,command= teacher_functions.view_details_get_entry)

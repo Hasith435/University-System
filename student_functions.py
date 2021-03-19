@@ -201,13 +201,20 @@ class courses(students):
                 continue
     
     @staticmethod
-    def add_student_grades(student_ID):
+    def add_student_grades(student_ID, g1, g2, g3, g4, g5):
 
         num_student_courses = ws_student_courses["L4"].value
         student_course_row = num_student_courses + 2
 
-        for i in range(0, num_student_courses)
-
+        for i in range(0, num_student_courses + 2):
+           if ws_courses["A" + str(i)].value == student_ID:
+               ws_courses["F" + str(i)] = g1
+               ws_courses["G" + str(i)] = g2
+               ws_courses["H" + str(i)] = g3
+               ws_courses["I" + str(i)] = g4
+               ws_courses["J" + str(i)] = g5
+        
+        ws_courses["L3"] = num_student_courses + 1
 
 
 class clubs(students):
