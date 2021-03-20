@@ -161,15 +161,35 @@ class courses(students):
                 continue
 
     @staticmethod
-    def add_student_courses(student_ID):
-       num_student_courses = ws_student_courses["L4"]
-       student_courses_row = ws_student_courses + 2
+    def add_student_courses(student_ID, course_ID):
+        num_student_courses = ws_student_courses["L4"]
+        student_courses_row = ws_student_courses + 2
 
-        ws_student_courses["A" + str(student_courses_row)] = course_name
-        ws_student_courses["B" + str(student_courses_row)] = course_duration
-        ws_student_courses["C" + str(student_courses_row)] = prerequisistes
-        ws_student_courses["D" + str(student_courses_row)] = instructors
-        ws_student_courses["E" + str(student_courses_row)] = instructors
+        num_students = ws["J3"].value
+        student_row = num_students + 2
+
+        num_courses = ws_courses["F4"].value
+        course_row = num_courses + 2
+
+        for i in range(2, num_students + 2):
+            if ws["A" + str(i)].value == student_ID:
+                fname = ws["B" + str(i)].value
+                lname = ws["C" + str(i)].value
+        
+        for k in range(2, num_courses + 2):
+            if ws_courses["A" + str(i)].value == course_ID:
+                course_name = ws_courses["B" +str(i)].value
+
+
+        ws_student_courses["A" + str(student_courses_row)] = student_ID
+        ws_student_courses["B" + str(student_courses_row)] = fname
+        ws_student_courses["C" + str(student_courses_row)] = lname
+        ws_student_courses["D" + str(student_courses_row)] = course_ID
+        ws_student_courses["E" + str(student_courses_row)] = course_name
+
+        ws_student_courses["L4"] = num_student_courses + 1
+
+        wb.save(filename="univerisity.xlsx")
 
 
 
