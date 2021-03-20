@@ -10,9 +10,6 @@ ws_student_clubs = wb['student_clubs']
 ws_removed_students = wb["removed_students"]
 
 
-
-
-
 num_student_clubs = ws_student_clubs["H4"].value
 student_club_row = num_student_clubs + 2
 
@@ -164,16 +161,17 @@ class courses(students):
                 continue
 
     @staticmethod
-    def add_student_courses(student_ID, ):
-        pass
+    def add_student_courses(student_ID):
+       num_student_courses = ws_student_courses["L4"]
+       student_courses_row = ws_student_courses + 2
+
+        ws_student_courses["A" + str(student_courses_row)] = course_name
+        ws_student_courses["B" + str(student_courses_row)] = course_duration
+        ws_student_courses["C" + str(student_courses_row)] = prerequisistes
+        ws_student_courses["D" + str(student_courses_row)] = instructors
+        ws_student_courses["E" + str(student_courses_row)] = instructors
 
 
-        # ws_student_courses["A" + str(student_course_row)] =
-        # ws_student_courses["B" + str(student_course_row)] =
-        # ws_student_courses["C" + str(student_course_row)] =
-
-        # ws_student_courses["D" + str(student_course_row)] =
-        # ws_student_courses["E" + str(student_course_row)] =
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):

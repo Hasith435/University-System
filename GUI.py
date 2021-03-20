@@ -137,6 +137,10 @@ class student_functions:
         back_button.grid(row=9, column=0, pady= 10)
 
 
+    @staticmethod
+    def register_for_course():
+        
+
 def student_button_root():
 
     view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
