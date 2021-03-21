@@ -139,7 +139,7 @@ class student_functions:
 
     @staticmethod
     def register_for_course():
-        
+        pass
 
 def student_button_root():
 
@@ -576,6 +576,12 @@ class admin_functions:
 
         back_button = Button(course_register_window, text="Back", bg="#e84d1a", foreground="white", width=10,font=font_style_submit_button, command=back, borderwidth=0)
         back_button.grid(row=7, column=0)
+
+    @staticmethod
+    def add_student_course():
+        add_student_course_window = Toplevel()
+        window.configure(bg="#393939")
+        window.title("Register Students")
 
 def admin_button_root_rest():
     register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
