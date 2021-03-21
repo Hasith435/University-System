@@ -558,7 +558,7 @@ class admin_functions:
             prerequisites = prerequisites_entry.get()
             instructors = instructors_entry.get()
 
-            registered_label = Label(window, text="Registered", bg="#393939", foreground="white")
+            registered_label = Label(course_register_window, text="Registered", bg="#393939", foreground="white")
             registered_label.grid(columnspan=2, pady=10)
 
             courses(course_name, course_duration, prerequisites, instructors)
