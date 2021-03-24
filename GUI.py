@@ -139,12 +139,20 @@ class student_functions:
 
     @staticmethod
     def register_for_course():
-        pass
+        register_course_window = Toplevel()
+        register_course_window.configure(bg="#393939")
+        register_course_window.title('Register for a Course')
+
+        course_ID_lbl = Label(register_course_window, text= "Course_ID:", font= font_style_main_entry, bg="#393939", foreground= "white")
+        course_ID_entry = Entry(register_course_window, width= 50,bg="#393939", foreground= "white")
+
+        course_ID_lbl.grid(row=1, column=0)
+        course_ID_entry.grid(row=1, column= 1)
 
 def student_button_root():
 
     view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-    apply_for_course = Button(root, text= "Apply for a Course", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0)
+    apply_for_course = Button(root, text= "Apply for a Course", width= 20,font= font_style_button, bg="#393939", foreground= "white",borderwidth= 0, command= student_functions.register_for_course)
     view_grades_button= Button(root, text="View Grades", width=20, font=font_style_button,bg="#393939", foreground="white", borderwidth=0)
     apply_for_club = Button(root, text="Apply for a Club", width=20, font=font_style_button,bg="#393939", foreground="white", borderwidth=0)
 
