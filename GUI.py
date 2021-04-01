@@ -400,18 +400,22 @@ def admin_button_root_password():
             password_entry.delete(0,100)
             password_entry.insert(0, "correct")
 
+            password_label.grid_forget()
+            password_entry.grid_forget()
+            enter_button.grid_forget()
+
         else:
             print('incorrect')
             password_entry.delete(0, 100)
             password_entry.insert(0, "Incorrect")
 
-    enter_button = Button(root, text="Enter", font=font_style_enter_button, borderwidth=0, width=10, command= password_verify)
+    enter_button = Button(root, text="ENTER", font=font_style_enter_button, borderwidth=0, width=13, command= password_verify, bg="#1aeb8d")
     enter_button.grid(row=8, column=2)
 
 
 def home():
-    welcome_lbl = Label(root, text= "Welcome to the University", font= font_style_title, bg="#000000", foreground= "white"  )
-    choice_lbl = Label(root, text= "Please choose your Position:", font= font_style_choice, bg="#000000", foreground= "white")
+    welcome_lbl = Label(root, text= "UNIVERSITY SYSTEM", font= font_style_title, bg="#000000", foreground= "white"  )
+    choice_lbl = Label(root, text= "PLEASE CHOOSE YOUR POSITION:", font= font_style_choice, bg="#000000", foreground= "white")
 
     student_button = Button(text= "STUDENT", font= font_style_button, bg="#545352", foreground= "white", command= student_button_root, borderwidth= 0, width= 9)
     teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0, width= 9)
@@ -421,10 +425,10 @@ def home():
     welcome_lbl.grid(columnspan=4)
     choice_lbl.grid(columnspan=4)
 
-    student_button.grid(row=5, column=0, pady= 20)
-    teacher_button.grid(row=5, column=1, pady= 20)
-    admin_button.grid(row=5, column=2, pady= 20)
-    parent_button.grid(row= 5, column= 3, pady= 20)
+    student_button.grid(row=5, column=0, pady= 20, padx= 10)
+    teacher_button.grid(row=5, column=1, pady= 20, padx=10)
+    admin_button.grid(row=5, column=2, pady= 20, padx=10)
+    parent_button.grid(row= 5, column= 3, pady= 20, padx=10)
 
 home()
 
