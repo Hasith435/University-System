@@ -145,12 +145,17 @@ def student_button_root():
     view_student_details_button.grid(row=7, column=0, padx=7, pady=10)
     view_grades_button.grid(row=7, column=1, padx=7, pady=10)
 
+
+
+
 def teacher_button_root():
     pass
 
 #Features that Teachers can Access
 class teacher_functions:
     pass
+
+
 
 
 #Features that the Admin can Access
@@ -367,18 +372,53 @@ class admin_functions:
                               bg="#393939", foreground="white", width=30)
         enter_button.grid(row=1, column=1)
 
+class admin_second_screen:
+
+    @staticmethod
+    def student_page():
+
+        admin_student_window = Toplevel()
+        admin_student_window.configure(bg="#000000")
+        admin_student_window.title("STUDENTS")
+
+        register_student_button = Button(admin_student_window, text="Register Student", width=20, font=font_style_button, bg="#393939", foreground="white", command=admin_functions.register_students, borderwidth=0)
+        view_student_details_button = Button(admin_student_window, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
+        remove_student_button = Button(admin_student_window, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
+        view_grades_button = Button(admin_student_window, text="View Grades", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+
+
+        register_student_button.grid(row=9, column=0, padx=7, pady=7)
+        view_student_details_button.grid(row=9, column=1, padx=7, pady=7)
+        remove_student_button.grid(row=10, column=0, padx=7, pady=7)
+        view_grades_button.grid(row=10, column=1, padx=7, pady=7)
+
+        def back():
+            admin_student_window.destroy()
+
+        back_button = Button(admin_student_window, text="Back", width=53, font=font_style_submit_button, bg="#e84d1a",foreground="white", borderwidth=0, command= back)
+        back_button.grid(columnspan= 2)
 
 
 def admin_button_root_rest():
-    register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
-    view_student_details_button = Button(root, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
-    remove_student_button = Button(root, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
-    view_grades_button = Button(root, text="View Grades", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+    # register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
+    # view_student_details_button = Button(root, text="View Student Details", width=20, font=font_style_button,bg="#393939", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
+    # remove_student_button = Button(root, text="Remove a Student", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0, command=admin_functions.remove_student)
+    # view_grades_button = Button(root, text="View Grades", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+    #
+    # register_student_button.grid(row=9, column=0, padx=7, pady=10)
+    # view_student_details_button.grid(row=9, column=1, padx=7, pady=10)
+    # remove_student_button.grid(row=9, column=2, padx=7, pady=10)
+    # view_grades_button.grid(row=9, column=3, padx=7, pady=10)
 
-    register_student_button.grid(row=9, column=0, padx=7, pady=10)
-    view_student_details_button.grid(row=9, column=1, padx=7, pady=10)
-    remove_student_button.grid(row=9, column=2, padx=7, pady=10)
-    view_grades_button.grid(row=9, column=3, padx=7, pady=10)
+    Students_button = Button(root, text= "STUDENTS", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_second_screen.student_page , borderwidth=0)
+    Teachers_button = Button(root, text= "TEACHERS", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+    Courses_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+    Clubs_button = Button(root, text= "CLUBS", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
+
+    Students_button.grid(row=9, column=0, padx=7, pady=10)
+    Teachers_button.grid(row=9, column=1, padx=7, pady=10)
+    Courses_button.grid(row=9, column=2, padx=7, pady=10)
+    Clubs_button.grid(row=9, column=3, padx=7, pady=10)
 
 
 def admin_button_root_password():
