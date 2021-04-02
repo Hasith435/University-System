@@ -410,15 +410,18 @@ def admin_button_root_rest():
     # remove_student_button.grid(row=9, column=2, padx=7, pady=10)
     # view_grades_button.grid(row=9, column=3, padx=7, pady=10)
 
+    task_lbl = Label(root, text= "What is your task related to:", font = font_style_popup_button, bg= "#000000", foreground= "white")
+
     Students_button = Button(root, text= "STUDENTS", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_second_screen.student_page , borderwidth=0)
     Teachers_button = Button(root, text= "TEACHERS", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
     Courses_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
     Clubs_button = Button(root, text= "CLUBS", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
 
-    Students_button.grid(row=9, column=0, padx=7, pady=10)
-    Teachers_button.grid(row=9, column=1, padx=7, pady=10)
-    Courses_button.grid(row=9, column=2, padx=7, pady=10)
-    Clubs_button.grid(row=9, column=3, padx=7, pady=10)
+    task_lbl.grid(columnspan = 4)
+    Students_button.grid(row=10, column=0, padx=7, pady=10)
+    Teachers_button.grid(row=10, column=1, padx=7, pady=10)
+    Courses_button.grid(row=10, column=2, padx=7, pady=10)
+    Clubs_button.grid(row=10, column=3, padx=7, pady=10)
 
 
 def admin_button_root_password():
