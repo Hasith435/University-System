@@ -155,7 +155,6 @@ def teacher_button_root():
 class teacher_functions:
     pass
 
-#dfjhashfjksa
 
 
 
@@ -400,6 +399,18 @@ class admin_second_screen:
         back_button = Button(admin_student_window, text="Back", width=53, font=font_style_submit_button, bg="#e84d1a",foreground="white", borderwidth=0, command= back)
         back_button.grid(columnspan= 2)
 
+    @staticmethod
+    def teacher_page():
+        pass
+
+    @staticmethod
+    def course_page():
+        pass
+
+    @staticmethod
+    def clubs_page():
+        pass
+
 
 def admin_button_root_rest():
     # register_student_button = Button(root, text="Register Student", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_functions.register_students, borderwidth=0)
@@ -412,18 +423,31 @@ def admin_button_root_rest():
     # remove_student_button.grid(row=9, column=2, padx=7, pady=10)
     # view_grades_button.grid(row=9, column=3, padx=7, pady=10)
 
-    task_lbl = Label(root, text= "What is your task related to:", font = font_style_popup_button, bg= "#000000", foreground= "white")
+    task_lbl = Label(root, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= "#000000", foreground= "white")
 
     Students_button = Button(root, text= "STUDENTS", width=20, font=font_style_button, bg="#393939",foreground="white", command=admin_second_screen.student_page , borderwidth=0)
     Teachers_button = Button(root, text= "TEACHERS", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
     Courses_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
     Clubs_button = Button(root, text= "CLUBS", width=20, font=font_style_button, bg="#393939",foreground="white", borderwidth=0)
 
+
     task_lbl.grid(columnspan = 4)
     Students_button.grid(row=10, column=0, padx=7, pady=10)
     Teachers_button.grid(row=10, column=1, padx=7, pady=10)
     Courses_button.grid(row=10, column=2, padx=7, pady=10)
     Clubs_button.grid(row=10, column=3, padx=7, pady=10)
+
+
+    def admin_screen_back():
+        task_lbl.grid_forget()
+        Students_button.grid_forget()
+        Teachers_button.grid_forget()
+        Courses_button.grid_forget()
+        Clubs_button.grid_forget()
+        back_button.grid_forget()
+
+    back_button = Button(root, text="Back", width=84, font=font_style_button, bg="#e84d1a", foreground="white",borderwidth=0, command= admin_screen_back)
+    back_button.grid(columnspan=4, pady=10)
 
 
 def admin_button_root_password():
