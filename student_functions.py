@@ -1,6 +1,7 @@
 import openpyxl as xl
 from tkinter import *
 from tkinter.font import Font
+import pandas as pd
 
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
