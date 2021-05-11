@@ -175,7 +175,14 @@ def student_button_root():
 
     home_buttons_disappear()
 
-    password_button_stdnt = Button(root, text= "PASSWORD", width=20, font=font_style_button, bg="#545352",foreground="white", fdfdf, borderwidth=0)
+    task_lbl = Label(root, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
+
+    #course
+    course_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+    #change credentials
+    change_credentials_button = Button(root, text= "CHANGE INFO", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+    #View Details
+    view_details_button = Button(root, text= "VIEW DETAILS", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
 
 def student_admission_number_and_pswd():
     passwd_frame_student = Frame(root, bg="#4f4f4d")
