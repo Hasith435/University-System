@@ -2,7 +2,6 @@ from tkinter import *
 import tkinter as tk
 import tkinter.font as tkFont
 import os
-import pandas as pd
 import openpyxl as xl
 
 from student_functions import students
@@ -150,10 +149,10 @@ class student_functions:
                 student_not_found_lbl.grid(columnspan= 2)
                 print('Student Not found')
 
-            
+
             print(type(student_ID_get))
 
-            
+
 
         enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command=view_details, bg="#393939", foreground= "white", width= 30)
         enter_button.grid(row=9, column=1, pady= 10)
@@ -195,31 +194,27 @@ def student_admission_number_and_pswd():
         student_password = password_entry_stdnt.get()
 
         for i in range(2, num_student_psswd + 2):
-            if ws_student_psswd["A" + str(i)].value == student_admission_number:
+            if ws_student_psswd["A" + str(i)].value == student_admission_number and ws_student_psswd["B" + str(i)].value == student_password:
 
-                if ws_student_psswd["B" + str(i)].value == student_password:
-                    admission_number_lbl.grid_forget()
-                    admission_number_entry.grid_forget()
-                    password_label_stdnt.grid_forget()
-                    password_entry_stdnt.grid_forget()
-                    passwd_frame_student.grid_forget()
-                    enter_button.grid_forget()
-                    print('correct')
+                admission_number_lbl.grid_forget()
+                admission_number_entry.grid_forget()
+                password_label_stdnt.grid_forget()
+                password_entry_stdnt.grid_forget()
+                passwd_frame_student.grid_forget()
+                enter_button.grid_forget()
+                print('correct')
 
-                else:
-                    password_entry_stdnt.delete(0,100)
-                    password_entry_stdnt.insert(0, 'password is wrong')
-
-
-                    #The rest of the code for the student section goes here
 
             else:
                 admission_number_entry.delete(0,100)
-                admission_number_entry.insert(0, 'Index number is wrong')
+                password_entry_stdnt.delete(0,100)
+
+                admission_number_entry.insert(0, "Incorrect")
+                password_entry_stdnt.insert(0, "Incorrect")
 
 
-    enter_button = Button(passwd_frame_student, text="ENTER", font=font_style_enter_button, borderwidth=0, width=86,command=password_verify, bg="#1aeb8d")
-    enter_button.grid(columnspan= 4, pady= 10)
+    enter_button = Button(passwd_frame_student, text="ENTER", font=font_style_enter_button, borderwidth=0, width=82,command=password_verify, bg="#1aeb8d")
+    enter_button.grid(columnspan= 4, pady= 10, padx= 10)
 
 
 
