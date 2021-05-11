@@ -166,11 +166,16 @@ class student_functions:
 
 def student_button_root():
 
-    view_student_details_button = Button(root,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-    view_grades_button= Button(root, text="View Grades", width=20, font=font_style_button,bg="#393939", foreground="white", borderwidth=0)
+    def home_buttons_disappear():
+        student_button.grid_forget()
+        teacher_button.grid_forget()
+        admin_button.grid_forget()
+        parent_button.grid_forget()
+        choice_lbl.grid_forget()
 
-    view_student_details_button.grid(row=7, column=0, padx=7, pady=10)
-    view_grades_button.grid(row=7, column=1, padx=7, pady=10)
+    home_buttons_disappear()
+
+    password_button_stdnt = Button(root, text= "PASSWORD", width=20, font=font_style_button, bg="#545352",foreground="white", fdfdf, borderwidth=0)
 
 def student_admission_number_and_pswd():
     passwd_frame_student = Frame(root, bg="#4f4f4d")
