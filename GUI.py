@@ -180,6 +180,31 @@ class student_functions:
         back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
         back_button.grid(row=9, column=0, pady= 10)
 
+class second_screen_students:
+
+    @staticmethod
+    def courses():
+        course_window = Toplevel()
+        course_window.configure(bg="#2e2e2d")
+        course_window.title('Courses')
+
+        student_ID_lbl = Label(course_window, text= "Student ID", font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        course_ID_lbl = Label(course_window,text= "Course ID", font= font_style_user_input_lbl, bg="#393939", foreground="white")
+
+        student_ID_entry = Entry(course_window, font= font_style_user_input_lbl)
+        course_ID_entry = Entry(course_window, cont= font_style_user_input_lbl)
+
+        student_ID_lbl.grid(row= 0, column= 0)
+        course_ID_lbl.grid(row=1, column= 0)
+
+        student_ID_entry.grid(row= 0, column= 1)
+        course_ID_entry.grid(row= 1, column= 1)
+
+        student_ID = student_ID_entry.get()
+        course_ID = course_ID_entry.get()
+
+        courses.add_student_courses(student_ID, course_ID)
+
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
 
@@ -208,7 +233,7 @@ def student_button_root():
     #COMPLETE THE COMMANDS IN THESE BUTTONS
 
     #courses_button
-    course_button = Button(root, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    course_button = Button(root, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white", command= second_screen_students.courses)
     #Credentials
     credentials_button = Button(root, text= "Credentials", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #view_details
