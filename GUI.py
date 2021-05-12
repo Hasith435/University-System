@@ -76,9 +76,26 @@ def home():
 
 
 
-
+#COMPLETE THE REMAINNING FUNCTIONS IN THE CLASS
 #Features that students can access
 class student_functions:
+
+    @staticmethod
+    def register_course():
+        pass
+
+    @staticmethod
+    def view_grades():
+        pass
+
+    @staticmethod
+    def view_courses():
+        pass
+
+    @staticmethod
+    def un_register_course():
+        pass
+
     @staticmethod
     def view_details_get_entry():
 
@@ -163,7 +180,7 @@ class student_functions:
         back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
         back_button.grid(row=9, column=0, pady= 10)
 
-
+#ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
 
     def home_buttons_disappear():
@@ -195,7 +212,7 @@ def student_button_root():
     #Credentials
     credentials_button = Button(root, text= "Credentials", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #view_details
-    view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white", command= student_functions.view_details_get_entry)
     #clubs button
     clubs_button = Button(root, text= "Clubs", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #back Button
