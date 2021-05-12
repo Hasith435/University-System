@@ -173,16 +173,39 @@ def student_button_root():
         parent_button.grid_forget()
         choice_lbl.grid_forget()
 
+    def back():
+        welcome_lbl.grid_forget()
+        course_button.grid_forget()
+        credentials_button.grid_forget()
+        view_details_button.grid_forget()
+        clubs_button.grid_forget()
+        back_button.grid_forget()
+
+        home()
+
     home_buttons_disappear()
 
     task_lbl = Label(root, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
 
-    #course
-    course_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
-    #change credentials
-    change_credentials_button = Button(root, text= "CHANGE INFO", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
-    #View Details
-    view_details_button = Button(root, text= "VIEW DETAILS", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+
+    #COMPLETE THE COMMANDS IN THESE BUTTONS
+
+    #courses_button
+    course_button = Button(root, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    #Credentials
+    credentials_button = Button(root, text= "Credentials", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    #view_details
+    view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    #clubs button
+    clubs_button = Button(root, text= "Clubs", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    #back Button
+    back_button = Button(root, text= "Back", font= font_style_button, borderwidth= 0, width= 62, bg="#e84d1a",foreground="white", command= back)
+
+    course_button.grid(row= 1, column= 0, padx= 10, pady= 10)
+    credentials_button.grid(row= 1, column= 1, padx= 10, pady= 10)
+    view_details_button.grid(row= 1, column= 2, padx= 10, pady= 10)
+    clubs_button.grid(row= 1, column= 3, padx= 10, pady= 10)
+    back_button.grid(columnspan= 4)
 
 def student_admission_number_and_pswd():
     passwd_frame_student = Frame(root, bg="#4f4f4d")
@@ -215,6 +238,8 @@ def student_admission_number_and_pswd():
                 passwd_frame_student.grid_forget()
                 enter_button.grid_forget()
                 print('correct')
+
+                student_button_root()
 
 
             else:
