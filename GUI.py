@@ -192,7 +192,7 @@ class second_screen_students:
         course_ID_lbl = Label(course_window,text= "Course ID", font= font_style_user_input_lbl, bg="#393939", foreground="white")
 
         student_ID_entry = Entry(course_window, font= font_style_user_input_lbl)
-        course_ID_entry = Entry(course_window, cont= font_style_user_input_lbl)
+        course_ID_entry = Entry(course_window, font= font_style_user_input_lbl)
 
         student_ID_lbl.grid(row= 0, column= 0)
         course_ID_lbl.grid(row=1, column= 0)
@@ -203,7 +203,11 @@ class second_screen_students:
         student_ID = student_ID_entry.get()
         course_ID = course_ID_entry.get()
 
-        courses.add_student_courses(student_ID, course_ID)
+        def enter():
+            courses.add_student_courses(student_ID, course_ID)
+
+        Enter_button = Button(course_window, text= "Enter", font= font_style_enter_button, command= enter)
+        Enter_button.grid(columnspan= 2, padx= 10, pady =10)
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
@@ -247,7 +251,7 @@ def student_button_root():
     credentials_button.grid(row= 1, column= 1, padx= 10, pady= 10)
     view_details_button.grid(row= 1, column= 2, padx= 10, pady= 10)
     clubs_button.grid(row= 1, column= 3, padx= 10, pady= 10)
-    back_button.grid(columnspan= 4)
+    back_button.grid(columnspan= 4, padx= 10, pady= 10)
 
 def student_admission_number_and_pswd():
     passwd_frame_student = Frame(root, bg="#4f4f4d")
