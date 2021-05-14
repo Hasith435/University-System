@@ -61,10 +61,10 @@ def home():
     welcome_lbl = Label(root, text= "UNIVERSITY SYSTEM", font= font_style_title, bg="#2e2e2d", foreground= "white"  )
     choice_lbl = Label(root, text= "PLEASE CHOOSE YOUR POSITION:", font= font_style_choice, bg="#2e2e2d", foreground= "white")
 
-    student_button = Button(text= "STUDENT", font= font_style_button, bg="#545352", foreground= "white", command= student_admission_number_and_pswd, borderwidth= 0, width= 9)
-    teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "white", borderwidth= 0, width= 9)
-    admin_button = Button(text= "ADMIN", font= font_style_button, bg="#545352", foreground= "white", command= admin_button_root_password,borderwidth= 0, width= 9)
-    parent_button = Button(text="PARENT", font=font_style_button, bg="#545352", foreground="white", borderwidth=0, width= 9)
+    student_button = Button(text= "STUDENT", font= font_style_button, bg="#545352", foreground= "#ed9339", command= student_admission_number_and_pswd, borderwidth= 0, width= 9)
+    teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "#ed9339", borderwidth= 0, width= 9)
+    admin_button = Button(text= "ADMIN", font= font_style_button, bg="#545352", foreground= "#ed9339", command= admin_button_root_password,borderwidth= 0, width= 9)
+    parent_button = Button(text="PARENT", font=font_style_button, bg="#545352", foreground="#ed9339", borderwidth=0, width= 9)
 
     welcome_lbl.grid(columnspan=4)
     choice_lbl.grid(columnspan=4)
@@ -188,26 +188,42 @@ class second_screen_students:
         course_window.configure(bg="#2e2e2d")
         course_window.title('Courses')
 
-        student_ID_lbl = Label(course_window, text= "Student ID", font= font_style_user_input_lbl, bg="#393939", foreground="white")
-        course_ID_lbl = Label(course_window,text= "Course ID", font= font_style_user_input_lbl, bg="#393939", foreground="white")
+        #THIS IS THE SECTION FOR THE STUDENTS TO REGISTER FOR A COURSE
+        def register():
 
-        student_ID_entry = Entry(course_window, font= font_style_user_input_lbl)
-        course_ID_entry = Entry(course_window, font= font_style_user_input_lbl)
+            course_register_window = Toplevel()
+            course_register_window.configure(bg="#2e2e2d")
+            course_register_window.title('Register')
 
-        student_ID_lbl.grid(row= 0, column= 0)
-        course_ID_lbl.grid(row=1, column= 0)
+            student_ID_lbl = Label(course_register_window, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+            course_ID_lbl = Label(course_register_window, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
 
-        student_ID_entry.grid(row= 0, column= 1)
-        course_ID_entry.grid(row= 1, column= 1)
+            student_ID_entry = Entry(course_register_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
+            course_ID_entry = Entry(course_register_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
 
-        student_ID = student_ID_entry.get()
-        course_ID = course_ID_entry.get()
+            student_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
+            course_ID_lbl.grid(row=1, column=0, padx= 10, pady= 10)
 
-        def enter():
-            courses.add_student_courses(student_ID, course_ID)
+            student_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
+            course_ID_entry.grid(row=1, column=1, padx= 10, pady= 10)
 
-        Enter_button = Button(course_window, text= "Enter", font= font_style_enter_button, command= enter)
-        Enter_button.grid(columnspan= 2, padx= 10, pady =10)
+            def enter():
+                student_ID = int(student_ID_entry.get())
+                course_ID = int(course_ID_entry.get())
+                courses.add_student_courses(student_ID, course_ID)
+
+            def back():
+                course_register_window.destroy()
+
+            Enter_button = Button(course_register_window, text="Enter", font=font_style_enter_button, command=enter, bg="#1aeb8d", foreground= "black", width= 19)
+            Enter_button.grid(row= 2, column= 1, padx=10, pady=10)
+
+            back_button = Button(course_register_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
+            back_button.grid(row= 2, column= 0, padx=10, pady=10)
+
+        register_button = Button(course_window, text= "Register",font= font_style_button, command= register, borderwidth= 0, bg="#545352", foreground= "white")
+        register_button.grid(row= 0, column= 0, padx= 10, pady= 10)
+
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():

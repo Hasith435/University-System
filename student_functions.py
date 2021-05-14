@@ -161,6 +161,8 @@ class courses(students):
 
     @staticmethod
     def add_student_courses(student_ID, course_ID):
+
+        print('function start')
         num_student_courses = ws_student_courses["L4"].value
         student_courses_row = num_student_courses + 2
 
@@ -171,29 +173,36 @@ class courses(students):
         course_row = num_courses + 2
 
         for i in range(2, num_students + 2):
+            print(student_ID)
             if ws["A" + str(i)].value == student_ID:
+                print('for loop')
                 fname = ws["B" + str(i)].value
                 lname = ws["C" + str(i)].value
                 ws_student_courses["B" + str(student_courses_row)] = fname
                 ws_student_courses["C" + str(student_courses_row)] = lname
                 print('student if works')
 
+            else:
+                print('student if does not work')
+
         for k in range(2, num_courses + 2):
-            if ws_courses["A" + str(i)].value == course_ID:
-                course_name = ws_courses["B" +str(i)].value
+            if int(ws_courses["A" + str(k)].value) == course_ID:
+                course_name = ws_courses["B" +str(k)].value
                 ws_student_courses["E" + str(student_courses_row)] = course_name
                 print('courses if works')
+
+            else:
+                print('Courses if does not work')
 
 
         ws_student_courses["A" + str(student_courses_row)] = student_ID
         ws_student_courses["D" + str(student_courses_row)] = course_ID
 
 
+
         ws_student_courses["L4"] = num_student_courses + 1
 
-        wb.save(filename="univerisity.xlsx")
-
-
+        wb.save(filename="university.xlsx")
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
