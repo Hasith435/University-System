@@ -184,9 +184,24 @@ class second_screen_students:
 
     @staticmethod
     def courses():
-        course_window = Toplevel()
-        course_window.configure(bg="#2e2e2d")
-        course_window.title('Courses')
+        # course_window = Toplevel()
+        # course_window.configure(bg="#2e2e2d")
+        # course_window.title('Courses')
+
+        welcome_lbl.grid_forget()
+        course_button.grid_forget()
+        credentials_button.grid_forget()
+        view_details_button.grid_forget()
+        clubs_button.grid_forget()
+        back_button.grid_forget()
+
+        def back():
+            register_button.grid_forget()
+            view_grades_button.grid_forget()
+            back_button_courses.grid_forget()
+
+            student_button_root()
+
 
         #THIS IS THE SECTION FOR THE STUDENTS TO REGISTER FOR A COURSE
         def register():
@@ -221,12 +236,80 @@ class second_screen_students:
             back_button = Button(course_register_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
             back_button.grid(row= 2, column= 0, padx=10, pady=10)
 
-        register_button = Button(course_window, text= "Register",font= font_style_button, command= register, borderwidth= 0, bg="#545352", foreground= "white")
+        register_button = Button(root, text= "Register",font= font_style_button, command= register, borderwidth= 0, bg="#545352", foreground= "white")
         register_button.grid(row= 0, column= 0, padx= 10, pady= 10)
+
+
+        #THIS IS THE SECTION TO ALLOW STUDENTS TO VIEW THEIR Grades
+        def view_grades():
+            view_grades_window = Toplevel()
+            view_grades_window.configure(bg="#2e2e2d")
+            view_grades_window.title('Grades')
+
+            student_ID_lbl = Label(view_grades_window, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+            course_ID_lbl = Label(view_grades_window, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
+
+            student_ID_entry = Entry(view_grades_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
+            course_ID_entry = Entry(view_grades_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
+
+            student_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
+            course_ID_lbl.grid(row=1, column=0, padx= 10, pady= 10)
+
+            student_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
+            course_ID_entry.grid(row=1, column=1, padx= 10, pady= 10)
+
+            def enter():
+                student_ID = int(student_ID_entry.get())
+                course_ID = int(course_ID_entry.get())
+                grade_list = courses.view_grades(student_ID, course_ID)
+
+                g1_lbl = Label(view_grades_window, text = "Term 1:", bg="#393939", foreground="white")
+                g2_lbl = Label(view_grades_window, text = "Term 2:", bg="#393939", foreground="white")
+                g3_lbl = Label(view_grades_window, text = "Term 3:", bg="#393939", foreground="white")
+                g4_lbl = Label(view_grades_window, text = "Term 4:", bg="#393939", foreground="white")
+                g5_lbl = Label(view_grades_window, text = "Term 5:", bg="#393939", foreground="white")
+
+                g1_result = Label(view_grades_window, text= grade_list[0], bg="#393939", foreground="white")
+                g2_result = Label(view_grades_window, text= grade_list[1], bg="#393939", foreground="white")
+                g3_result = Label(view_grades_window, text= grade_list[2], bg="#393939", foreground="white")
+                g4_result = Label(view_grades_window, text= grade_list[3], bg="#393939", foreground="white")
+                g5_result = Label(view_grades_window, text= grade_list[4], bg="#393939", foreground="white")
+
+                g1_lbl.grid(row= 2, column= 0, padx= 10, pady= 10)
+                g2_lbl.grid(row= 3, column= 0, padx= 10, pady= 10)
+                g3_lbl.grid(row= 4, column= 0, padx= 10, pady= 10)
+                g4_lbl.grid(row= 5, column= 0, padx= 10, pady= 10)
+                g5_lbl.grid(row= 6, column= 0, padx= 10, pady= 10)
+
+                g1_result.grid(row= 2, column= 1, padx= 10, pady= 10)
+                g2_result.grid(row= 3, column= 1, padx= 10, pady= 10)
+                g3_result.grid(row= 4, column= 1, padx= 10, pady= 10)
+                g4_result.grid(row= 5, column= 1, padx= 10, pady= 10)
+                g5_result.grid(row= 6, column= 1, padx= 10, pady= 10)
+
+            def back():
+                view_grades_window.destroy()
+
+            Enter_button = Button(view_grades_window, text="Enter", font=font_style_enter_button, command=enter, bg="#1aeb8d", foreground= "black", width= 19)
+            Enter_button.grid(row= 7, column= 1, padx=10, pady=10)
+
+            back_button = Button(view_grades_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
+            back_button.grid(row= 7, column= 0, padx=10, pady=10)
+
+        view_grades_button = Button(root, text= "View grades",font= font_style_button, command= view_grades, borderwidth= 0, bg="#545352", foreground= "white")
+        view_grades_button.grid(row= 0, column= 1, padx= 10, pady= 10)
+
+
+        #THIS IS THE SECTION TO ALLOW STUDENTS TO UN-REGISTER FROM A COURSE
+
+        back_button_courses = Button(root, text= "Back", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 62)
+        back_button_courses.grid(columnspan= 2, padx= 10, pady= 10)
+
 
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
+    global course_button, credentials_button, view_details_button, clubs_button, back_button
 
     def home_buttons_disappear():
         student_button.grid_forget()

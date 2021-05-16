@@ -247,6 +247,33 @@ class courses(students):
         wb.save(filename= "university.xlsx")
 
 
+    @staticmethod
+    def view_grades(student_ID, course_ID):
+
+        num_student_courses = ws_student_courses["L4"].value
+        student_course_row = num_student_courses + 2
+
+        for i in range(2, num_student_courses + 2):
+            if ws_student_courses["A" + str(i)].value == student_ID and ws_student_courses["D" + str(i)].value == course_ID:
+                g1 = ws_student_courses["F" + str(i)].value
+                g2 = ws_student_courses["G" + str(i)].value
+                g3 = ws_student_courses["H" + str(i)].value
+                g4 = ws_student_courses["I" + str(i)].value
+                g5 = ws_student_courses["G" + str(i)].value
+
+                print(g1)
+                print(g2)
+                print(g3)
+                print(g4)
+                print(g5)
+
+                return g1, g2, g3, g4, g5
+
+            else:
+                print('Student ID or course ID is wrong!')
+
+
+
 class clubs(students):
 
     club_id = []
