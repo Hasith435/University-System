@@ -75,119 +75,10 @@ def home():
     parent_button.grid(row= 5, column= 3, pady= 20, padx=10)
 
 
-
-#COMPLETE THE REMAINNING FUNCTIONS IN THE CLASS
-#Features that students can access
-class student_functions:
-
-    @staticmethod
-    def register_course():
-        pass
-
-    @staticmethod
-    def view_grades():
-        pass
-
-    @staticmethod
-    def view_courses():
-        pass
-
-    @staticmethod
-    def un_register_course():
-        pass
-
-    @staticmethod
-    def view_details_get_entry():
-
-        student_ID_get = 0
-
-        window_details_ID = Toplevel()
-        window_details_ID.configure(bg="#393939")
-        window_details_ID.title("View student Details")
-
-
-        student_ID_label = Label(window_details_ID,text= "Student ID:", font=font_style_main_entry, pady= 2, bg="#393939", foreground= "white")
-        student_ID_label.grid(row=0, column=0)
-        student_ID_entry = Entry(window_details_ID, width= 50,bg="#393939", foreground= "white")
-        student_ID_entry.grid(row= 0 , column= 1)
-
-
-
-
-        def view_details():
-
-            try:
-                student_ID_get = int(student_ID_entry.get())
-
-                returned_list = students.view_student_details(student_ID_get)
-
-                # view_details_window = Toplevel()
-                # view_details_window.configure(bg="#393939")
-
-                student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
-                fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
-                lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
-                DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
-                gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
-                guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939", foreground="white")
-                guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",foreground="white")
-                address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
-
-                print(students.view_student_details(student_ID_get))
-                student_ID_details = Label(window_details_ID, text=returned_list[0],bg="#393939", foreground="white", width= 50)
-                fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939",foreground="white", width= 50)
-                lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white", width= 50)
-                DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939",foreground="white", width= 50)
-                gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939",foreground="white", width= 50)
-                guardian_names_details = Label(window_details_ID, text=returned_list[5],bg="#393939", foreground="white", width= 50)
-                guardian_telephone_details = Label(window_details_ID, text=returned_list[6],bg="#393939", foreground="white", width= 50)
-                address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white", width= 50)
-
-                student_ID_details_lbl.grid(row=1, column=0)
-                fname_details_lbl.grid(row=2, column=0)
-                lname_details_lbl.grid(row=3, column=0)
-                DoB_details_lbl.grid(row=4, column=0)
-                gender_details_lbl.grid(row=5, column=0)
-                guardian_details_lbl.grid(row=6, column=0)
-                guardian_telephone_lbl.grid(row=7, column=0)
-                address_details_lbl.grid(row=8, column=0)
-
-                student_ID_details.grid(row=1, column=1, sticky= W)
-                fname_details.grid(row=2, column=1, sticky= W)
-                lname_details.grid(row=3, column=1, sticky= W)
-                DoB_details.grid(row=4, column=1, sticky= W)
-                gender_details.grid(row=5, column=1, sticky= W)
-                guardian_names_details.grid(row=6, column=1, sticky= W)
-                guardian_telephone_details.grid(row=7, column=1, sticky= W)
-                address_details.grid(row=8, column=1, sticky= W)
-
-            except:
-                student_not_found_lbl = Label(window_details_ID,text= "Student Not Found!",bg="#393939", foreground="white" )
-                student_not_found_lbl.grid(columnspan= 2)
-                print('Student Not found')
-
-
-            print(type(student_ID_get))
-
-
-
-        enter_button = Button(window_details_ID, text= "Enter", font= font_style_popup_button, command=view_details, bg="#393939", foreground= "white", width= 30)
-        enter_button.grid(row=9, column=1, pady= 10)
-
-        def back():
-            window_details_ID.destroy()
-
-        back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10, font=font_style_submit_button, command=back, borderwidth=0)
-        back_button.grid(row=9, column=0, pady= 10)
-
 class second_screen_students:
 
     @staticmethod
     def courses():
-        # course_window = Toplevel()
-        # course_window.configure(bg="#2e2e2d")
-        # course_window.title('Courses')
-
         welcome_lbl.grid_forget()
         course_button.grid_forget()
         credentials_button.grid_forget()
@@ -198,6 +89,7 @@ class second_screen_students:
         def back():
             register_button.grid_forget()
             view_grades_button.grid_forget()
+            disenroll_button.grid_forget()
             back_button_courses.grid_forget()
 
             student_button_root()
@@ -227,6 +119,9 @@ class second_screen_students:
                 course_ID = int(course_ID_entry.get())
                 courses.add_student_courses(student_ID, course_ID)
 
+                registered_lbl = Label(course_register_window,text= "REGISTERED", bg="#2e2e2d",foreground="white")
+                registered_lbl.grid(row= 3, column= 1)
+
             def back():
                 course_register_window.destroy()
 
@@ -236,7 +131,7 @@ class second_screen_students:
             back_button = Button(course_register_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
             back_button.grid(row= 2, column= 0, padx=10, pady=10)
 
-        register_button = Button(root, text= "Register",font= font_style_button, command= register, borderwidth= 0, bg="#545352", foreground= "white")
+        register_button = Button(root, text= "ENROLL",font= font_style_button, command= register, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
         register_button.grid(row= 0, column= 0, padx= 10, pady= 10)
 
 
@@ -296,14 +191,101 @@ class second_screen_students:
             back_button = Button(view_grades_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
             back_button.grid(row= 7, column= 0, padx=10, pady=10)
 
-        view_grades_button = Button(root, text= "View grades",font= font_style_button, command= view_grades, borderwidth= 0, bg="#545352", foreground= "white")
+        view_grades_button = Button(root, text= "GRADES",font= font_style_button, command= view_grades, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
         view_grades_button.grid(row= 0, column= 1, padx= 10, pady= 10)
 
 
         #THIS IS THE SECTION TO ALLOW STUDENTS TO UN-REGISTER FROM A COURSE
+        def disenroll() :
+            course_disenroll_window = Toplevel()
+            course_disenroll_window.configure(bg="#2e2e2d")
+            course_disenroll_window.title('Disenroll')
 
-        back_button_courses = Button(root, text= "Back", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 62)
-        back_button_courses.grid(columnspan= 2, padx= 10, pady= 10)
+            student_ID_lbl = Label(course_disenroll_window, text="Student ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+            course_ID_lbl = Label(course_disenroll_window, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+
+            student_ID_entry = Entry(course_disenroll_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+            course_ID_entry = Entry(course_disenroll_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+
+            student_ID_lbl.grid(row=0, column=0, padx=10, pady=10)
+            course_ID_lbl.grid(row=1, column=0, padx=10, pady=10)
+
+            student_ID_entry.grid(row=0, column=1, padx=10, pady=10)
+            course_ID_entry.grid(row=1, column=1, padx=10, pady=10)
+
+            def enter():
+                student_ID = int(student_ID_entry.get())
+                course_ID = int(course_ID_entry.get())
+                courses.remove_student_courses(student_ID, course_ID)
+
+            def back():
+                course_disenroll_window.destroy()
+
+            Enter_button = Button(course_disenroll_window, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19)
+            Enter_button.grid(row=2, column=1, padx=10, pady=10)
+
+            back_button = Button(course_disenroll_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
+            back_button.grid(row=2, column=0, padx=10, pady=10)
+
+        disenroll_button = Button(root, text= "DISENROLL",font= font_style_button, command= disenroll, borderwidth= 0, bg="#545352", foreground= "white", width= 13)
+        disenroll_button.grid(row=0, column= 2, padx= 10, pady= 10)
+
+        #THIS IS THE SECTION TO VIEW THE COURSE DETAILS
+        def course_details() :
+            course_details_window = Toplevel()
+            course_details_window.configure(bg="#2e2e2d")
+            course_details_window.title('Register')
+
+            course_ID_lbl = Label(course_details_window, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+
+            course_ID_entry = Entry(course_details_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+
+            course_ID_lbl.grid(row=1, column=0, padx=10, pady=10)
+
+            course_ID_entry.grid(row=1, column=1, padx=10, pady=10)
+
+            def enter():
+                course_id = int(course_ID_entry.get())
+
+                course_list = courses.view_course_details(course_id)
+
+                course_name_lbl = Label(course_details_window, text="Term 2:", bg="#393939", foreground="white")
+                course_duration_lbl = Label(course_details_window, text="Term 3:", bg="#393939", foreground="white")
+                prerequisites_lbl = Label(course_details_window, text="Term 4:", bg="#393939", foreground="white")
+                instructors_lbl = Label(course_details_window, text="Term 5:", bg="#393939", foreground="white")
+
+                course_name_results = Label(course_details_window, text=course_list[1], bg="#393939", foreground="white")
+                course_duration_results = Label(course_details_window, text=course_list[2], bg="#393939", foreground="white")
+                prerequisites_results = Label(course_details_window, text=course_list[3], bg="#393939", foreground="white")
+                instructors_results = Label(course_details_window, text=course_list[4], bg="#393939", foreground="white")
+
+                course_name_lbl.grid(row=2, column=0, padx=10, pady=10)
+                course_duration_lbl.grid(row=3, column=0, padx=10, pady=10)
+                prerequisites_lbl.grid(row=4, column=0, padx=10, pady=10)
+                instructors_lbl.grid(row=5, column=0, padx=10, pady=10)
+
+                course_name_results.grid(row=2, column=1, padx=10, pady=10)
+                course_duration_results.grid(row=3, column=1, padx=10, pady=10)
+                prerequisites_results.grid(row=4, column=1, padx=10, pady=10)
+                instructors_results.grid(row=5, column=1, padx=10, pady=10)
+
+            def back():
+                course_details_window.destroy()
+
+            Enter_button = Button(course_details_window, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19)
+            Enter_button.grid(row=2, column=1, padx=10, pady=10)
+
+            back_button = Button(course_details_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
+            back_button.grid(row=2, column=0, padx=10, pady=10)
+
+        course_details_button = Button(root, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
+        course_details_button.grid(row=0, column=3, padx=10, pady=10)
+
+
+
+        #THIS IS THE BACK BUTTON
+        back_button_courses = Button(root, text= "Back", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 86)
+        back_button_courses.grid(columnspan= 4, padx= 10, pady= 10)
 
 
 
@@ -340,7 +322,7 @@ def student_button_root():
     #Credentials
     credentials_button = Button(root, text= "Credentials", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #view_details
-    view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white", command= student_functions.view_details_get_entry)
+    view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #clubs button
     clubs_button = Button(root, text= "Clubs", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #back Button

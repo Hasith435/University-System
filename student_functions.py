@@ -144,17 +144,26 @@ class courses(students):
         wb.save(filename="university.xlsx")
 
 
-    @classmethod
-    def view_course_details(cls, course_ID):
+    @staticmethod
+    def view_course_details(Course_ID):
 
-        for i in range(2, num_students + 2):
-            if ws["A" + str(i)] == course_ID:
+        num_courses = ws_courses["F4"].value
+
+        for i in range(2, num_courses + 2):
+            if ws_courses["A" + str(i)] == int(Course_ID):
                 course_ID = ws["A" + str(i)].value
                 course_name = ws["B" + str(i)].value
-                course_duration = ws["B" + str(i)].value
-                prerequisites = ws["B" + str(i)].value
-                instructors = ws["B" + str(i)].value
-                break
+                course_duration = ws["C" + str(i)].value
+                prerequisites = ws["D" + str(i)].value
+                instructors = ws["E" + str(i)].value
+
+                print(course_ID)
+                print(course_name)
+                print(course_duration)
+                print(prerequisites)
+                print(instructors)
+
+                return course_ID, course_name, course_duration, prerequisites, instructors
 
             else:
                 continue
@@ -206,6 +215,9 @@ class courses(students):
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
+
+        num_student_courses = ws_student_courses["L4"].value
+
         print('Function')
         print(num_student_courses)
         for i in range(2, 100000):
@@ -222,6 +234,8 @@ class courses(students):
                 ws_student_courses["H" + str(i)] = ""
                 ws_student_courses["I" + str(i)] = ""
                 ws_student_courses["J" + str(i)] = ""
+
+                ws_student_courses["L4"] = num_student_courses - 1
 
                 wb.save(filename="university.xlsx")
                 break
