@@ -129,7 +129,7 @@ class students:
 
         for i in range(2, num_student_psswd + 2):
             if ws_student_psswd["A" + str(i)].value == student_ID:
-                return ws["C" + str(i)].value
+                return ws_student_psswd["C" + str(i)].value
 
             else:
                 print('invalid_student_ID')

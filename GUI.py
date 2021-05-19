@@ -308,13 +308,13 @@ def student_button_root():
         view_details_button.grid_forget()
         clubs_button.grid_forget()
         back_button.grid_forget()
+        greeting_lbl.grid_forget()
 
         home()
 
     home_buttons_disappear()
 
-    gretting_lbl = Label(root, text= "Hello")
-    task_lbl = Label(root, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
+    greeting_lbl = Label(root, text= f"Hello {student_name}, what is your task related to:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
 
 
     #COMPLETE THE COMMANDS IN THESE BUTTONS
@@ -330,13 +330,16 @@ def student_button_root():
     #back Button
     back_button = Button(root, text= "Back", font= font_style_button, borderwidth= 0, width= 62, bg="#e84d1a",foreground="white", command= back)
 
-    course_button.grid(row= 1, column= 0, padx= 10, pady= 10)
-    credentials_button.grid(row= 1, column= 1, padx= 10, pady= 10)
-    view_details_button.grid(row= 1, column= 2, padx= 10, pady= 10)
-    clubs_button.grid(row= 1, column= 3, padx= 10, pady= 10)
+    greeting_lbl.grid(columnspan= 5, sticky= "NSWE", padx= 10, pady= 10)
+
+    course_button.grid(row= 3, column= 0, padx= 10, pady= 10)
+    credentials_button.grid(row= 3, column= 1, padx= 10, pady= 10)
+    view_details_button.grid(row= 3, column= 2, padx= 10, pady= 10)
+    clubs_button.grid(row= 3, column= 3, padx= 10, pady= 10)
     back_button.grid(columnspan= 4, padx= 10, pady= 10)
 
 def student_admission_number_and_pswd():
+    global student_name
 
     passwd_frame_student = Frame(root, bg="#4f4f4d")
     passwd_frame_student.grid(columnspan=4, padx=10, pady=10)
