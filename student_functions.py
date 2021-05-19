@@ -8,6 +8,7 @@ ws_courses = wb['courses']
 ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
 ws_removed_students = wb["removed_students"]
+ws_student_psswd = wb["student_pswd"]
 
 
 num_student_clubs = ws_student_clubs["H4"].value
@@ -120,6 +121,23 @@ class students:
             except:
                 continue
 
+    @staticmethod
+    def get_name_for_password(student_ID):
+
+        num_student_psswd = ws_student_psswd["G6"].value
+        print(num_student_psswd)
+
+        for i in range(2, num_student_psswd + 2):
+            if ws_student_psswd["A" + str(i)].value == student_ID:
+                return ws["C" + str(i)].value
+
+            else:
+                print('invalid_student_ID')
+
+    @staticmethod
+    def change_password():
+        pass
+
 
 class courses(students):
 
@@ -148,14 +166,15 @@ class courses(students):
     def view_course_details(Course_ID):
 
         num_courses = ws_courses["F4"].value
+        print(num_courses)
 
         for i in range(2, num_courses + 2):
-            if ws_courses["A" + str(i)] == int(Course_ID):
-                course_ID = ws["A" + str(i)].value
-                course_name = ws["B" + str(i)].value
-                course_duration = ws["C" + str(i)].value
-                prerequisites = ws["D" + str(i)].value
-                instructors = ws["E" + str(i)].value
+            if ws_courses["A" + str(i)].value == Course_ID:
+                course_ID = ws_courses["A" + str(i)].value
+                course_name = ws_courses["B" + str(i)].value
+                course_duration = ws_courses["C" + str(i)].value
+                prerequisites = ws_courses["D" + str(i)].value
+                instructors = ws_courses["E" + str(i)].value
 
                 print(course_ID)
                 print(course_name)
@@ -166,7 +185,7 @@ class courses(students):
                 return course_ID, course_name, course_duration, prerequisites, instructors
 
             else:
-                continue
+                print('Invalid')
 
     @staticmethod
     def add_student_courses(student_ID, course_ID):
@@ -285,7 +304,6 @@ class courses(students):
 
             else:
                 print('Student ID or course ID is wrong!')
-
 
 
 class clubs(students):

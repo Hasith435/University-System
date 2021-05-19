@@ -91,6 +91,7 @@ class second_screen_students:
             view_grades_button.grid_forget()
             disenroll_button.grid_forget()
             back_button_courses.grid_forget()
+            course_details_button.grid_forget()
 
             student_button_root()
 
@@ -249,34 +250,34 @@ class second_screen_students:
 
                 course_list = courses.view_course_details(course_id)
 
-                course_name_lbl = Label(course_details_window, text="Term 2:", bg="#393939", foreground="white")
-                course_duration_lbl = Label(course_details_window, text="Term 3:", bg="#393939", foreground="white")
-                prerequisites_lbl = Label(course_details_window, text="Term 4:", bg="#393939", foreground="white")
-                instructors_lbl = Label(course_details_window, text="Term 5:", bg="#393939", foreground="white")
+                course_name_lbl = Label(course_details_window, text="Course Name:", bg="#2e2e2d", foreground="white")
+                course_duration_lbl = Label(course_details_window, text="Course Duration:", bg="#2e2e2d", foreground="white")
+                prerequisites_lbl = Label(course_details_window, text="Prerequisites:", bg="#2e2e2d", foreground="white")
+                instructors_lbl = Label(course_details_window, text="Instructors:", bg="#2e2e2d", foreground="white")
 
-                course_name_results = Label(course_details_window, text=course_list[1], bg="#393939", foreground="white")
-                course_duration_results = Label(course_details_window, text=course_list[2], bg="#393939", foreground="white")
-                prerequisites_results = Label(course_details_window, text=course_list[3], bg="#393939", foreground="white")
-                instructors_results = Label(course_details_window, text=course_list[4], bg="#393939", foreground="white")
+                course_name_results = Label(course_details_window, text=course_list[1], bg="#2e2e2d", foreground="white")
+                course_duration_results = Label(course_details_window, text=course_list[2], bg="#2e2e2d", foreground="white")
+                prerequisites_results = Label(course_details_window, text=course_list[3], bg="#2e2e2d", foreground="white")
+                instructors_results = Label(course_details_window, text=course_list[4], bg="#2e2e2d", foreground="white")
 
-                course_name_lbl.grid(row=2, column=0, padx=10, pady=10)
-                course_duration_lbl.grid(row=3, column=0, padx=10, pady=10)
-                prerequisites_lbl.grid(row=4, column=0, padx=10, pady=10)
-                instructors_lbl.grid(row=5, column=0, padx=10, pady=10)
+                course_name_lbl.grid(row=2, column=0, padx=10, pady=10, sticky= W)
+                course_duration_lbl.grid(row=3, column=0, padx=10, pady=10, sticky= W)
+                prerequisites_lbl.grid(row=4, column=0, padx=10, pady=10, sticky= W)
+                instructors_lbl.grid(row=5, column=0, padx=10, pady=10, sticky= W)
 
-                course_name_results.grid(row=2, column=1, padx=10, pady=10)
-                course_duration_results.grid(row=3, column=1, padx=10, pady=10)
-                prerequisites_results.grid(row=4, column=1, padx=10, pady=10)
-                instructors_results.grid(row=5, column=1, padx=10, pady=10)
+                course_name_results.grid(row=2, column=1, padx=10, pady=10, sticky= W)
+                course_duration_results.grid(row=3, column=1, padx=10, pady=10, sticky= W)
+                prerequisites_results.grid(row=4, column=1, padx=10, pady=10, sticky= W)
+                instructors_results.grid(row=5, column=1, padx=10, pady=10, sticky= W)
 
             def back():
                 course_details_window.destroy()
 
             Enter_button = Button(course_details_window, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19)
-            Enter_button.grid(row=2, column=1, padx=10, pady=10)
+            Enter_button.grid(row=6, column=1, padx=10, pady=10)
 
             back_button = Button(course_details_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
-            back_button.grid(row=2, column=0, padx=10, pady=10)
+            back_button.grid(row=6, column=0, padx=10, pady=10)
 
         course_details_button = Button(root, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
         course_details_button.grid(row=0, column=3, padx=10, pady=10)
@@ -312,6 +313,7 @@ def student_button_root():
 
     home_buttons_disappear()
 
+    gretting_lbl = Label(root, text= "Hello")
     task_lbl = Label(root, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
 
 
@@ -335,6 +337,7 @@ def student_button_root():
     back_button.grid(columnspan= 4, padx= 10, pady= 10)
 
 def student_admission_number_and_pswd():
+
     passwd_frame_student = Frame(root, bg="#4f4f4d")
     passwd_frame_student.grid(columnspan=4, padx=10, pady=10)
 
@@ -351,6 +354,8 @@ def student_admission_number_and_pswd():
     password_entry_stdnt.grid(row= 2, column= 1, padx= 10, pady= 10)
 
     def password_verify():
+        global student_name
+
         student_admission_number = int(admission_number_entry.get())
         print(student_admission_number)
         student_password = password_entry_stdnt.get()
@@ -365,6 +370,9 @@ def student_admission_number_and_pswd():
                 passwd_frame_student.grid_forget()
                 enter_button.grid_forget()
                 print('correct')
+
+                student_name = students.get_name_for_password(student_admission_number)
+                print(student_name)
 
                 student_button_root()
 
