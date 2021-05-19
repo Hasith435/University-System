@@ -28,6 +28,7 @@ class students:
         self.guardian_telephone = guardian_telephone
         self.address = address
 
+        #THIS SECTION IS TO ADD THE STUDENT TO THE STUDENT WORKSHEET
         num_students = ws["J3"].value
         student_row = num_students + 2
 
@@ -42,6 +43,29 @@ class students:
         ws["J3"] = num_students + 1
 
         ws["A" + str(student_row)] = ws['J3'].value
+
+        #THIS SECTION IS TO ADD THE STUDENT TO THE STUDENT_PSSWD WORKSHEET
+        num_student_psswd = ws_student_psswd["G6"].value
+        student_psswd_row = num_student_psswd + 2
+
+        for i in range(2, num_students + 2):
+            if ws["A" + str(i)].value == num_students:
+                student_index = ws["A" + str(i)].value
+                print(f"Student Index: {student_index}")
+
+                #This is the student ID
+                ws_student_psswd["A" + str(student_psswd_row)] = student_index
+                #This is the student password
+                ws_student_psswd["B" + str(student_psswd_row)] = f"student{student_index}"
+                #This is the student's First Name
+                ws_student_psswd["C" + str(student_psswd_row)] = fname
+
+                ws_student_psswd["G6"] = num_student_psswd + 1
+
+            else:
+                print('Invalid number')
+                continue
+
         wb.save(filename="university.xlsx")
 
     @staticmethod
