@@ -85,6 +85,7 @@ class second_screen_students:
         view_details_button.grid_forget()
         clubs_button.grid_forget()
         back_button.grid_forget()
+        greeting_lbl.grid_forget()
 
         def back():
             register_button.grid_forget()
@@ -288,11 +289,79 @@ class second_screen_students:
         back_button_courses = Button(root, text= "Back", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 86)
         back_button_courses.grid(columnspan= 4, padx= 10, pady= 10)
 
+    @staticmethod
+    def credentials():
+        welcome_lbl.grid_forget()
+        course_button.grid_forget()
+        credentials_button.grid_forget()
+        view_details_button.grid_forget()
+        clubs_button.grid_forget()
+        greeting_lbl.grid_forget()
+        back_button.grid_forget()
+
+
+        def back():
+            change_password_button.grid_forget()
+            back_button_credentials.grid_forget()
+
+            student_button_root()
+
+
+        #THIS IS THE SECTION THAT ALLOWS THE STUDENT TO CHANGE THEIR PASSWORD
+        def change_password():
+            credentials_change_password_window = Toplevel()
+            credentials_change_password_window.configure(bg="#2e2e2d")
+            credentials_change_password_window.title('Register')
+
+            student_ID_lbl = Label(credentials_change_password_window, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+            student_ID_lbl.grid(row= 0, column=0, padx=10, pady= 10)
+
+            student_ID_entry = Entry(credentials_change_password_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+            student_ID_entry.grid(row= 0, column=1, padx= 10, pady= 10)
+
+
+            new_password_lbl = Label(credentials_change_password_window, text="New Password", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+            new_password_lbl.grid(row= 1, column= 0, padx= 10, pady= 10)
+
+            new_password_entry = Entry(credentials_change_password_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+            new_password_entry.grid(row=1, column=1, padx=10, pady=10)
+
+            def back():
+                student_ID_lbl.grid_forget()
+                student_ID_entry.grid_forget()
+                Enter_button.grid_forget()
+                back_button.grid_forget()
+
+            def enter():
+                student_ID = student_ID_entry.get()
+                new_password = new_password_entry.get()
+                print(f"student_ID {student_ID}")
+                print(f"new_password {new_password}")
+
+
+
+                students.change_password(int(student_ID), str(new_password))
+
+                changed_lbl = Label(credentials_change_password_window, text="Changed", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+                changed_lbl.grid(columnspan = 2, padx=10, pady= 10)
+
+
+            Enter_button = Button(credentials_change_password_window, text="Enter", font=font_style_enter_button,bg="#1aeb8d", foreground="black", width=19, command= enter)
+            Enter_button.grid(row=2, column=1, padx=10, pady=10)
+
+            back_button = Button(credentials_change_password_window, text="Back", font=font_style_enter_button, bg="#e84d1a", foreground="white", width=10, command= back)
+            back_button.grid(row=2, column=0, padx=10, pady=10)
+
+        change_password_button = Button(root, text= "CHANGE PASSWORD",font= font_style_button, borderwidth= 0, bg="#545352", foreground= "white", width= 20, command = change_password)
+        change_password_button.grid(row= 0, column=0, padx= 10, pady= 10)
+
+        back_button_credentials = Button(root, text="Back", font=font_style_enter_button,bg="#e84d1a", foreground="white", width=10, command=back)
+        back_button_credentials.grid(columnspan= 4, padx= 10, pady= 10)
 
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
-    global course_button, credentials_button, view_details_button, clubs_button, back_button
+    global course_button, credentials_button, view_details_button, clubs_button, back_button, greeting_lbl
 
     def home_buttons_disappear():
         student_button.grid_forget()
@@ -322,7 +391,7 @@ def student_button_root():
     #courses_button
     course_button = Button(root, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white", command= second_screen_students.courses)
     #Credentials
-    credentials_button = Button(root, text= "Credentials", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    credentials_button = Button(root, text= "Credentials", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white", command = second_screen_students.credentials)
     #view_details
     view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #clubs button
@@ -364,7 +433,9 @@ def student_admission_number_and_pswd():
         student_password = password_entry_stdnt.get()
 
         for i in range(2, num_student_psswd + 2):
+            print('For loop works')
             if ws_student_psswd["A" + str(i)].value == student_admission_number and ws_student_psswd["B" + str(i)].value == student_password:
+                print("iff statement correct")
 
                 admission_number_lbl.grid_forget()
                 admission_number_entry.grid_forget()

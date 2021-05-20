@@ -48,23 +48,16 @@ class students:
         num_student_psswd = ws_student_psswd["G6"].value
         student_psswd_row = num_student_psswd + 2
 
-        for i in range(2, num_students + 2):
-            if ws["A" + str(i)].value == num_students:
-                student_index = ws["A" + str(i)].value
-                print(f"Student Index: {student_index}")
+        student_index = ws["A" + str(student_row)].value
 
-                #This is the student ID
-                ws_student_psswd["A" + str(student_psswd_row)] = student_index
-                #This is the student password
-                ws_student_psswd["B" + str(student_psswd_row)] = f"student{student_index}"
-                #This is the student's First Name
-                ws_student_psswd["C" + str(student_psswd_row)] = fname
+        # This is the student ID
+        ws_student_psswd["A" + str(student_psswd_row)] = student_index
+        # This is the student password
+        ws_student_psswd["B" + str(student_psswd_row)] = f"student{student_index}"
+        # This is the student's First Name
+        ws_student_psswd["C" + str(student_psswd_row)] = fname
 
-                ws_student_psswd["G6"] = num_student_psswd + 1
-
-            else:
-                print('Invalid number')
-                continue
+        ws_student_psswd["G6"] = num_student_psswd + 1
 
         wb.save(filename="university.xlsx")
 
@@ -159,8 +152,17 @@ class students:
                 print('invalid_student_ID')
 
     @staticmethod
-    def change_password():
-        pass
+    def change_password(student_ID, newPassword):
+
+        num_student_psswd = ws_student_psswd["G6"].value
+        student_psswd_row = num_student_psswd + 2
+
+        for i in range(2, num_student_psswd + 2):
+            if ws_student_psswd["A" + str(i)].value == student_ID:
+                ws_student_psswd["B" + str(i)] = newPassword
+
+            else:
+                print('Invalid (change password)')
 
 
 class courses(students):
