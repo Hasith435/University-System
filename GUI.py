@@ -435,12 +435,8 @@ def student_admission_number_and_pswd():
         for i in range(2, num_student_psswd + 2):
             print('For loop works')
             if ws_student_psswd["A" + str(i)].value == student_admission_number and ws_student_psswd["B" + str(i)].value == student_password:
-                print("iff statement correct")
+                print("if statement correct")
 
-                admission_number_lbl.grid_forget()
-                admission_number_entry.grid_forget()
-                password_label_stdnt.grid_forget()
-                password_entry_stdnt.grid_forget()
                 passwd_frame_student.grid_forget()
                 enter_button.grid_forget()
                 print('correct')
@@ -457,6 +453,7 @@ def student_admission_number_and_pswd():
 
                 admission_number_entry.insert(0, "Incorrect")
                 password_entry_stdnt.insert(0, "Incorrect")
+                continue
 
 
     enter_button = Button(passwd_frame_student, text="ENTER", font=font_style_enter_button, borderwidth=0, width=82,command=password_verify, bg="#1aeb8d")
@@ -615,14 +612,14 @@ class admin_functions:
                 address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white",
                                         width=50)
 
-                student_ID_details_lbl.grid(row=1, column=0)
-                fname_details_lbl.grid(row=2, column=0)
-                lname_details_lbl.grid(row=3, column=0)
-                DoB_details_lbl.grid(row=4, column=0)
-                gender_details_lbl.grid(row=5, column=0)
-                guardian_details_lbl.grid(row=6, column=0)
-                guardian_telephone_lbl.grid(row=7, column=0)
-                address_details_lbl.grid(row=8, column=0)
+                student_ID_details_lbl.grid(row=1, column=0, sticky= W)
+                fname_details_lbl.grid(row=2, column=0, sticky= W)
+                lname_details_lbl.grid(row=3, column=0, sticky= W)
+                DoB_details_lbl.grid(row=4, column=0, sticky= W)
+                gender_details_lbl.grid(row=5, column=0, sticky= W)
+                guardian_details_lbl.grid(row=6, column=0, sticky= W)
+                guardian_telephone_lbl.grid(row=7, column=0, sticky= W)
+                address_details_lbl.grid(row=8, column=0, sticky= W)
 
                 student_ID_details.grid(row=1, column=1, sticky=W)
                 fname_details.grid(row=2, column=1, sticky=W)
