@@ -377,7 +377,7 @@ def student_button_root():
     #courses_button
     course_button = Button(root, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white", command= second_screen_students.courses)
     #Credentials
-    credentials_button = Button(root, text= "Change Password", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white", command = second_screen_students.change_password)
+    credentials_button = Button(root, text= "Change Password", font= font_style_button,  borderwidth= 0, width= 15, bg="#545352",foreground="white", command = second_screen_students.change_password)
     #view_details
     view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #clubs button
@@ -395,6 +395,8 @@ def student_button_root():
 
 def student_admission_number_and_pswd():
     global student_name
+
+
 
     passwd_frame_student = Frame(root, bg="#4f4f4d")
     passwd_frame_student.grid(columnspan=4, padx=10, pady=10)
@@ -680,6 +682,7 @@ class admin_functions:
                               bg="#393939", foreground="white", width=30)
         enter_button.grid(row=1, column=1)
 
+
 class admin_second_screen:
 
     @staticmethod
@@ -737,6 +740,7 @@ def admin_button_root_rest():
     Teachers_button = Button(root, text= "TEACHERS", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
     Courses_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
     Clubs_button = Button(root, text= "CLUBS", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+    # terminal_button = Button(root, text= "TERMINAL", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command= admin_functions.open_terminal)
 
 
     task_lbl.grid(columnspan = 4)
@@ -744,6 +748,7 @@ def admin_button_root_rest():
     Teachers_button.grid(row=10, column=1, padx=7, pady=10)
     Courses_button.grid(row=10, column=2, padx=7, pady=10)
     Clubs_button.grid(row=10, column=3, padx=7, pady=10)
+    # terminal_button.grid(row=10, column=4, padx=7, pady=10)
 
 
     def admin_screen_back():

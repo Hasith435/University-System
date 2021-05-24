@@ -159,14 +159,15 @@ class students:
         student_psswd_row = num_student_psswd + 2
 
         for i in range(2, num_student_psswd):
-            if ws_student_psswd["A" + str(i)].value == student_ID:
+            if ws_student_psswd["A" + str(i)].value == student_ID :
 
                 if ws_student_psswd["B" + str(i)].value == currentPassword:
                     ws_student_psswd["B" + str(i)] = newPassword
                     wb.save(filename="university.xlsx")
+                    break
 
                 else:
-                    print('Problem1')
+                    print('problem1')
                     return False
 
             else:
