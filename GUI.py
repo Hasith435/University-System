@@ -434,17 +434,23 @@ def student_admission_number_and_pswd():
 
         for i in range(2, num_student_psswd + 2):
             print('For loop works')
-            if ws_student_psswd["A" + str(i)].value == student_admission_number and ws_student_psswd["B" + str(i)].value == student_password:
-                print("if statement correct")
+            admission_number_in_spreadsheet = ws_student_psswd["A" + str(i)].value
+            password_in_spreadsheet = ws_student_psswd["B" + str(i)].value
 
-                passwd_frame_student.grid_forget()
-                enter_button.grid_forget()
-                print('correct')
+            if admission_number_in_spreadsheet == student_admission_number:
 
-                student_name = students.get_name_for_password(student_admission_number)
-                print(student_name)
+                if password_in_spreadsheet == student_password:
+                    passwd_frame_student.grid_forget()
+                    enter_button.grid_forget()
+                    print('correct')
 
-                student_button_root()
+                    student_name = students.get_name_for_password(student_admission_number)
+                    print(student_name)
+
+                    student_button_root()
+
+                else:
+                    print('incorrect')
 
 
             else:
