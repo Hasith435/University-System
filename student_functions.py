@@ -138,21 +138,6 @@ class students:
             except:
                 continue
 
-    # @staticmethod
-    # def check_password(studentID, password):
-    #
-    #     num_student_psswd = ws_student_psswd["G6"].value
-    #
-    #     for i in range(2, num_student_psswd + 2):
-    #         print('For loop works')
-    #         if ws_student_psswd["A" + str(i)].value == studentID and ws_student_psswd["B" + str(i)].value == password:
-    #             print("correct")
-    #             return True
-    #
-    #         else:
-    #             print('Incorrect')
-    #             return False
-
 
     @staticmethod
     def get_name_for_password(student_ID):
@@ -168,19 +153,25 @@ class students:
                 print('invalid_student_ID')
 
     @staticmethod
-    def change_password(student_ID, newPassword):
+    def change_password(student_ID, currentPassword, newPassword):
 
         num_student_psswd = ws_student_psswd["G6"].value
         student_psswd_row = num_student_psswd + 2
 
-        for i in range(2, num_student_psswd + 2):
+        for i in range(2, num_student_psswd):
             if ws_student_psswd["A" + str(i)].value == student_ID:
-                ws_student_psswd["B" + str(i)] = newPassword
 
-                wb.save(filename="university.xlsx")
+                if ws_student_psswd["B" + str(i)].value == currentPassword:
+                    ws_student_psswd["B" + str(i)] = newPassword
+                    wb.save(filename="university.xlsx")
+
+                else:
+                    print('Problem1')
+                    return False
 
             else:
-                print('Invalid (change password)')
+                print('Problem2')
+                return False
 
 
 class courses(students):
