@@ -116,13 +116,7 @@ class second_screen_students:
 
     @staticmethod
     def courses():
-        welcome_lbl.grid_forget()
-        course_button.grid_forget()
-        credentials_button.grid_forget()
-        view_details_button.grid_forget()
-        clubs_button.grid_forget()
-        back_button.grid_forget()
-        greeting_lbl.grid_forget()
+        student_buttons_frame.grid_forget()
 
         def back():
             register_button.grid_forget()
@@ -133,9 +127,11 @@ class second_screen_students:
 
             student_button_root()
 
+        courses_frame = create_frame(root, dark_bg, row=0, column=1)
 
         #THIS IS THE SECTION FOR THE STUDENTS TO REGISTER FOR A COURSE
         def register():
+
 
             course_register_window = Toplevel()
             course_register_window.configure(bg="#2e2e2d")
@@ -170,8 +166,8 @@ class second_screen_students:
             back_button = Button(course_register_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
             back_button.grid(row= 2, column= 0, padx=10, pady=10)
 
-        register_button = Button(root, text= "ENROLL",font= font_style_button, command= register, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
-        register_button.grid(row= 0, column= 0, padx= 10, pady= 10)
+        register_button = HoverButton(courses_frame, text= "ENROLL",font= font_style_button, command= register, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 70)
+        register_button.grid(row= 0, columnspan=2, padx= 10, pady= 10)
 
 
         #THIS IS THE SECTION TO ALLOW STUDENTS TO VIEW THEIR Grades
@@ -230,8 +226,8 @@ class second_screen_students:
             back_button = Button(view_grades_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
             back_button.grid(row= 7, column= 0, padx=10, pady=10)
 
-        view_grades_button = Button(root, text= "GRADES",font= font_style_button, command= view_grades, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
-        view_grades_button.grid(row= 0, column= 1, padx= 10, pady= 10)
+        view_grades_button = HoverButton(courses_frame, text= "GRADES",font= font_style_button, command= view_grades, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 33)
+        view_grades_button.grid(row= 1, column= 0, padx= 10, pady= 10)
 
 
         #THIS IS THE SECTION TO ALLOW STUDENTS TO UN-REGISTER FROM A COURSE
@@ -266,8 +262,8 @@ class second_screen_students:
             back_button = Button(course_disenroll_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
             back_button.grid(row=2, column=0, padx=10, pady=10)
 
-        disenroll_button = Button(root, text= "DISENROLL",font= font_style_button, command= disenroll, borderwidth= 0, bg="#545352", foreground= "white", width= 13)
-        disenroll_button.grid(row=0, column= 2, padx= 10, pady= 10)
+        disenroll_button = HoverButton(courses_frame, text= "DISENROLL",font= font_style_button, command= disenroll, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 33)
+        disenroll_button.grid(row=1, column= 1, padx= 10, pady= 10)
 
         #THIS IS THE SECTION TO VIEW THE COURSE DETAILS
         def course_details() :
@@ -317,14 +313,14 @@ class second_screen_students:
             back_button = Button(course_details_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
             back_button.grid(row=6, column=0, padx=10, pady=10)
 
-        course_details_button = Button(root, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg="#545352", foreground= "white", width= 12)
-        course_details_button.grid(row=0, column=3, padx=10, pady=10)
+        course_details_button = HoverButton(courses_frame, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 70)
+        course_details_button.grid(row=2,columnspan=2, padx=10, pady=10)
 
 
 
         #THIS IS THE BACK BUTTON
-        back_button_courses = Button(root, text= "Back", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 86)
-        back_button_courses.grid(columnspan= 4, padx= 10, pady= 10)
+        back_button_courses = HoverButton(courses_frame, text= "BACK", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 75)
+        back_button_courses.grid(row=3,columnspan= 4, padx= 10, pady= 10)
 
     @staticmethod
     def change_password():
@@ -384,7 +380,7 @@ class second_screen_students:
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
-    global course_button, credentials_button, view_details_button, clubs_button, back_button, greeting_lbl
+    global course_button, credentials_button, view_details_button, clubs_button, back_button, greeting_lbl, student_buttons_frame
 
     def back():
         welcome_lbl.grid_forget()
@@ -406,13 +402,13 @@ def student_button_root():
     #COMPLETE THE COMMANDS IN THESE BUTTONS
 
     #courses_button
-    course_button = HoverButton(student_buttons_frame, text= "COURSES", font= font_style_button,borderwidth= 0, width= 70, bg=button_colour1,foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+    course_button = HoverButton(student_buttons_frame, text= "COURSES", font= font_style_button,borderwidth= 0, width= 70, bg=bg_colour1,foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
     #Credentials
-    credentials_button = HoverButton(student_buttons_frame, text= "CHANGE PASSWORD", font= font_style_button,  borderwidth= 0, width= 70, bg=button_colour1,foreground="white", command = second_screen_students.change_password, activebackground=sidebar_button_hover_color)
+    credentials_button = HoverButton(student_buttons_frame, text= "CHANGE PASSWORD", font= font_style_button,  borderwidth= 0, width= 70, bg=bg_colour1,foreground="white", command = second_screen_students.change_password, activebackground=sidebar_button_hover_color)
     #view_details
-    view_details_button = HoverButton(student_buttons_frame, text= "VIEW DETAILS", font= font_style_button,  borderwidth= 0, width= 34, bg=button_colour1,foreground="white", activebackground=sidebar_button_hover_color)
+    view_details_button = HoverButton(student_buttons_frame, text= "VIEW DETAILS", font= font_style_button,  borderwidth= 0, width= 34, bg=bg_colour1,foreground="white", activebackground=sidebar_button_hover_color)
     #clubs button
-    clubs_button = HoverButton(student_buttons_frame, text= "CLUBS", font= font_style_button,borderwidth= 0, width= 34, bg=button_colour1,foreground="white", activebackground=sidebar_button_hover_color)
+    clubs_button = HoverButton(student_buttons_frame, text= "CLUBS", font= font_style_button,borderwidth= 0, width= 34, bg=bg_colour1,foreground="white", activebackground=sidebar_button_hover_color)
     #back Button
     back_button = HoverButton(student_buttons_frame, text= "BACK", font= font_style_button, borderwidth= 0, width= 70, bg="#e84d1a",foreground="white", command= back, activebackground=sidebar_button_hover_color)
 
