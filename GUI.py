@@ -39,10 +39,19 @@ if os.environ.get('DISPLAY','') == '':
     os.environ.__setitem__('DISPLAY', ':0.0')
 
 root = Tk()
-root.configure(bg="#2e2e2d")
+
 root.title("Welcome to the University")
 # root.iconbitmap('D:\download.png')
 
+# Accent colours
+button_colour1 = "#2b2b2b"
+button_colour2 = "#595959"
+# side_bar_color =
+bg_colour1 = "#393939"
+dark_bg = "#1C1C1C"
+sidebar_button_hover_color = '#636363'
+
+root.configure(bg=dark_bg)
 
 font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
 font_style_main_entry = tkFont.Font(family= "corbel light", size= 20)
@@ -55,24 +64,53 @@ font_style_choice = tkFont.Font(family= "corbel light", size=18)
 font_style_enter_button = tkFont.Font(family= "cobel light", size= 13)
 font_style_passwd_entry_field = tkFont.Font(family= "cobel light", size= 13)
 
+
+class HoverButton(tk.Button):
+    def __init__(self, master, **kw):
+        tk.Button.__init__(self, master=master, **kw)
+        self.default_bg = self["bg"]
+        self.bind("<Enter>", self.on_enter)
+        self.bind("<Leave>", self.on_leave)
+
+    def on_enter(self, e):
+        self['bg'] = self['activebackground']
+
+    def on_leave(self, e):
+        self['bg'] = self.default_bg
+
+def create_frame(popup, colour, row=0, column=0, padx=20, pady=20, sticky=NSEW, columnspan=1):
+    frame = LabelFrame(popup, padx=padx, pady=pady, borderwidth=0)
+    frame.configure(bg=colour)
+    frame.grid(row=row, column=column, sticky=sticky, columnspan=columnspan)
+    return frame
+
 def home():
     global welcome_lbl, student_button, teacher_button, admin_button, parent_button, choice_lbl
 
-    welcome_lbl = Label(root, text= "UNIVERSITY SYSTEM", font= font_style_title, bg="#2e2e2d", foreground= "white"  )
-    choice_lbl = Label(root, text= "PLEASE CHOOSE YOUR POSITION:", font= font_style_choice, bg="#2e2e2d", foreground= "white")
+    home_buttons_frame = create_frame(root, bg_colour1)
+    welcome_lbl_frame = create_frame(root, dark_bg, row=0, column=1)
 
-    student_button = Button(text= "STUDENT", font= font_style_button, bg="#545352", foreground= "#ed9339", command= student_admission_number_and_pswd, borderwidth= 0, width= 9)
-    teacher_button = Button(text= "TEACHER", font= font_style_button, bg="#545352", foreground= "#ed9339", borderwidth= 0, width= 9)
-    admin_button = Button(text= "ADMIN", font= font_style_button, bg="#545352", foreground= "#ed9339", command= admin_button_root_password,borderwidth= 0, width= 9)
-    parent_button = Button(text="PARENT", font=font_style_button, bg="#545352", foreground="#ed9339", borderwidth=0, width= 9)
+    welcome_lbl = Label(welcome_lbl_frame, text= "UNIVERSITY SYSTEM", font= font_style_title, bg=dark_bg, foreground= "white"  )
 
-    welcome_lbl.grid(columnspan=4)
-    choice_lbl.grid(columnspan=4)
+    student_button = HoverButton(home_buttons_frame,text= "STUDENT     ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", command= student_admission_number_and_pswd, borderwidth= 0, width= 9, activeback)
+    teacher_button = HoverButton(home_buttons_frame,text= "TEACHER      ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", borderwidth= 0, width= 9)
+    admin_button = HoverButton(home_buttons_frame,text= "ADMIN           ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", command= admin_button_root_password,borderwidth= 0, width= 9)
+    parent_button = HoverButton(home_buttons_frame,text="PARENT        ", font=font_style_button, bg=bg_colour1, foreground="#ed9339", borderwidth=0, width= 9)
+    random_button = HoverButton(home_buttons_frame,bg=bg_colour1, borderwidth=0, height=20)
+    settings_button = HoverButton(home_buttons_frame,text="SETTINGS", font=font_style_button, bg=bg_colour1, foreground='white', borderwidth=0, width= 9)
 
-    student_button.grid(row=5, column=0, pady= 20, padx= 10)
-    teacher_button.grid(row=5, column=1, pady= 20, padx=10)
-    admin_button.grid(row=5, column=2, pady= 20, padx=10)
-    parent_button.grid(row= 5, column= 3, pady= 20, padx=10)
+    welcome_lbl.grid(row=1, column=1)
+    welcome_lbl_frame.grid_rowconfigure(0, weight=1)
+    welcome_lbl_frame.grid_rowconfigure(2, weight=1)
+    welcome_lbl_frame.grid_columnconfigure(0, weight=1)
+    welcome_lbl_frame.grid_columnconfigure(2, weight=1)
+
+    student_button.grid(row=1, column=0, padx= 10)
+    teacher_button.grid(row=2, column=0, padx=10)
+    admin_button.grid(row=3, column=0, padx=10)
+    parent_button.grid(row= 4, column= 0, padx=10)
+    random_button.grid(row=5, column=0, padx=10)
+    settings_button.grid(row=6, column=0, padx=10)
 
 
 class second_screen_students:
@@ -84,7 +122,7 @@ class second_screen_students:
         credentials_button.grid_forget()
         view_details_button.grid_forget()
         clubs_button.grid_forget()
-        back_button_root.grid_forget()
+        back_button.grid_forget()
         greeting_lbl.grid_forget()
 
         def back():
@@ -347,7 +385,7 @@ class second_screen_students:
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
-    global course_button, credentials_button, view_details_button, clubs_button, back_button_root, greeting_lbl
+    global course_button, credentials_button, view_details_button, clubs_button, back_button, greeting_lbl
 
     def home_buttons_disappear():
         student_button.grid_forget()
@@ -370,28 +408,29 @@ def student_button_root():
     home_buttons_disappear()
 
     greeting_lbl = Label(root, text= f"Hello {student_name}, what is your task related to:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
+    student_buttons_frame = create_frame(root, bg_colour1)
 
 
     #COMPLETE THE COMMANDS IN THESE BUTTONS
 
     #courses_button
-    course_button = Button(root, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white", command= second_screen_students.courses)
+    course_button = Button(student_buttons_frame, text= "Courses", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white", command= second_screen_students.courses)
     #Credentials
-    credentials_button = Button(root, text= "Change Password", font= font_style_button,  borderwidth= 0, width= 15, bg="#545352",foreground="white", command = second_screen_students.change_password)
+    credentials_button = Button(student_buttons_frame, text= "Change Password", font= font_style_button,  borderwidth= 0, width= 15, bg="#545352",foreground="white", command = second_screen_students.change_password)
     #view_details
-    view_details_button = Button(root, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    view_details_button = Button(student_buttons_frame, text= "View Details", font= font_style_button,  borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #clubs button
-    clubs_button = Button(root, text= "Clubs", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
+    clubs_button = Button(student_buttons_frame, text= "Clubs", font= font_style_button,borderwidth= 0, width= 13, bg="#545352",foreground="white")
     #back Button
-    back_button = Button(root, text= "Back", font= font_style_button, borderwidth= 0, width= 62, bg="#e84d1a",foreground="white", command= back)
+    back_button = Button(student_buttons_frame, text= "Back", font= font_style_button, borderwidth= 0, width= 62, bg="#e84d1a",foreground="white", command= back)
 
     greeting_lbl.grid(columnspan= 5, sticky= "NSWE", padx= 10, pady= 10)
 
-    course_button.grid(row= 3, column= 0, padx= 10, pady= 10)
-    credentials_button.grid(row= 3, column= 1, padx= 10, pady= 10)
-    view_details_button.grid(row= 3, column= 2, padx= 10, pady= 10)
-    clubs_button.grid(row= 3, column= 3, padx= 10, pady= 10)
-    back_button.grid(columnspan= 4, padx= 10, pady= 10)
+    course_button.grid(row= 0, column= 0, padx= 10, pady= 10)
+    credentials_button.grid(row= 1, column= 0, padx= 10, pady= 10)
+    view_details_button.grid(row= 2, column= 0, padx= 10, pady= 10)
+    clubs_button.grid(row= 3, column= 0, padx= 10, pady= 10)
+    back_button.grid(columnspan= 4, padx= 10, pady= 0)
 
 def student_admission_number_and_pswd():
     global student_name
