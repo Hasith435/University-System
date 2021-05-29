@@ -328,7 +328,7 @@ class courses(students):
                 g2 = ws_student_courses["G" + str(i)].value
                 g3 = ws_student_courses["H" + str(i)].value
                 g4 = ws_student_courses["I" + str(i)].value
-                g5 = ws_student_courses["G" + str(i)].value
+                g5 = ws_student_courses["J" + str(i)].value
 
                 print(g1)
                 print(g2)

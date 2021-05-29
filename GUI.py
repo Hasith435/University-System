@@ -39,7 +39,7 @@ if os.environ.get('DISPLAY','') == '':
     os.environ.__setitem__('DISPLAY', ':0.0')
 
 root = Tk()
-root.title("Welcome to the University")
+root.title("UNIVERISTY SYSTEM")
 
 
 # Accent colours
@@ -49,6 +49,8 @@ button_colour2 = "#595959"
 bg_colour1 = "#393939"
 dark_bg = "#1C1C1C"
 sidebar_button_hover_color = '#636363'
+enter_button_hover_color = "#63ed28"
+back_button_hover_color = "#eb6709"
 
 root.configure(bg=dark_bg)
 
@@ -131,17 +133,15 @@ class second_screen_students:
 
         #THIS IS THE SECTION FOR THE STUDENTS TO REGISTER FOR A COURSE
         def register():
+            back_button_root.grid_forget()
 
+            register_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            course_register_window = Toplevel()
-            course_register_window.configure(bg="#2e2e2d")
-            course_register_window.title('Register')
+            student_ID_lbl = Label(register_frame, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+            course_ID_lbl = Label(register_frame, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
 
-            student_ID_lbl = Label(course_register_window, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
-            course_ID_lbl = Label(course_register_window, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
-
-            student_ID_entry = Entry(course_register_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
-            course_ID_entry = Entry(course_register_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
+            student_ID_entry = Entry(register_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
+            course_ID_entry = Entry(register_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
 
             student_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
             course_ID_lbl.grid(row=1, column=0, padx= 10, pady= 10)
@@ -154,33 +154,31 @@ class second_screen_students:
                 course_ID = int(course_ID_entry.get())
                 courses.add_student_courses(student_ID, course_ID)
 
-                registered_lbl = Label(course_register_window,text= "REGISTERED", bg="#2e2e2d",foreground="white")
+                registered_lbl = Label(register_frame,text= "REGISTERED", bg="#2e2e2d",foreground="white")
                 registered_lbl.grid(row= 3, column= 1)
 
             def back():
-                course_register_window.destroy()
+                register_frame.grid_forget()
 
-            Enter_button = Button(course_register_window, text="Enter", font=font_style_enter_button, command=enter, bg="#1aeb8d", foreground= "black", width= 19)
+            Enter_button = HoverButton(register_frame, text="Enter", font=font_style_enter_button, command=enter, bg="#1aeb8d", foreground= "black", width= 19, borderwidth=0, activebackground=enter_button_hover_color)
             Enter_button.grid(row= 2, column= 1, padx=10, pady=10)
 
-            back_button = Button(course_register_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
+            back_button = HoverButton(register_frame, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10, borderwidth=0, activebackground=back_button_hover_color)
             back_button.grid(row= 2, column= 0, padx=10, pady=10)
 
-        register_button = HoverButton(courses_frame, text= "ENROLL",font= font_style_button, command= register, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 70)
+        register_button = HoverButton(courses_frame, text= "ENROLL",font= font_style_button, command= register, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 71, activebackground=sidebar_button_hover_color)
         register_button.grid(row= 0, columnspan=2, padx= 10, pady= 10)
 
 
         #THIS IS THE SECTION TO ALLOW STUDENTS TO VIEW THEIR Grades
         def view_grades():
-            view_grades_window = Toplevel()
-            view_grades_window.configure(bg="#2e2e2d")
-            view_grades_window.title('Grades')
+            view_grades_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            student_ID_lbl = Label(view_grades_window, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
-            course_ID_lbl = Label(view_grades_window, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
+            student_ID_lbl = Label(view_grades_frame, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+            course_ID_lbl = Label(view_grades_frame, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
 
-            student_ID_entry = Entry(view_grades_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
-            course_ID_entry = Entry(view_grades_window, font=font_style_user_input_lbl, bg="#393939", foreground= "white")
+            student_ID_entry = Entry(view_grades_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
+            course_ID_entry = Entry(view_grades_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
 
             student_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
             course_ID_lbl.grid(row=1, column=0, padx= 10, pady= 10)
@@ -193,17 +191,17 @@ class second_screen_students:
                 course_ID = int(course_ID_entry.get())
                 grade_list = courses.view_grades(student_ID, course_ID)
 
-                g1_lbl = Label(view_grades_window, text = "Term 1:", bg="#393939", foreground="white")
-                g2_lbl = Label(view_grades_window, text = "Term 2:", bg="#393939", foreground="white")
-                g3_lbl = Label(view_grades_window, text = "Term 3:", bg="#393939", foreground="white")
-                g4_lbl = Label(view_grades_window, text = "Term 4:", bg="#393939", foreground="white")
-                g5_lbl = Label(view_grades_window, text = "Term 5:", bg="#393939", foreground="white")
+                g1_lbl = Label(view_grades_frame, text = "Term 1:", bg="#2e2e2d", foreground="white")
+                g2_lbl = Label(view_grades_frame, text = "Term 2:", bg="#2e2e2d", foreground="white")
+                g3_lbl = Label(view_grades_frame, text = "Term 3:", bg="#2e2e2d", foreground="white")
+                g4_lbl = Label(view_grades_frame, text = "Term 4:", bg="#2e2e2d", foreground="white")
+                g5_lbl = Label(view_grades_frame, text = "Term 5:", bg="#2e2e2d", foreground="white")
 
-                g1_result = Label(view_grades_window, text= grade_list[0], bg="#393939", foreground="white")
-                g2_result = Label(view_grades_window, text= grade_list[1], bg="#393939", foreground="white")
-                g3_result = Label(view_grades_window, text= grade_list[2], bg="#393939", foreground="white")
-                g4_result = Label(view_grades_window, text= grade_list[3], bg="#393939", foreground="white")
-                g5_result = Label(view_grades_window, text= grade_list[4], bg="#393939", foreground="white")
+                g1_result = Label(view_grades_frame, text= grade_list[0], bg="#2e2e2d", foreground="white")
+                g2_result = Label(view_grades_frame, text= grade_list[1], bg="#2e2e2d", foreground="white")
+                g3_result = Label(view_grades_frame, text= grade_list[2], bg="#2e2e2d", foreground="white")
+                g4_result = Label(view_grades_frame, text= grade_list[3], bg="#2e2e2d", foreground="white")
+                g5_result = Label(view_grades_frame, text= grade_list[4], bg="#2e2e2d", foreground="white")
 
                 g1_lbl.grid(row= 2, column= 0, padx= 10, pady= 10)
                 g2_lbl.grid(row= 3, column= 0, padx= 10, pady= 10)
@@ -211,36 +209,34 @@ class second_screen_students:
                 g4_lbl.grid(row= 5, column= 0, padx= 10, pady= 10)
                 g5_lbl.grid(row= 6, column= 0, padx= 10, pady= 10)
 
-                g1_result.grid(row= 2, column= 1, padx= 10, pady= 10)
-                g2_result.grid(row= 3, column= 1, padx= 10, pady= 10)
-                g3_result.grid(row= 4, column= 1, padx= 10, pady= 10)
-                g4_result.grid(row= 5, column= 1, padx= 10, pady= 10)
-                g5_result.grid(row= 6, column= 1, padx= 10, pady= 10)
+                g1_result.grid(row= 2, column= 1, padx= 10, pady= 10, sticky=W)
+                g2_result.grid(row= 3, column= 1, padx= 10, pady= 1, sticky=W)
+                g3_result.grid(row= 4, column= 1, padx= 10, pady= 10, sticky=W)
+                g4_result.grid(row= 5, column= 1, padx= 10, pady= 10, sticky=W)
+                g5_result.grid(row= 6, column= 1, padx= 10, pady= 10, sticky=W)
 
             def back():
-                view_grades_window.destroy()
+                view_grades_frame.grid_forget()
 
-            Enter_button = Button(view_grades_window, text="Enter", font=font_style_enter_button, command=enter, bg="#1aeb8d", foreground= "black", width= 19)
+            Enter_button = HoverButton(view_grades_frame, text="Enter", font=font_style_enter_button, command=enter, bg="#1aeb8d", foreground= "black", width= 19, activebackground=enter_button_hover_color, borderwidth=0)
             Enter_button.grid(row= 7, column= 1, padx=10, pady=10)
 
-            back_button = Button(view_grades_window, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10)
+            back_button = HoverButton(view_grades_frame, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10, activebackground=back_button_hover_color, borderwidth=0)
             back_button.grid(row= 7, column= 0, padx=10, pady=10)
 
-        view_grades_button = HoverButton(courses_frame, text= "GRADES",font= font_style_button, command= view_grades, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 33)
+        view_grades_button = HoverButton(courses_frame, text= "GRADES",font= font_style_button, command= view_grades, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 34, activebackground=sidebar_button_hover_color)
         view_grades_button.grid(row= 1, column= 0, padx= 10, pady= 10)
 
 
         #THIS IS THE SECTION TO ALLOW STUDENTS TO UN-REGISTER FROM A COURSE
         def disenroll() :
-            course_disenroll_window = Toplevel()
-            course_disenroll_window.configure(bg="#2e2e2d")
-            course_disenroll_window.title('Disenroll')
+            disenroll_frame = create_frame(root,"#2e2e2d", row=0, column=2)
 
-            student_ID_lbl = Label(course_disenroll_window, text="Student ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
-            course_ID_lbl = Label(course_disenroll_window, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+            student_ID_lbl = Label(disenroll_frame, text="Student ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+            course_ID_lbl = Label(disenroll_frame, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
 
-            student_ID_entry = Entry(course_disenroll_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
-            course_ID_entry = Entry(course_disenroll_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+            student_ID_entry = Entry(disenroll_frame, font=font_style_user_input_lbl, bg=dark_bg,foreground="white", borderwidth=0)
+            course_ID_entry = Entry(disenroll_frame, font=font_style_user_input_lbl, bg=dark_bg,foreground="white", borderwidth=0)
 
             student_ID_lbl.grid(row=0, column=0, padx=10, pady=10)
             course_ID_lbl.grid(row=1, column=0, padx=10, pady=10)
@@ -254,29 +250,25 @@ class second_screen_students:
                 courses.remove_student_courses(student_ID, course_ID)
 
             def back():
-                course_disenroll_window.destroy()
+                disenroll_frame.grid_forget()
 
-            Enter_button = Button(course_disenroll_window, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19)
+            Enter_button = HoverButton(disenroll_frame, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19, borderwidth=0, activebackground=enter_button_hover_color)
             Enter_button.grid(row=2, column=1, padx=10, pady=10)
 
-            back_button = Button(course_disenroll_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
+            back_button = HoverButton(disenroll_frame, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
             back_button.grid(row=2, column=0, padx=10, pady=10)
 
-        disenroll_button = HoverButton(courses_frame, text= "DISENROLL",font= font_style_button, command= disenroll, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 33)
+        disenroll_button = HoverButton(courses_frame, text= "DISENROLL",font= font_style_button, command= disenroll, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 34, activebackground=sidebar_button_hover_color)
         disenroll_button.grid(row=1, column= 1, padx= 10, pady= 10)
 
         #THIS IS THE SECTION TO VIEW THE COURSE DETAILS
         def course_details() :
-            course_details_window = Toplevel()
-            course_details_window.configure(bg="#2e2e2d")
-            course_details_window.title('Register')
+            course_details_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            course_ID_lbl = Label(course_details_window, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
-
-            course_ID_entry = Entry(course_details_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+            course_ID_lbl = Label(course_details_frame, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+            course_ID_entry = Entry(course_details_frame, font=font_style_user_input_lbl, bg=dark_bg,foreground="white", borderwidth=0)
 
             course_ID_lbl.grid(row=1, column=0, padx=10, pady=10)
-
             course_ID_entry.grid(row=1, column=1, padx=10, pady=10)
 
             def enter():
@@ -284,15 +276,15 @@ class second_screen_students:
 
                 course_list = courses.view_course_details(course_id)
 
-                course_name_lbl = Label(course_details_window, text="Course Name:", bg="#2e2e2d", foreground="white")
-                course_duration_lbl = Label(course_details_window, text="Course Duration:", bg="#2e2e2d", foreground="white")
-                prerequisites_lbl = Label(course_details_window, text="Prerequisites:", bg="#2e2e2d", foreground="white")
-                instructors_lbl = Label(course_details_window, text="Instructors:", bg="#2e2e2d", foreground="white")
+                course_name_lbl = Label(course_details_frame, text="Course Name:", bg="#2e2e2d", foreground="white")
+                course_duration_lbl = Label(course_details_frame, text="Course Duration:", bg="#2e2e2d", foreground="white")
+                prerequisites_lbl = Label(course_details_frame, text="Prerequisites:", bg="#2e2e2d", foreground="white")
+                instructors_lbl = Label(course_details_frame, text="Instructors:", bg="#2e2e2d", foreground="white")
 
-                course_name_results = Label(course_details_window, text=course_list[1], bg="#2e2e2d", foreground="white")
-                course_duration_results = Label(course_details_window, text=course_list[2], bg="#2e2e2d", foreground="white")
-                prerequisites_results = Label(course_details_window, text=course_list[3], bg="#2e2e2d", foreground="white")
-                instructors_results = Label(course_details_window, text=course_list[4], bg="#2e2e2d", foreground="white")
+                course_name_results = Label(course_details_frame, text=course_list[1], bg="#2e2e2d", foreground="white")
+                course_duration_results = Label(course_details_frame, text=course_list[2], bg="#2e2e2d", foreground="white")
+                prerequisites_results = Label(course_details_frame, text=course_list[3], bg="#2e2e2d", foreground="white")
+                instructors_results = Label(course_details_frame, text=course_list[4], bg="#2e2e2d", foreground="white")
 
                 course_name_lbl.grid(row=2, column=0, padx=10, pady=10, sticky= W)
                 course_duration_lbl.grid(row=3, column=0, padx=10, pady=10, sticky= W)
@@ -305,21 +297,21 @@ class second_screen_students:
                 instructors_results.grid(row=5, column=1, padx=10, pady=10, sticky= W)
 
             def back():
-                course_details_window.destroy()
+                course_details_frame.grid_forget()
 
-            Enter_button = Button(course_details_window, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19)
+            Enter_button = HoverButton(course_details_frame, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19, borderwidth=0, activebackground=enter_button_hover_color)
             Enter_button.grid(row=6, column=1, padx=10, pady=10)
 
-            back_button = Button(course_details_window, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10)
+            back_button = HoverButton(course_details_frame, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
             back_button.grid(row=6, column=0, padx=10, pady=10)
 
-        course_details_button = HoverButton(courses_frame, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 70)
+        course_details_button = HoverButton(courses_frame, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 71, activebackground=sidebar_button_hover_color)
         course_details_button.grid(row=2,columnspan=2, padx=10, pady=10)
 
 
 
         #THIS IS THE BACK BUTTON
-        back_button_courses = HoverButton(courses_frame, text= "BACK", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 75)
+        back_button_courses = HoverButton(courses_frame, text= "BACK", font= font_style_enter_button, command = back, borderwidth= 0, bg="#e84d1a",foreground="white", width= 79, activebackground=back_button_hover_color)
         back_button_courses.grid(row=3,columnspan= 4, padx= 10, pady= 10)
 
     @staticmethod
@@ -380,16 +372,10 @@ class second_screen_students:
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
-    global course_button, credentials_button, view_details_button, clubs_button, back_button, greeting_lbl, student_buttons_frame
+    global course_button, credentials_button, view_details_button, clubs_button, back_button_root, greeting_lbl, student_buttons_frame
 
     def back():
-        welcome_lbl.grid_forget()
-        course_button.grid_forget()
-        credentials_button.grid_forget()
-        view_details_button.grid_forget()
-        clubs_button.grid_forget()
-        back_button.grid_forget()
-        greeting_lbl.grid_forget()
+        student_buttons_frame.grid_forget()
 
         home()
 
@@ -410,7 +396,7 @@ def student_button_root():
     #clubs button
     clubs_button = HoverButton(student_buttons_frame, text= "CLUBS", font= font_style_button,borderwidth= 0, width= 34, bg=bg_colour1,foreground="white", activebackground=sidebar_button_hover_color)
     #back Button
-    back_button = HoverButton(student_buttons_frame, text= "BACK", font= font_style_button, borderwidth= 0, width= 70, bg="#e84d1a",foreground="white", command= back, activebackground=sidebar_button_hover_color)
+    back_button_root = HoverButton(student_buttons_frame, text= "BACK", font= font_style_enter_button, borderwidth= 0, width= 78, bg="#e84d1a",foreground="white", command= back, activebackground=sidebar_button_hover_color)
 
     greeting_lbl.grid(columnspan=2, sticky= "NSWE", padx= 10, pady= 10)
 
@@ -419,7 +405,7 @@ def student_button_root():
     view_details_button.grid(row=2, column=1, padx=10, pady=10)
     credentials_button.grid(row= 3, columnspan=2, padx= 10, pady= 10)
 
-    back_button.grid(columnspan= 4, padx= 10, pady= 0)
+    back_button_root.grid(columnspan= 4, padx= 10, pady= 0)
 
 def student_admission_number_and_pswd():
     global student_name, passwd_frame_student
