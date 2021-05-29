@@ -317,30 +317,28 @@ class second_screen_students:
     @staticmethod
     def change_password():
         #THIS IS THE SECTION THAT ALLOWS THE STUDENT TO CHANGE THEIR PASSWORd
-        credentials_change_password_window = Toplevel()
-        credentials_change_password_window.configure(bg="#2e2e2d")
-        credentials_change_password_window.title('Register')
+        change_password_frame = create_frame(root,"#2e2e2d", row=0, column=2)
 
-        student_ID_lbl = Label(credentials_change_password_window, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
-        student_ID_lbl.grid(row= 0, column=0, padx=10, pady= 10)
+        student_ID_lbl = Label(change_password_frame, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+        student_ID_lbl.grid(row= 0, column=0, padx=10, pady= 10, sticky=W)
 
-        student_ID_entry = Entry(credentials_change_password_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        student_ID_entry = Entry(change_password_frame, font=font_style_user_input_lbl, bg="#393939",foreground="white", borderwidth=0)
         student_ID_entry.grid(row= 0, column=1, padx= 10, pady= 10)
 
-        current_password_lbl = Label(credentials_change_password_window, text="Current Passowrd", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
-        current_password_lbl.grid(row= 1, column= 0, padx= 10, pady= 10)
+        current_password_lbl = Label(change_password_frame, text="Current Passowrd", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+        current_password_lbl.grid(row= 1, column= 0, padx= 10, pady= 10, sticky=W)
 
-        current_password_entry = Entry(credentials_change_password_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        current_password_entry = Entry(change_password_frame, font=font_style_user_input_lbl, bg="#393939",foreground="white", borderwidth=0)
         current_password_entry.grid(row=1, column=1, padx=10, pady=10)
 
-        new_password_lbl = Label(credentials_change_password_window, text="New Password", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
-        new_password_lbl.grid(row= 2, column= 0, padx= 10, pady= 10)
+        new_password_lbl = Label(change_password_frame, text="New Password", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+        new_password_lbl.grid(row= 2, column= 0, padx= 10, pady= 10, sticky=W)
 
-        new_password_entry = Entry(credentials_change_password_window, font=font_style_user_input_lbl, bg="#393939",foreground="white")
+        new_password_entry = Entry(change_password_frame, font=font_style_user_input_lbl, bg="#393939",foreground="white", borderwidth=0)
         new_password_entry.grid(row=2, column=1, padx=10, pady=10)
 
         def back():
-            credentials_change_password_window.destroy()
+            change_password_frame.grid_forget()
 
         def enter():
             student_ID = student_ID_entry.get()
@@ -355,18 +353,18 @@ class second_screen_students:
             final_decision = students.change_password(int(student_ID), current_password, new_password)
 
             if final_decision == False:
-                incorrect_lbl = Label(credentials_change_password_window, text="Incorrect", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+                incorrect_lbl = Label(change_password_frame, text="Incorrect", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
                 incorrect_lbl.grid(columnspan=2, padx=10, pady=10)
 
             else:
-                changed_lbl = Label(credentials_change_password_window, text="Changed", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+                changed_lbl = Label(change_password_frame, text="Changed", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
                 changed_lbl.grid(columnspan = 2, padx=10, pady= 10)
 
 
-        Enter_button = Button(credentials_change_password_window, text="Enter", font=font_style_enter_button,bg="#1aeb8d", foreground="black", width=19, command= enter)
+        Enter_button = HoverButton(change_password_frame, text="Enter", font=font_style_enter_button,bg="#1aeb8d", foreground="black", width=19, command= enter, borderwidth=0, activebackground=enter_button_hover_color)
         Enter_button.grid(row=3, column=1, padx=10, pady=10)
 
-        back_button = Button(credentials_change_password_window, text="Back", font=font_style_enter_button, bg="#e84d1a", foreground="white", width=10, command= back)
+        back_button = HoverButton(change_password_frame, text="Back", font=font_style_enter_button, bg="#e84d1a", foreground="white", width=10, command= back, borderwidth=0, activebackground=enter_button_hover_color)
         back_button.grid(row=3, column=0, padx=10, pady=10)
 
 
