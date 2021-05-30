@@ -787,10 +787,14 @@ def admin_button_root_rest():
 def admin_button_root_password():
 
     passwd_frame = Frame(root,bg= "#4f4f4d" )
-    passwd_frame.grid(columnspan= 4, padx= 10, pady= 10)
+    passwd_frame.grid(row=0, column=1, padx= 10, pady= 10)
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_rowconfigure(2, weight=1)
+    root.grid_columnconfigure(0, weight=1)
+    root.grid_columnconfigure(2, weight=1)
 
     password_label = Label(passwd_frame, text= "PLEASE ENTER YOUR PASSWORD", font= font_style_user_input_lbl, bg="#4f4f4d", foreground= "#FFFFFF")
-    password_entry = Entry(passwd_frame, bg="#2e2e2d", foreground= "#FFFFFF",borderwidth= 0, width = 74, font=font_style_passwd_entry_field)
+    password_entry = Entry(passwd_frame, bg="#2e2e2d", foreground= "#FFFFFF",borderwidth= 0, width = 50, font=font_style_passwd_entry_field)
 
     password_label.grid(columnspan= 4, pady= 10)
     password_entry.grid(columnspan= 3, padx= 10)
