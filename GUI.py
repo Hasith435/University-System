@@ -364,7 +364,7 @@ class second_screen_students:
         Enter_button = HoverButton(change_password_frame, text="Enter", font=font_style_enter_button,bg="#1aeb8d", foreground="black", width=19, command= enter, borderwidth=0, activebackground=enter_button_hover_color)
         Enter_button.grid(row=3, column=1, padx=10, pady=10)
 
-        back_button = HoverButton(change_password_frame, text="Back", font=font_style_enter_button, bg="#e84d1a", foreground="white", width=10, command= back, borderwidth=0, activebackground=enter_button_hover_color)
+        back_button = HoverButton(change_password_frame, text="Back", font=font_style_enter_button, bg="#e84d1a", foreground="white", width=10, command= back, borderwidth=0, activebackground=back_button_hover_color)
         back_button.grid(row=3, column=0, padx=10, pady=10)
 
 
@@ -403,7 +403,7 @@ def student_button_root():
     view_details_button.grid(row=2, column=1, padx=10, pady=10)
     credentials_button.grid(row= 3, columnspan=2, padx= 10, pady= 10)
 
-    back_button_root.grid(columnspan= 4, padx= 10, pady= 0)
+    back_button_root.grid(columnspan= 4, padx= 10, pady= 10)
 
 def student_admission_number_and_pswd():
     global student_name, passwd_frame_student, passwd_frame_student
