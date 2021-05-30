@@ -98,7 +98,7 @@ def home():
     admin_button = HoverButton(home_buttons_frame,text= "ADMIN       ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", command= admin_button_root_password,borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
     parent_button = HoverButton(home_buttons_frame,text="PARENT     ", font=font_style_button, bg=bg_colour1, foreground="#ed9339", borderwidth=0, width= 9, activebackground= sidebar_button_hover_color)
     random_button = Button(home_buttons_frame,bg=bg_colour1, borderwidth=0, height=20)
-    settings_button = HoverButton(home_buttons_frame,text="SETTINGS", font=font_style_button, bg=bg_colour1, foreground='white', borderwidth=0, width= 9, activebackground= sidebar_button_hover_color)
+    settings_button = HoverButton(home_buttons_frame,text="SETTINGS", font=font_style_button, bg=button_colour2, foreground='white', borderwidth=0, width= 9, activebackground= button_colour1)
 
     welcome_lbl.grid(row=1, column=1)
     welcome_lbl_frame.grid_rowconfigure(0, weight=1)
@@ -406,7 +406,7 @@ def student_button_root():
     back_button_root.grid(columnspan= 4, padx= 10, pady= 0)
 
 def student_admission_number_and_pswd():
-    global student_name, passwd_frame_student
+    global student_name, passwd_frame_student, passwd_frame_student
 
     welcome_lbl_frame.grid_forget()
 
@@ -707,25 +707,25 @@ class admin_second_screen:
     @staticmethod
     def student_page():
 
-        admin_student_window = Toplevel()
-        admin_student_window.configure(bg="#2e2e2d")
-        admin_student_window.title("STUDENTS")
+        admin_students_frame = create_frame(root, dark_bg, row=0, column=1)
 
-        register_student_button = Button(admin_student_window, text="Register Student", width=20, font=font_style_button, bg="#545352", foreground="white", command=admin_functions.register_students, borderwidth=0)
-        view_student_details_button = Button(admin_student_window, text="View Student Details", width=20, font=font_style_button,bg="#545352", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
-        remove_student_button = Button(admin_student_window, text="Remove a Student", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command=admin_functions.remove_student)
-        view_grades_button = Button(admin_student_window, text="View Grades", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+        register_student_button = Button(admin_students_frame, text="REGISTER STUDENTS", width=70, font=font_style_button, bg="#545352", foreground="white", command=admin_functions.register_students, borderwidth=0)
+        view_student_details_button = Button(admin_students_frame, text="VIEW DETAILS", width=35, font=font_style_button,bg="#545352", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
+        remove_student_button = Button(admin_students_frame, text="UNREGISTER STUDENT", width=35, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command=admin_functions.remove_student)
+        view_grades_button = Button(admin_students_frame, text="VIEW GRADES", width=70, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+
+        # register_button = HoverButton(courses_frame, text="ENROLL", font=font_style_button, command=register,borderwidth=0, bg=bg_colour1, foreground="white", width=71,activebackground=sidebar_button_hover_color)
 
 
-        register_student_button.grid(row=9, column=0, padx=7, pady=7)
-        view_student_details_button.grid(row=9, column=1, padx=7, pady=7)
-        remove_student_button.grid(row=10, column=0, padx=7, pady=7)
-        view_grades_button.grid(row=10, column=1, padx=7, pady=7)
+        register_student_button.grid(row=0, columnspan=2, padx=5, pady=5)
+        view_student_details_button.grid(row=1, column=0, padx=5, pady=5)
+        remove_student_button.grid(row=1, column=1, padx=5, pady=5)
+        view_grades_button.grid(row=2, columnspan=2, padx=5, pady=5)
 
         def back():
-            admin_student_window.destroy()
+            admin_students_frame.grid_forget()
 
-        back_button = Button(admin_student_window, text="Back", width=53, font=font_style_submit_button, bg="#e84d1a",foreground="white", borderwidth=0, command= back)
+        back_button = Button(admin_students_frame, text="BACK", width=53, font=font_style_enter_button, bg="#e84d1a",foreground="white", borderwidth=0, command= back)
         back_button.grid(columnspan= 2, pady =10, padx= 10)
 
     @staticmethod
@@ -743,48 +743,35 @@ class admin_second_screen:
 
 def admin_button_root_rest():
 
-    def home_buttons_disappear():
-        student_button.grid_forget()
-        teacher_button.grid_forget()
-        admin_button.grid_forget()
-        parent_button.grid_forget()
-        choice_lbl.grid_forget()
+    passwd_frame.grid_forget()
 
-    home_buttons_disappear()
+    admin_buttons_frame = create_frame(root, dark_bg, row=0, column=1)
+    task_lbl = Label(admin_buttons_frame, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= dark_bg, foreground= "white")
 
-
-    task_lbl = Label(root, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= "#2e2e2d", foreground= "white")
-
-    Students_button = Button(root, text= "STUDENTS", width=20, font=font_style_button, bg="#545352",foreground="white", command=admin_second_screen.student_page , borderwidth=0)
-    Teachers_button = Button(root, text= "TEACHERS", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
-    Courses_button = Button(root, text= "COURSES", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
-    Clubs_button = Button(root, text= "CLUBS", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+    Students_button = HoverButton(admin_buttons_frame, text= "STUDENTS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", command=admin_second_screen.student_page , borderwidth=0, activebackground=sidebar_button_hover_color)
+    Teachers_button = HoverButton(admin_buttons_frame, text= "TEACHERS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+    Courses_button = HoverButton(admin_buttons_frame, text= "COURSES", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+    Clubs_button = HoverButton(admin_buttons_frame, text= "CLUBS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
     # terminal_button = Button(root, text= "TERMINAL", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command= admin_functions.open_terminal)
 
 
     task_lbl.grid(columnspan = 4)
-    Students_button.grid(row=10, column=0, padx=7, pady=10)
-    Teachers_button.grid(row=10, column=1, padx=7, pady=10)
-    Courses_button.grid(row=10, column=2, padx=7, pady=10)
-    Clubs_button.grid(row=10, column=3, padx=7, pady=10)
+    Students_button.grid(row=10, column=0, padx=5, pady=5)
+    Teachers_button.grid(row=10, column=1, padx=5, pady=5)
+    Courses_button.grid(row=10, column=2, padx=5, pady=5)
+    Clubs_button.grid(row=10, column=3, padx=5, pady=5)
     # terminal_button.grid(row=10, column=4, padx=7, pady=10)
 
 
     def admin_screen_back():
-        welcome_lbl.grid_forget()
-        task_lbl.grid_forget()
-        Students_button.grid_forget()
-        Teachers_button.grid_forget()
-        Courses_button.grid_forget()
-        Clubs_button.grid_forget()
-        back_button.grid_forget()
-
+        admin_buttons_frame.grid_forget()
         home()
 
-    back_button = Button(root, text="BACK", width=107, font=font_style_submit_button, bg="#e84d1a", foreground="white",borderwidth=0, command= admin_screen_back)
+    back_button = HoverButton(admin_buttons_frame, text="BACK", width=94, font=font_style_enter_button, bg="#e84d1a", foreground="white",borderwidth=0, command= admin_screen_back, activebackground=back_button_hover_color)
     back_button.grid(columnspan=4, pady=10)
 
 def admin_button_root_password():
+    global passwd_frame
 
     passwd_frame = Frame(root,bg= "#4f4f4d" )
     passwd_frame.grid(row=0, column=1, padx= 10, pady= 10)
@@ -821,7 +808,7 @@ def admin_button_root_password():
             password_entry.delete(0, 100)
             password_entry.insert(0, "Incorrect")
 
-    enter_button = Button(passwd_frame, text="ENTER", font=font_style_enter_button, borderwidth=0, width=13, command= password_verify, bg="#1aeb8d")
+    enter_button = HoverButton(passwd_frame, text="ENTER", font=font_style_enter_button, borderwidth=0, width=13, command= password_verify, bg="#1aeb8d", activebackground=enter_button_hover_color)
     enter_button.grid(row=1, column=3, pady= 10, padx= 10)
 
 
