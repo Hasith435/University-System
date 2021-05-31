@@ -137,22 +137,15 @@ class second_screen_students:
 
             register_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            student_ID_lbl = Label(register_frame, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
             course_ID_lbl = Label(register_frame, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
-
-            student_ID_entry = Entry(register_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
             course_ID_entry = Entry(register_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
 
-            student_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
-            course_ID_lbl.grid(row=1, column=0, padx= 10, pady= 10)
-
-            student_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
-            course_ID_entry.grid(row=1, column=1, padx= 10, pady= 10)
+            course_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
+            course_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
 
             def enter():
-                student_ID = int(student_ID_entry.get())
                 course_ID = int(course_ID_entry.get())
-                courses.add_student_courses(student_ID, course_ID)
+                courses.add_student_courses(student_admission_number, course_ID)
 
                 registered_lbl = Label(register_frame,text= "REGISTERED", bg="#2e2e2d",foreground="white")
                 registered_lbl.grid(row= 3, column= 1)
@@ -433,7 +426,7 @@ def student_admission_number_and_pswd():
     password_entry_stdnt.grid(row= 2, column= 1, padx= 10, pady= 10)
 
     def password_verify():
-        global student_name
+        global student_name, student_admission_number
 
         student_admission_number = int(admission_number_entry.get())
         print(student_admission_number)

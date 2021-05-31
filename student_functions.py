@@ -2,6 +2,7 @@ import openpyxl as xl
 from tkinter import *
 from tkinter.font import Font
 
+
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
 ws_courses = wb['courses']
