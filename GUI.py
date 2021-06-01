@@ -1,8 +1,10 @@
 from tkinter import *
 import tkinter as tk
 import tkinter.font as tkFont
+from tkinter import ttk
 import os
 import openpyxl as xl
+import time
 
 from student_functions import students
 from student_functions import courses
@@ -59,10 +61,10 @@ root.configure(bg=dark_bg)
 
 font_style_popup_button = tkFont.Font(family= "corbel light", size=15)
 font_style_main_entry = tkFont.Font(family= "corbel light", size= 20)
-font_style_user_input_lbl = tkFont.Font(family= "corbel light", size= 13)
+corbel_13 = tkFont.Font(family="corbel light", size= 13)
 font_style_submit_button = tkFont.Font(family= "corbel light", size = 15, weight= "bold")
 font_style_title = tkFont.Font(family= "corbel light", size= 40)
-font_style_button = tkFont.Font(family= "corbel light", size= 15)
+corbel_15 = tkFont.Font(family="corbel light", size= 15)
 font_style_welcome_frame_title = tkFont.Font(family= "corbel", size=30 )
 font_style_choice = tkFont.Font(family= "corbel light", size=18)
 font_style_enter_button = tkFont.Font(family= "cobel light", size= 13)
@@ -96,12 +98,12 @@ def home():
 
     welcome_lbl = Label(welcome_lbl_frame, text= "UNIVERSITY SYSTEM", font= font_style_title, bg=dark_bg, foreground= "white"  )
 
-    student_button = HoverButton(home_buttons_frame,text= "STUDENT ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", command= student_admission_number_and_pswd, borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
-    teacher_button = HoverButton(home_buttons_frame,text= "TEACHER  ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
-    admin_button = HoverButton(home_buttons_frame,text= "ADMIN       ", font= font_style_button, bg=bg_colour1, foreground= "#ed9339", command= admin_button_root_password,borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
-    parent_button = HoverButton(home_buttons_frame,text="PARENT     ", font=font_style_button, bg=bg_colour1, foreground="#ed9339", borderwidth=0, width= 9, activebackground= sidebar_button_hover_color)
+    student_button = HoverButton(home_buttons_frame, text= "STUDENT ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", command= student_admission_number_and_pswd, borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
+    teacher_button = HoverButton(home_buttons_frame, text= "TEACHER  ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
+    admin_button = HoverButton(home_buttons_frame, text= "ADMIN       ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", command= admin_button_root_password, borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
+    parent_button = HoverButton(home_buttons_frame, text="PARENT     ", font=corbel_15, bg=bg_colour1, foreground="#ed9339", borderwidth=0, width= 9, activebackground= sidebar_button_hover_color)
     random_button = Button(home_buttons_frame,bg=bg_colour1, borderwidth=0, height=20)
-    settings_button = HoverButton(home_buttons_frame,text="SETTINGS", font=font_style_button, bg=button_colour2, foreground='white', borderwidth=0, width= 9, activebackground= button_colour1)
+    settings_button = HoverButton(home_buttons_frame, text="SETTINGS", font=corbel_15, bg=button_colour2, foreground='white', borderwidth=0, width= 9, activebackground= button_colour1)
 
     welcome_lbl.grid(row=1, column=1)
     welcome_lbl_frame.grid_rowconfigure(0, weight=1)
@@ -140,8 +142,8 @@ class second_screen_students:
 
             register_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            course_ID_lbl = Label(register_frame, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
-            course_ID_entry = Entry(register_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
+            course_ID_lbl = Label(register_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
+            course_ID_entry = Entry(register_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
 
             course_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
             course_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
@@ -150,8 +152,23 @@ class second_screen_students:
                 course_ID = int(course_ID_entry.get())
                 courses.add_student_courses(student_admission_number, course_ID)
 
-                registered_lbl = Label(register_frame,text= "REGISTERED", bg="#2e2e2d",foreground="white")
-                registered_lbl.grid(row= 3, column= 1)
+                def registered_lbl():
+                    registered_lbl = Label(register_frame, text= "REGISTERED", bg="#2e2e2d", foreground="white", font=corbel_13)
+                    registered_lbl.grid(row= 5, columnspan=2)
+
+                registering_lbl = Label(register_frame, text="REGISTERING...", font=corbel_13, bg="#2e2e2d", foreground="white")
+                registering_lbl.grid(row=3, columnspan=2)
+
+                course_register_progress_bar = ttk.Progressbar(register_frame, orient=HORIZONTAL, length=300, mode="determinate")
+                course_register_progress_bar.grid(row=4, columnspan=2)
+
+
+                for i in range(5):
+                    course_register_progress_bar['value'] += 20
+                    root.update_idletasks()
+                    time.sleep(1)
+
+                registered_lbl()
 
             def back():
                 register_frame.grid_forget()
@@ -162,7 +179,7 @@ class second_screen_students:
             back_button = HoverButton(register_frame, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10, borderwidth=0, activebackground=back_button_hover_color)
             back_button.grid(row= 2, column= 0, padx=10, pady=10)
 
-        register_button = HoverButton(courses_frame, text= "ENROLL",font= font_style_button, command= register, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 71, activebackground=sidebar_button_hover_color)
+        register_button = HoverButton(courses_frame, text= "ENROLL", font= corbel_15, command= register, borderwidth= 0, bg=bg_colour1, foreground="white", width= 71, activebackground=sidebar_button_hover_color)
         register_button.grid(row= 0, columnspan=2, padx= 10, pady= 10)
 
 
@@ -170,11 +187,11 @@ class second_screen_students:
         def view_grades():
             view_grades_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            student_ID_lbl = Label(view_grades_frame, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
-            course_ID_lbl = Label(view_grades_frame, text="Course ID", font=font_style_user_input_lbl, bg="#2e2e2d", foreground="white")
+            student_ID_lbl = Label(view_grades_frame, text="Student ID", font=corbel_13, bg="#2e2e2d", foreground="white")
+            course_ID_lbl = Label(view_grades_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
 
-            student_ID_entry = Entry(view_grades_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
-            course_ID_entry = Entry(view_grades_frame, font=font_style_user_input_lbl, bg=dark_bg, foreground= "white", borderwidth=0)
+            student_ID_entry = Entry(view_grades_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+            course_ID_entry = Entry(view_grades_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
 
             student_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
             course_ID_lbl.grid(row=1, column=0, padx= 10, pady= 10)
@@ -220,7 +237,7 @@ class second_screen_students:
             back_button = HoverButton(view_grades_frame, text= "Back", font= font_style_enter_button, command= back, bg="#e84d1a", foreground= "white", width= 10, activebackground=back_button_hover_color, borderwidth=0)
             back_button.grid(row= 7, column= 0, padx=10, pady=10)
 
-        view_grades_button = HoverButton(courses_frame, text= "GRADES",font= font_style_button, command= view_grades, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 34, activebackground=sidebar_button_hover_color)
+        view_grades_button = HoverButton(courses_frame, text= "GRADES", font= corbel_15, command= view_grades, borderwidth= 0, bg=bg_colour1, foreground="white", width= 34, activebackground=sidebar_button_hover_color)
         view_grades_button.grid(row= 1, column= 0, padx= 10, pady= 10)
 
 
@@ -228,11 +245,11 @@ class second_screen_students:
         def disenroll() :
             disenroll_frame = create_frame(root,"#2e2e2d", row=0, column=2)
 
-            student_ID_lbl = Label(disenroll_frame, text="Student ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
-            course_ID_lbl = Label(disenroll_frame, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
+            student_ID_lbl = Label(disenroll_frame, text="Student ID", font=corbel_13, bg="#2e2e2d", foreground="white")
+            course_ID_lbl = Label(disenroll_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
 
-            student_ID_entry = Entry(disenroll_frame, font=font_style_user_input_lbl, bg=dark_bg,foreground="white", borderwidth=0)
-            course_ID_entry = Entry(disenroll_frame, font=font_style_user_input_lbl, bg=dark_bg,foreground="white", borderwidth=0)
+            student_ID_entry = Entry(disenroll_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+            course_ID_entry = Entry(disenroll_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
 
             student_ID_lbl.grid(row=0, column=0, padx=10, pady=10)
             course_ID_lbl.grid(row=1, column=0, padx=10, pady=10)
@@ -254,15 +271,15 @@ class second_screen_students:
             back_button = HoverButton(disenroll_frame, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
             back_button.grid(row=2, column=0, padx=10, pady=10)
 
-        disenroll_button = HoverButton(courses_frame, text= "DISENROLL",font= font_style_button, command= disenroll, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 34, activebackground=sidebar_button_hover_color)
+        disenroll_button = HoverButton(courses_frame, text= "DISENROLL", font= corbel_15, command= disenroll, borderwidth= 0, bg=bg_colour1, foreground="white", width= 34, activebackground=sidebar_button_hover_color)
         disenroll_button.grid(row=1, column= 1, padx= 10, pady= 10)
 
         #THIS IS THE SECTION TO VIEW THE COURSE DETAILS
         def course_details() :
             course_details_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            course_ID_lbl = Label(course_details_frame, text="Course ID", font=font_style_user_input_lbl,bg="#2e2e2d", foreground="white")
-            course_ID_entry = Entry(course_details_frame, font=font_style_user_input_lbl, bg=dark_bg,foreground="white", borderwidth=0)
+            course_ID_lbl = Label(course_details_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
+            course_ID_entry = Entry(course_details_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
 
             course_ID_lbl.grid(row=1, column=0, padx=10, pady=10)
             course_ID_entry.grid(row=1, column=1, padx=10, pady=10)
@@ -301,7 +318,7 @@ class second_screen_students:
             back_button = HoverButton(course_details_frame, text="Back", font=font_style_enter_button, command=back,bg="#e84d1a", foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
             back_button.grid(row=6, column=0, padx=10, pady=10)
 
-        course_details_button = HoverButton(courses_frame, text= "DETAILS",font= font_style_button, command= course_details, borderwidth= 0, bg=bg_colour1, foreground= "white", width= 71, activebackground=sidebar_button_hover_color)
+        course_details_button = HoverButton(courses_frame, text= "DETAILS", font= corbel_15, command= course_details, borderwidth= 0, bg=bg_colour1, foreground="white", width= 71, activebackground=sidebar_button_hover_color)
         course_details_button.grid(row=2,columnspan=2, padx=10, pady=10)
 
 
@@ -315,22 +332,22 @@ class second_screen_students:
         #THIS IS THE SECTION THAT ALLOWS THE STUDENT TO CHANGE THEIR PASSWORd
         change_password_frame = create_frame(root,"#2e2e2d", row=0, column=2)
 
-        student_ID_lbl = Label(change_password_frame, text="Student ID", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+        student_ID_lbl = Label(change_password_frame, text="Student ID", font=corbel_13, bg="#2e2e2d", foreground="white")
         student_ID_lbl.grid(row= 0, column=0, padx=10, pady= 10, sticky=W)
 
-        student_ID_entry = Entry(change_password_frame, font=font_style_user_input_lbl, bg="#393939",foreground="white", borderwidth=0)
+        student_ID_entry = Entry(change_password_frame, font=corbel_13, bg="#393939", foreground="white", borderwidth=0)
         student_ID_entry.grid(row= 0, column=1, padx= 10, pady= 10)
 
-        current_password_lbl = Label(change_password_frame, text="Current Passowrd", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+        current_password_lbl = Label(change_password_frame, text="Current Passowrd", font=corbel_13, bg="#2e2e2d", foreground="white")
         current_password_lbl.grid(row= 1, column= 0, padx= 10, pady= 10, sticky=W)
 
-        current_password_entry = Entry(change_password_frame, font=font_style_user_input_lbl, bg="#393939",foreground="white", borderwidth=0)
+        current_password_entry = Entry(change_password_frame, font=corbel_13, bg="#393939", foreground="white", borderwidth=0)
         current_password_entry.grid(row=1, column=1, padx=10, pady=10)
 
-        new_password_lbl = Label(change_password_frame, text="New Password", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+        new_password_lbl = Label(change_password_frame, text="New Password", font=corbel_13, bg="#2e2e2d", foreground="white")
         new_password_lbl.grid(row= 2, column= 0, padx= 10, pady= 10, sticky=W)
 
-        new_password_entry = Entry(change_password_frame, font=font_style_user_input_lbl, bg="#393939",foreground="white", borderwidth=0)
+        new_password_entry = Entry(change_password_frame, font=corbel_13, bg="#393939", foreground="white", borderwidth=0)
         new_password_entry.grid(row=2, column=1, padx=10, pady=10)
 
         def back():
@@ -349,11 +366,11 @@ class second_screen_students:
             final_decision = students.change_password(int(student_ID), current_password, new_password)
 
             if final_decision == False:
-                incorrect_lbl = Label(change_password_frame, text="Incorrect", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+                incorrect_lbl = Label(change_password_frame, text="Incorrect", font=corbel_13, bg="#2e2e2d", foreground="white")
                 incorrect_lbl.grid(columnspan=2, padx=10, pady=10)
 
             else:
-                changed_lbl = Label(change_password_frame, text="Changed", font=font_style_user_input_lbl, bg="#2e2e2d",foreground="white")
+                changed_lbl = Label(change_password_frame, text="Changed", font=corbel_13, bg="#2e2e2d", foreground="white")
                 changed_lbl.grid(columnspan = 2, padx=10, pady= 10)
 
 
@@ -382,13 +399,13 @@ def student_button_root():
     #COMPLETE THE COMMANDS IN THESE BUTTONS
 
     #courses_button
-    course_button = HoverButton(student_buttons_frame, text= "COURSES", font= font_style_button,borderwidth= 0, width= 70, bg=bg_colour1,foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+    course_button = HoverButton(student_buttons_frame, text= "COURSES", font= corbel_15, borderwidth= 0, width= 70, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
     #Credentials
-    credentials_button = HoverButton(student_buttons_frame, text= "CHANGE PASSWORD", font= font_style_button,  borderwidth= 0, width= 70, bg=bg_colour1,foreground="white", command = second_screen_students.change_password, activebackground=sidebar_button_hover_color)
+    credentials_button = HoverButton(student_buttons_frame, text= "CHANGE PASSWORD", font= corbel_15, borderwidth= 0, width= 70, bg=bg_colour1, foreground="white", command = second_screen_students.change_password, activebackground=sidebar_button_hover_color)
     #view_details
-    view_details_button = HoverButton(student_buttons_frame, text= "VIEW DETAILS", font= font_style_button,  borderwidth= 0, width= 34, bg=bg_colour1,foreground="white", activebackground=sidebar_button_hover_color)
+    view_details_button = HoverButton(student_buttons_frame, text= "VIEW DETAILS", font= corbel_15, borderwidth= 0, width= 34, bg=bg_colour1, foreground="white", activebackground=sidebar_button_hover_color)
     #clubs button
-    clubs_button = HoverButton(student_buttons_frame, text= "CLUBS", font= font_style_button,borderwidth= 0, width= 34, bg=bg_colour1,foreground="white", activebackground=sidebar_button_hover_color)
+    clubs_button = HoverButton(student_buttons_frame, text= "CLUBS", font= corbel_15, borderwidth= 0, width= 34, bg=bg_colour1, foreground="white", activebackground=sidebar_button_hover_color)
     #back Button
     back_button_root = HoverButton(student_buttons_frame, text= "BACK", font= font_style_enter_button, borderwidth= 0, width= 78, bg="#e84d1a",foreground="white", command= back, activebackground=sidebar_button_hover_color)
 
@@ -416,11 +433,11 @@ def student_admission_number_and_pswd():
     instructions_lbl = Label(passwd_frame_student, text="Please enter your Username and Password",font=font_style_popup_button, bg="#4f4f4d", foreground="white")
     instructions_lbl.grid(row=0, columnspan=2, padx=10)
 
-    admission_number_lbl = Label(passwd_frame_student, text="INDEX NO.", font=font_style_user_input_lbl,bg="#4f4f4d", foreground="#FFFFFF")
+    admission_number_lbl = Label(passwd_frame_student, text="INDEX NO.", font=corbel_13, bg="#4f4f4d", foreground="#FFFFFF")
     admission_number_entry = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=50,font=font_style_passwd_entry_field)
 
-    password_label_stdnt = Label(passwd_frame_student, text="PASSWORD", font=font_style_user_input_lbl,bg="#4f4f4d", foreground="#FFFFFF")
-    password_entry_stdnt = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=50,font=font_style_passwd_entry_field)
+    password_label_stdnt = Label(passwd_frame_student, text="PASSWORD", font=corbel_13, bg="#4f4f4d", foreground="#FFFFFF")
+    password_entry_stdnt = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=50,font=font_style_passwd_entry_field, show="*")
 
     admission_number_lbl.grid(row=1, column= 0, pady= 10)
     admission_number_entry.grid(row=1, column =1, padx =10)
@@ -497,24 +514,24 @@ class admin_functions:
         window.title("Register Students")
 
         # Assigning the Entry Fields
-        fname_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        lname_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        dob_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        gender_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_names_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_telephone_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939",
+        fname_entry = Entry(window, width=40, font=corbel_13, bg="#393939", foreground="white")
+        lname_entry = Entry(window, width=40, font=corbel_13, bg="#393939", foreground="white")
+        dob_entry = Entry(window, width=40, font=corbel_13, bg="#393939", foreground="white")
+        gender_entry = Entry(window, width=40, font=corbel_13, bg="#393939", foreground="white")
+        guardian_names_entry = Entry(window, width=40, font=corbel_13, bg="#393939", foreground="white")
+        guardian_telephone_entry = Entry(window, width=40, font=corbel_13, bg="#393939",
                                          foreground="white")
-        address_entry = Entry(window, width=40, font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        address_entry = Entry(window, width=40, font=corbel_13, bg="#393939", foreground="white")
 
-        fname_lbl = Label(window, text="First Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        lname_lbl = Label(window, text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        dob_lbl = Label(window, text="Date of Birth:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        gender_lbl = Label(window, text="Gender:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        guardian_names_lbl = Label(window, text="Guardian Names:", font=font_style_user_input_lbl, bg="#393939",
+        fname_lbl = Label(window, text="First Name:", font=corbel_13, bg="#393939", foreground="white")
+        lname_lbl = Label(window, text="Last Name:", font=corbel_13, bg="#393939", foreground="white")
+        dob_lbl = Label(window, text="Date of Birth:", font=corbel_13, bg="#393939", foreground="white")
+        gender_lbl = Label(window, text="Gender:", font=corbel_13, bg="#393939", foreground="white")
+        guardian_names_lbl = Label(window, text="Guardian Names:", font=corbel_13, bg="#393939",
                                    foreground="white")
-        guardian_telephone_lbl = Label(window, text="Guardian Telephone:", font=font_style_user_input_lbl, bg="#393939",
+        guardian_telephone_lbl = Label(window, text="Guardian Telephone:", font=corbel_13, bg="#393939",
                                        foreground="white")
-        address_lbl = Label(window, text="Address:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        address_lbl = Label(window, text="Address:", font=corbel_13, bg="#393939", foreground="white")
 
         fname_lbl.grid(row=0, column=0, sticky=W)
         lname_lbl.grid(row=1, column=0, sticky=W)
@@ -705,15 +722,15 @@ class admin_functions:
         register_teacher_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
         # Assigning the Entry Fields
-        fname_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
-        lname_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
-        qualifications_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
-        experience_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
+        fname_entry = Entry(register_teacher_frame, width=40, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+        lname_entry = Entry(register_teacher_frame, width=40, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+        qualifications_entry = Entry(register_teacher_frame, width=40, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+        experience_entry = Entry(register_teacher_frame, width=40, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
 
-        fname_lbl = Label(register_teacher_frame, text="First Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        lname_lbl = Label(register_teacher_frame, text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        qualifications_lbl = Label(register_teacher_frame, text="Qualifications:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
-        experience_lbl = Label(register_teacher_frame, text="Experience:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        fname_lbl = Label(register_teacher_frame, text="First Name:", font=corbel_13, bg="#2e2e2d", foreground="white")
+        lname_lbl = Label(register_teacher_frame, text="Last Name:", font=corbel_13, bg="#2e2e2d", foreground="white")
+        qualifications_lbl = Label(register_teacher_frame, text="Qualifications:", font=corbel_13, bg="#2e2e2d", foreground="white")
+        experience_lbl = Label(register_teacher_frame, text="Experience:", font=corbel_13, bg="#2e2e2d", foreground="white")
 
         fname_lbl.grid(row=0, column=0, sticky=W)
         lname_lbl.grid(row=1, column=0, sticky=W)
@@ -734,18 +751,21 @@ class admin_functions:
 
             teachers.register_teacher(fname_teachers, lname_teachers, qualifications_teachers, experience_teachers)
 
-            registered_lbl = Label(register_teacher_frame, text="REGISTERED", font=font_style_user_input_lbl, bg="#393939", fg="white")
+            registered_lbl = Label(register_teacher_frame, text="REGISTERED", font=corbel_13, bg="#393939", fg="white")
             registered_lbl.grid(row=5, columnspan=2, padx=10, pady=10)
 
         def back():
             register_teacher_frame.grid_forget()
 
-        Enter_button = HoverButton(register_teacher_frame, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19, borderwidth=0,activebackground=enter_button_hover_color)
+        Enter_button = HoverButton(register_teacher_frame, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=40, borderwidth=0,activebackground=enter_button_hover_color)
         Enter_button.grid(row=4, column=1, padx=10, pady=10)
 
         back_button = HoverButton(register_teacher_frame, text="Back", font=font_style_enter_button, command=back, bg="#e84d1a",foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
         back_button.grid(row=4, column=0, padx=10, pady=10)
 
+    @staticmethod
+    def view_teacher_details():
+        pass
 
 class admin_second_screen:
 
@@ -754,10 +774,10 @@ class admin_second_screen:
 
         admin_students_frame = create_frame(root, dark_bg, row=0, column=1)
 
-        register_student_button = Button(admin_students_frame, text="REGISTER STUDENTS", width=70, font=font_style_button, bg="#545352", foreground="white", command=admin_functions.register_students, borderwidth=0)
-        view_student_details_button = Button(admin_students_frame, text="VIEW DETAILS", width=35, font=font_style_button,bg="#545352", foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
-        remove_student_button = Button(admin_students_frame, text="UNREGISTER STUDENT", width=35, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command=admin_functions.remove_student)
-        view_grades_button = Button(admin_students_frame, text="VIEW GRADES", width=70, font=font_style_button, bg="#545352",foreground="white", borderwidth=0)
+        register_student_button = HoverButton(admin_students_frame, text="REGISTER STUDENTS", width=70, font=corbel_15, bg=bg_colour1, foreground="white", command=admin_functions.register_students, borderwidth=0)
+        view_student_details_button = HoverButton(admin_students_frame, text="VIEW DETAILS", width=35, font=corbel_15, bg=bg_colour1, foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0)
+        remove_student_button = HoverButton(admin_students_frame, text="UNREGISTER STUDENT", width=35, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, command=admin_functions.remove_student)
+        view_grades_button = HoverButton(admin_students_frame, text="VIEW GRADES", width=70, font=corbel_15, bg="#545352", foreground="white", borderwidth=0)
 
         # register_button = HoverButton(courses_frame, text="ENROLL", font=font_style_button, command=register,borderwidth=0, bg=bg_colour1, foreground="white", width=71,activebackground=sidebar_button_hover_color)
 
@@ -775,7 +795,21 @@ class admin_second_screen:
 
     @staticmethod
     def teacher_page():
-        pass
+        admin_teachers_frame = create_frame(root, dark_bg, row=0, column=1)
+
+        register_teachers_button = HoverButton(admin_teachers_frame, text="REGISTER LECTURER", width=70, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color, command=admin_functions.register_teacher)
+        view_teacher_details_button = HoverButton(admin_teachers_frame, text="VIEW DETAILS", width=34, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+        remove_teacher_button = HoverButton(admin_teachers_frame, text="REMOVE LECTURER", width=34, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+
+        register_teachers_button.grid(row=0, columnspan=2, padx=5, pady=5)
+        view_teacher_details_button.grid(row=1, column=0, padx=5, pady=5)
+        remove_teacher_button.grid(row=1, column=1, padx=5, pady=5)
+
+        def back():
+            admin_teachers_frame.grid_forget()
+
+        back_button = Button(admin_teachers_frame, text="BACK", width=78, font=font_style_enter_button, bg="#e84d1a",foreground="white", borderwidth=0, command= back)
+        back_button.grid(columnspan= 2, pady =10, padx= 10)
 
     @staticmethod
     def course_page():
@@ -793,18 +827,18 @@ def admin_button_root_rest():
     admin_buttons_frame = create_frame(root, dark_bg, row=0, column=1)
     task_lbl = Label(admin_buttons_frame, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= dark_bg, foreground= "white")
 
-    Students_button = HoverButton(admin_buttons_frame, text= "STUDENTS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", command=admin_second_screen.student_page , borderwidth=0, activebackground=sidebar_button_hover_color)
-    Teachers_button = HoverButton(admin_buttons_frame, text= "TEACHERS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color, command=)
-    Courses_button = HoverButton(admin_buttons_frame, text= "COURSES", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
-    Clubs_button = HoverButton(admin_buttons_frame, text= "CLUBS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+    Students_button = HoverButton(admin_buttons_frame, text= "STUDENTS", width=35, font=corbel_15, bg=bg_colour1, foreground="white", command=admin_second_screen.student_page, borderwidth=0, activebackground=sidebar_button_hover_color)
+    Teachers_button = HoverButton(admin_buttons_frame, text= "TEACHERS", width=35, font=corbel_15, bg=bg_colour1, foreground="white",command=admin_second_screen.teacher_page, borderwidth=0, activebackground=sidebar_button_hover_color)
+    Courses_button = HoverButton(admin_buttons_frame, text= "COURSES", width=35, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+    Clubs_button = HoverButton(admin_buttons_frame, text= "CLUBS", width=35, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
     # terminal_button = Button(root, text= "TERMINAL", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command= admin_functions.open_terminal)
 
 
     task_lbl.grid(columnspan = 4)
     Students_button.grid(row=10, column=0, padx=5, pady=5)
     Teachers_button.grid(row=10, column=1, padx=5, pady=5)
-    Courses_button.grid(row=10, column=2, padx=5, pady=5)
-    Clubs_button.grid(row=10, column=3, padx=5, pady=5)
+    Courses_button.grid(row=11, column=0, padx=5, pady=5)
+    Clubs_button.grid(row=11, column=1, padx=5, pady=5)
     # terminal_button.grid(row=10, column=4, padx=7, pady=10)
 
 
@@ -812,7 +846,7 @@ def admin_button_root_rest():
         admin_buttons_frame.grid_forget()
         home()
 
-    back_button = HoverButton(admin_buttons_frame, text="BACK", width=94, font=font_style_enter_button, bg="#e84d1a", foreground="white",borderwidth=0, command= admin_screen_back, activebackground=back_button_hover_color)
+    back_button = HoverButton(admin_buttons_frame, text="BACK", width=80, font=font_style_enter_button, bg="#e84d1a", foreground="white",borderwidth=0, command= admin_screen_back, activebackground=back_button_hover_color)
     back_button.grid(columnspan=4, pady=10)
 
 def admin_button_root_password():
@@ -825,8 +859,8 @@ def admin_button_root_password():
     root.grid_columnconfigure(0, weight=1)
     root.grid_columnconfigure(2, weight=1)
 
-    password_label = Label(passwd_frame, text= "PLEASE ENTER YOUR PASSWORD", font= font_style_user_input_lbl, bg="#4f4f4d", foreground= "#FFFFFF")
-    password_entry = Entry(passwd_frame, bg="#2e2e2d", foreground= "#FFFFFF",borderwidth= 0, width = 50, font=font_style_passwd_entry_field)
+    password_label = Label(passwd_frame, text= "PLEASE ENTER YOUR PASSWORD", font= corbel_13, bg="#4f4f4d", foreground="#FFFFFF")
+    password_entry = Entry(passwd_frame, bg="#2e2e2d", foreground= "#FFFFFF",borderwidth= 0, width = 50, font=font_style_passwd_entry_field, show="*")
 
     password_label.grid(columnspan= 4, pady= 10)
     password_entry.grid(columnspan= 3, padx= 10)
