@@ -70,6 +70,8 @@ font_style_choice = tkFont.Font(family= "corbel light", size=18)
 font_style_enter_button = tkFont.Font(family= "cobel light", size= 13)
 font_style_passwd_entry_field = tkFont.Font(family= "cobel light", size= 13)
 
+close_eye_image = PhotoImage(file='close_eye.png')
+open_eye_image = PhotoImage(file='open_eye.png')
 
 class HoverButton(tk.Button):
     def __init__(self, master, **kw):
@@ -434,10 +436,22 @@ def student_admission_number_and_pswd():
     instructions_lbl.grid(row=0, columnspan=2, padx=10)
 
     admission_number_lbl = Label(passwd_frame_student, text="INDEX NO.", font=corbel_13, bg="#4f4f4d", foreground="#FFFFFF")
-    admission_number_entry = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=50,font=font_style_passwd_entry_field)
+    admission_number_entry = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=55,font=font_style_passwd_entry_field)
+
+    def toggle_password():
+        if password_entry_stdnt.cget('show') == "" :
+            password_entry_stdnt.config(show="*")
+            show_hide_password_button['image'] = close_eye_image
+        else:
+            password_entry_stdnt.config(show='')
+            show_hide_password_button['image'] = open_eye_image
 
     password_label_stdnt = Label(passwd_frame_student, text="PASSWORD", font=corbel_13, bg="#4f4f4d", foreground="#FFFFFF")
-    password_entry_stdnt = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=50,font=font_style_passwd_entry_field, show="*")
+    password_entry_stdnt = Entry(passwd_frame_student, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=55,font=font_style_passwd_entry_field, show="*")
+
+
+    show_hide_password_button = HoverButton(passwd_frame_student, image=close_eye_image, bg="#4f4f4d", command=toggle_password, borderwidth=0, activebackground=sidebar_button_hover_color)
+    show_hide_password_button.grid(row=2, column=2, padx=5, sticky=W)
 
     admission_number_lbl.grid(row=1, column= 0, pady= 10)
     admission_number_entry.grid(row=1, column =1, padx =10)
@@ -866,6 +880,16 @@ def admin_button_root_password():
     password_label.grid(columnspan= 4, pady= 10)
     password_entry.grid(columnspan= 3, padx= 10)
 
+    def toggle_password():
+        if password_entry.cget('show') == "":
+            password_entry.config(show="*")
+            hide_view_button['image'] = close_eye_image
+        else:
+            password_entry.config(show='')
+            hide_view_button['image'] = open_eye_image
+
+    hide_view_button = HoverButton(passwd_frame, image=close_eye_image, bg="#4f4f4d", command=toggle_password, borderwidth=0, activebackground=sidebar_button_hover_color)
+    hide_view_button.grid(row=1, column=3, padx=5)
 
     def password_verify():
         password= '12'
@@ -889,7 +913,7 @@ def admin_button_root_password():
             password_entry.insert(0, "Incorrect")
 
     enter_button = HoverButton(passwd_frame, text="ENTER", font=font_style_enter_button, borderwidth=0, width=13, command= password_verify, bg="#1aeb8d", activebackground=enter_button_hover_color)
-    enter_button.grid(row=1, column=3, pady= 10, padx= 10)
+    enter_button.grid(row=1, column=4, pady= 10, padx= 10)
 
 
 
