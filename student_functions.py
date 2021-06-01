@@ -411,6 +411,9 @@ class teachers:
         ws["D" + str(cls.num_teachers_row)] = qualifications
         ws["E" + str(cls.num_teachers_row)] = experience
 
+        print(first_name)
+
         ws_teachers["H4"] = cls.num_teachers + 1
 
         wb.save(filename="university.xlsx")
+

@@ -744,10 +744,11 @@ class admin_functions:
         experience_entry.grid(row=3, column=1)
 
         def enter():
-            fname_teachers = fname_entry.grid()
+            fname_teachers = fname_entry.get()
             lname_teachers = lname_entry.get()
             qualifications_teachers = qualifications_entry.get()
             experience_teachers = experience_entry.get()
+
 
             teachers.register_teacher(fname_teachers, lname_teachers, qualifications_teachers, experience_teachers)
 
