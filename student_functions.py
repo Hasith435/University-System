@@ -10,6 +10,7 @@ ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
 ws_removed_students = wb["removed_students"]
 ws_student_psswd = wb["student_pswd"]
+ws_teachers = wb["Teachers"]
 
 
 num_student_clubs = ws_student_clubs["H4"].value
@@ -17,6 +18,7 @@ student_club_row = num_student_clubs + 2
 
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
+#THESE ARE THE CLASSES THAT ARE RELATED TO THE STUDENTS
 class students:
 
     #For Registering Students
@@ -393,3 +395,22 @@ class clubs(students):
         ws_student_clubs["H4"] = num_student_clubs + 1
 
         wb.save(filename = "university.xlsx")
+
+
+#THESE ARE THE CLASSES THAT ARE RELEATED TO THE TEACHERS IN THE UNIVERSITY
+class teachers:
+
+    num_teachers = ws_teachers["H4"].value
+    num_teachers_row = num_teachers + 2
+
+    @classmethod
+    def register_teacher(cls, first_name, last_name, qualifications, experience):
+        ws["A" + str(cls.num_teachers_row)] = cls.num_teachers
+        ws["B" + str(cls.num_teachers_row)] = first_name
+        ws["C" + str(cls.num_teachers_row)] = last_name
+        ws["D" + str(cls.num_teachers_row)] = qualifications
+        ws["E" + str(cls.num_teachers_row)] = experience
+
+        ws_teachers["H4"] = cls.num_teachers + 1
+
+        wb.save(filename="university.xlsx")

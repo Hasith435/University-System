@@ -7,6 +7,7 @@ import openpyxl as xl
 from student_functions import students
 from student_functions import courses
 from student_functions import clubs
+from student_functions import teachers
 
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
@@ -14,6 +15,7 @@ ws_courses = wb['courses']
 ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
 ws_student_psswd = wb["student_pswd"]
+ws_teachers = wb["Teachers"]
 
 num_students = ws["J3"].value
 student_row = num_students + 2
@@ -30,7 +32,8 @@ student_club_row = num_student_clubs + 2
 num_student_psswd = ws_student_psswd["G6"].value
 num_student_psswd_row = num_student_psswd + 2
 
-
+num_teachers = ws_teachers["H4"].value
+num_teachers_row = num_teachers + 2
 
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
@@ -483,6 +486,7 @@ class teacher_functions:
 #Features that the Admin can Access
 class admin_functions:
 
+    #THESE ARE THE ADMIN FUNCTIONS FOR STUDENTS
     @staticmethod
     def register_students():
         global fname, lname, DoB, gender, guardian_names, guardian_telephone, address, submit_button, fname_entry, lname_entry, dob_entry, gender_entry, guardian_names_entry, \
@@ -695,6 +699,54 @@ class admin_functions:
         enter_button.grid(row=1, column=1)
 
 
+    #THESE ARE THE ADMIN FUNCTIONS FOR TEACHERS
+    @staticmethod
+    def register_teacher():
+        register_teacher_frame = create_frame(root, "#2e2e2d", row=0, column=2)
+
+        # Assigning the Entry Fields
+        fname_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
+        lname_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
+        qualifications_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
+        experience_entry = Entry(register_teacher_frame, width=40, font=font_style_user_input_lbl, bg=dark_bg, foreground="white", borderwidth=0)
+
+        fname_lbl = Label(register_teacher_frame, text="First Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        lname_lbl = Label(register_teacher_frame, text="Last Name:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        qualifications_lbl = Label(register_teacher_frame, text="Qualifications:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+        experience_lbl = Label(register_teacher_frame, text="Experience:", font=font_style_user_input_lbl, bg="#393939", foreground="white")
+
+        fname_lbl.grid(row=0, column=0, sticky=W)
+        lname_lbl.grid(row=1, column=0, sticky=W)
+        qualifications_lbl.grid(row=2, column=0, sticky=W)
+        experience_lbl.grid(row=3, column=0, sticky=W)
+
+        # Positionning the Entry Fields
+        fname_entry.grid(row=0, column=1)
+        lname_entry.grid(row=1, column=1)
+        qualifications_entry.grid(row=2, column=1)
+        experience_entry.grid(row=3, column=1)
+
+        def enter():
+            fname_teachers = fname_entry.grid()
+            lname_teachers = lname_entry.get()
+            qualifications_teachers = qualifications_entry.get()
+            experience_teachers = experience_entry.get()
+
+            teachers.register_teacher(fname_teachers, lname_teachers, qualifications_teachers, experience_teachers)
+
+            registered_lbl = Label(register_teacher_frame, text="REGISTERED", font=font_style_user_input_lbl, bg="#393939", fg="white")
+            registered_lbl.grid(row=5, columnspan=2, padx=10, pady=10)
+
+        def back():
+            register_teacher_frame.grid_forget()
+
+        Enter_button = HoverButton(register_teacher_frame, text="Enter", font=font_style_enter_button, command=enter,bg="#1aeb8d", foreground="black", width=19, borderwidth=0,activebackground=enter_button_hover_color)
+        Enter_button.grid(row=4, column=1, padx=10, pady=10)
+
+        back_button = HoverButton(register_teacher_frame, text="Back", font=font_style_enter_button, command=back, bg="#e84d1a",foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
+        back_button.grid(row=4, column=0, padx=10, pady=10)
+
+
 class admin_second_screen:
 
     @staticmethod
@@ -742,7 +794,7 @@ def admin_button_root_rest():
     task_lbl = Label(admin_buttons_frame, text= "WHAT IS YOUR TASK RELATED TO:", font = font_style_popup_button, bg= dark_bg, foreground= "white")
 
     Students_button = HoverButton(admin_buttons_frame, text= "STUDENTS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", command=admin_second_screen.student_page , borderwidth=0, activebackground=sidebar_button_hover_color)
-    Teachers_button = HoverButton(admin_buttons_frame, text= "TEACHERS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
+    Teachers_button = HoverButton(admin_buttons_frame, text= "TEACHERS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color, command=)
     Courses_button = HoverButton(admin_buttons_frame, text= "COURSES", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
     Clubs_button = HoverButton(admin_buttons_frame, text= "CLUBS", width=20, font=font_style_button, bg=bg_colour1,foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
     # terminal_button = Button(root, text= "TERMINAL", width=20, font=font_style_button, bg="#545352",foreground="white", borderwidth=0, command= admin_functions.open_terminal)
