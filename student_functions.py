@@ -405,15 +405,71 @@ class teachers:
 
     @classmethod
     def register_teacher(cls, first_name, last_name, qualifications, experience):
-        ws["A" + str(cls.num_teachers_row)] = cls.num_teachers
-        ws["B" + str(cls.num_teachers_row)] = first_name
-        ws["C" + str(cls.num_teachers_row)] = last_name
-        ws["D" + str(cls.num_teachers_row)] = qualifications
-        ws["E" + str(cls.num_teachers_row)] = experience
+
+        ws_teachers["B" + str(cls.num_teachers_row)] = first_name
+        ws_teachers["C" + str(cls.num_teachers_row)] = last_name
+        ws_teachers["D" + str(cls.num_teachers_row)] = qualifications
+        ws_teachers["E" + str(cls.num_teachers_row)] = experience
 
         print(first_name)
 
         ws_teachers["H4"] = cls.num_teachers + 1
+        ws_teachers["A" + str(cls.num_teachers_row)] = ws_teachers["H4"].value
 
         wb.save(filename="university.xlsx")
 
+    @staticmethod
+    def remove_teacher(teacher_id):
+        num_teachers = ws_teachers["H4"].value
+        num_teachers_row = num_teachers + 2
+
+        print('Function Works')
+        for i in range(2, num_teachers + 2):
+            print("For Loop Works")
+            try:
+                if int(ws_teachers["A" + str(i)].value) == int(teacher_id):
+                    print("IF statement Works")
+
+                    ws_teachers["A" + str(i)] = ""
+                    ws_teachers["B" + str(i)] = ""
+                    ws_teachers["C" + str(i)] = ""
+                    ws_teachers["D" + str(i)] = ""
+                    ws_teachers["E" + str(i)] = ""
+                    ws_teachers["F" + str(i)] = ""
+                    ws_teachers["G" + str(i)] = ""
+                    ws_teachers["H" + str(i)] = ""
+
+                    for x in range(i, num_teachers + 2):
+                        ws["A" + str(x)] = ws["A" + str(x + 1)].value
+                        ws["B" + str(x)] = ws["B" + str(x + 1)].value
+                        ws["C" + str(x)] = ws["C" + str(x + 1)].value
+                        ws["D" + str(x)] = ws["D" + str(x + 1)].value
+                        ws["E" + str(x)] = ws["E" + str(x + 1)].value
+                        ws["F" + str(x)] = ws["F" + str(x + 1)].value
+                        ws["G" + str(x)] = ws["G" + str(x + 1)].value
+                        ws["H" + str(x)] = ws["H" + str(x + 1)].value
+
+                    current_num_teachers = ws_teachers["H4"].value
+                    ws_teachers["H4"] = current_num_teachers - 1
+                    wb.save(filename="university.xlsx")
+                    break
+
+            except:
+                continue
+
+    @staticmethod
+    def view_details(teacher_id):
+        num_teachers = ws_teachers["H4"].value
+
+        for i in range(2, num_teachers + 2):
+            if ws_teachers["A" + str(i)].value == int(teacher_id):
+                teacher_ID = ws_teachers["A" + str(i)].value
+                fname = ws_teachers["B" + str(i)].value
+                lname = ws_teachers["C" + str(i)].value
+                qualifications = ws_teachers["D" + str(i)].value
+                experience = ws_teachers["E" + str(i)].value
+
+                return teacher_ID, fname, lname, qualifications, experience
+
+            else:
+                continue
