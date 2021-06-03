@@ -227,6 +227,27 @@ class courses(students):
                 print('Invalid')
 
     @staticmethod
+    def view_all_course_names():
+        num_courses = ws_courses["F4"].value
+
+        for i in range(2, num_courses + 2):
+            if ws_courses["B" + str(i)].value != None:
+                course_names = []
+                course_name =  ws_courses["B" + str(i)].value
+                course_names.append(course_name)
+
+            else:
+                break
+
+
+
+
+    #This is the function that will send a notification to the lecturer when the student registers for a course
+    @staticmethod
+    def get_data_for_notification():
+        pass
+
+    @staticmethod
     def add_student_courses(student_ID, course_ID):
 
         print('function start')
@@ -300,6 +321,8 @@ class courses(students):
 
             else:
                 continue
+
+
 
     @staticmethod
     def add_student_grades(student_ID, g1, g2, g3, g4, g5):

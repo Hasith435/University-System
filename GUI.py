@@ -145,14 +145,24 @@ class second_screen_students:
 
             register_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            course_ID_lbl = Label(register_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
-            course_ID_entry = Entry(register_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+            # course_ID_lbl = Label(register_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
+            # course_ID_entry = Entry(register_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
+            #
+            # course_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
+            # course_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
 
-            course_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
-            course_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
+            courses_lbl = Label(register_frame, text="COURSES", font=corbel_13, bg="#2e2e2d", fg='white')
+            courses_lbl.grid(row=0, column=0)
+
+            options = courses.view_all_course_names()
+
+            clicked = StringVar()
+            clicked.set('PLEASE CHOOSE THE COURSE')
+            course_list = OptionMenu(register_frame, clicked, *options)
+            course_list.grid(row=0, column=1)
 
             def enter():
-                course_ID = int(course_ID_entry.get())
+                course_ID = int(clicked.get())
                 courses.add_student_courses(student_admission_number, course_ID)
 
                 def registered_lbl():
@@ -1015,42 +1025,4 @@ def admin_button_root_password():
 
 
 home()
-
-
-
-
-
-
-# students_frame = LabelFrame(text= "STUDENTS", font=font_style_welcome_frame_title, padx=80, pady=5, bg="#000000", foreground= "white")
-# students_frame.grid(row=1, column=0)
-
-# course_frame = LabelFrame(text= "COURSES", font=font_style_welcome_frame_title, padx= 80, pady=5, bg="#000000", foreground= "white")
-# course_frame.grid(row=5, column=0)
-
-
-# register_student_button = Button(students_frame, text= "Register Student", width=20, font= font_style_button, bg="#393939", foreground= "white" , command= student_functions.register_student, borderwidth=0)
-# view_student_details_button = Button(students_frame,text= "View Student Details", width=20, font= font_style_button, bg="#393939", foreground= "white", command = student_functions.view_details_get_entry, borderwidth=0)
-# remove_student_button = Button(students_frame,text= "Remove a Student", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0, command=student_functions.remove_student )
-# add_course_button = Button(course_frame,text= "Add a Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-# view_course_details_button = Button(course_frame,text= "View Course Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-# add_student_to_course_button = Button(course_frame,text= "Enroll in Course", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-# # add_club_button = Button(root,text= "Add a Club", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-# # view_club_details_button = Button(root,text= "View Club Details", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0)
-# # add_student_to_club_button = Button(root,text= "Add student to Club", width=20, font= font_style_button, bg="#393939", foreground= "white", borderwidth=0 )
-
-
-# #
-# register_student_button.grid(row=1, column=0, padx=2, pady=2)
-# view_student_details_button.grid(row=1, column=1, padx=2, pady=2)
-# remove_student_button.grid(row=1, column=2, padx=2, pady=2)
-# add_course_button.grid(row=1, column=0, padx=2, pady=2)
-# view_course_details_button.grid(row=1, column=1, padx=2, pady=2)
-# add_student_to_course_button.grid(row=1, column=2, padx=2, pady=2)
-# # add_club_button.grid(row=3, column=1, padx=2, pady=2)
-# # view_club_details_button.grid(row=4, column=0, padx=2, pady=2)
-# # add_student_to_club_button.grid(row=4, column=1, padx=2, pady=2)
-
-
-
-
 root.mainloop()
