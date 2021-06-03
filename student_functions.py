@@ -4,7 +4,7 @@ from tkinter.font import Font
 
 
 wb = xl.load_workbook("university.xlsx")
-ws = wb['students']
+ws_students = wb['students']
 ws_courses = wb['courses']
 ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
@@ -32,26 +32,26 @@ class students:
         self.address = address
 
         #THIS SECTION IS TO ADD THE STUDENT TO THE STUDENT WORKSHEET
-        num_students = ws["J3"].value
+        num_students = ws_students["J3"].value
         student_row = num_students + 2
 
-        ws["B" + str(student_row)] = fname
-        ws["C" + str(student_row)] = lname
-        ws["D" + str(student_row)] = DoB
-        ws["E" + str(student_row)] = gender
-        ws["F" + str(student_row)] = guardian_names
-        ws["G" + str(student_row)] = guardian_telephone
-        ws["H" + str(student_row)] = address
+        ws_students["B" + str(student_row)] = fname
+        ws_students["C" + str(student_row)] = lname
+        ws_students["D" + str(student_row)] = DoB
+        ws_students["E" + str(student_row)] = gender
+        ws_students["F" + str(student_row)] = guardian_names
+        ws_students["G" + str(student_row)] = guardian_telephone
+        ws_students["H" + str(student_row)] = address
 
-        ws["J3"] = num_students + 1
+        ws_students["J3"] = num_students + 1
 
-        ws["A" + str(student_row)] = ws['J3'].value
+        ws_students["A" + str(student_row)] = ws_students['J3'].value
 
         #THIS SECTION IS TO ADD THE STUDENT TO THE STUDENT_PSSWD WORKSHEET
         num_student_psswd = ws_student_psswd["G6"].value
         student_psswd_row = num_student_psswd + 2
 
-        student_index = ws["A" + str(student_row)].value
+        student_index = ws_students["A" + str(student_row)].value
 
         # This is the student ID
         ws_student_psswd["A" + str(student_psswd_row)] = student_index
@@ -67,19 +67,19 @@ class students:
     @staticmethod
     def view_student_details(ID):
 
-        num_students = ws["J3"].value
+        num_students = ws_students["J3"].value
         student_row = num_students + 2
 
         for i in range(2, num_students + 2):
-            if ws["A" + str(i)].value == int(ID):
-                student_ID = ws["A" + str(i)].value
-                fname = ws["B" + str(i)].value
-                lname = ws["C" + str(i)].value
-                DoB = ws["D" + str(i)].value
-                gender = ws["E" + str(i)].value
-                guardian_names = ws["F" + str(i)].value
-                guardian_telephone = ws["G" + str(i)].value
-                address = ws["H" + str(i)].value
+            if ws_students["A" + str(i)].value == int(ID):
+                student_ID = ws_students["A" + str(i)].value
+                fname = ws_students["B" + str(i)].value
+                lname = ws_students["C" + str(i)].value
+                DoB = ws_students["D" + str(i)].value
+                gender = ws_students["E" + str(i)].value
+                guardian_names = ws_students["F" + str(i)].value
+                guardian_telephone = ws_students["G" + str(i)].value
+                address = ws_students["H" + str(i)].value
 
 
                 return student_ID, fname, lname, DoB, gender, guardian_names, guardian_telephone, address
@@ -91,7 +91,7 @@ class students:
     @staticmethod
     def remove_student_function(ID):
 
-        num_students = ws["J3"].value
+        num_students = ws_students["J3"].value
         student_row = num_students + 2
 
         num_students_removed = ws_removed_students["J3"].value
@@ -100,41 +100,41 @@ class students:
         for i in range(2, num_students + 2):
             print("For Loop Works")
             try:
-                if int(ws["A" + str(i)].value) == ID:
+                if int(ws_students["A" + str(i)].value) == ID:
                     print("IF statement Works")
 
-                    ws_removed_students["A" + str(i)] =  ws["A" + str(i)].value
-                    ws_removed_students["B" + str(i)] = ws["B" + str(i)].value
-                    ws_removed_students["C" + str(i)] = ws["C" + str(i)].value
-                    ws_removed_students["D" + str(i)] = ws["D" + str(i)].value
-                    ws_removed_students["E" + str(i)] = ws["E" + str(i)].value
-                    ws_removed_students["F" + str(i)] = ws["F" + str(i)].value
-                    ws_removed_students["G" + str(i)] = ws["G" + str(i)].value
-                    ws_removed_students["H" + str(i)] = ws["H" + str(i)].value
+                    ws_removed_students["A" + str(i)] =  ws_students["A" + str(i)].value
+                    ws_removed_students["B" + str(i)] = ws_students["B" + str(i)].value
+                    ws_removed_students["C" + str(i)] = ws_students["C" + str(i)].value
+                    ws_removed_students["D" + str(i)] = ws_students["D" + str(i)].value
+                    ws_removed_students["E" + str(i)] = ws_students["E" + str(i)].value
+                    ws_removed_students["F" + str(i)] = ws_students["F" + str(i)].value
+                    ws_removed_students["G" + str(i)] = ws_students["G" + str(i)].value
+                    ws_removed_students["H" + str(i)] = ws_students["H" + str(i)].value
 
                     ws_removed_students["J3"] = num_students_removed + 1
 
-                    ws["A" + str(i)] = ""
-                    ws["B" + str(i)] = ""
-                    ws["C" + str(i)] = ""
-                    ws["D" + str(i)] = ""
-                    ws["E" + str(i)] = ""
-                    ws["F" + str(i)] = ""
-                    ws["G" + str(i)] = ""
-                    ws["H" + str(i)] = ""
+                    ws_students["A" + str(i)] = ""
+                    ws_students["B" + str(i)] = ""
+                    ws_students["C" + str(i)] = ""
+                    ws_students["D" + str(i)] = ""
+                    ws_students["E" + str(i)] = ""
+                    ws_students["F" + str(i)] = ""
+                    ws_students["G" + str(i)] = ""
+                    ws_students["H" + str(i)] = ""
 
                     for x in range(i, num_students + 2):
-                        ws["A" + str(x)] = ws["A" + str(x + 1)].value
-                        ws["B" + str(x)] = ws["B" + str(x + 1)].value
-                        ws["C" + str(x)] = ws["C" + str(x + 1)].value
-                        ws["D" + str(x)] = ws["D" + str(x + 1)].value
-                        ws["E" + str(x)] = ws["E" + str(x + 1)].value
-                        ws["F" + str(x)] = ws["F" + str(x + 1)].value
-                        ws["G" + str(x)] = ws["G" + str(x + 1)].value
-                        ws["H" + str(x)] = ws["H" + str(x + 1)].value
+                        ws_students["A" + str(x)] = ws_students["A" + str(x + 1)].value
+                        ws_students["B" + str(x)] = ws_students["B" + str(x + 1)].value
+                        ws_students["C" + str(x)] = ws_students["C" + str(x + 1)].value
+                        ws_students["D" + str(x)] = ws_students["D" + str(x + 1)].value
+                        ws_students["E" + str(x)] = ws_students["E" + str(x + 1)].value
+                        ws_students["F" + str(x)] = ws_students["F" + str(x + 1)].value
+                        ws_students["G" + str(x)] = ws_students["G" + str(x + 1)].value
+                        ws_students["H" + str(x)] = ws_students["H" + str(x + 1)].value
 
-                    current_num_students = ws["J3"].value
-                    ws["J3"] = current_num_students - 1
+                    current_num_students = ws_students["J3"].value
+                    ws_students["J3"] = current_num_students - 1
                     wb.save(filename="university.xlsx")
                     break
 
@@ -229,62 +229,64 @@ class courses(students):
     @staticmethod
     def view_all_course_names():
         num_courses = ws_courses["F4"].value
+        course_names = []
 
         for i in range(2, num_courses + 2):
-            if ws_courses["B" + str(i)].value != None:
-                course_names = []
-                course_name =  ws_courses["B" + str(i)].value
-                course_names.append(course_name)
+            course_name = ws_courses["B" + str(i)].value
+            course_names.append(course_name)
 
-            else:
-                break
-
-
-
-
-    #This is the function that will send a notification to the lecturer when the student registers for a course
-    @staticmethod
-    def get_data_for_notification():
-        pass
+        return course_names
 
     @staticmethod
-    def add_student_courses(student_ID, course_ID):
+    def add_student_courses(student_id,course_name):
 
         print('function start')
         num_student_courses = ws_student_courses["L4"].value
         student_courses_row = num_student_courses + 2
 
-        num_students = ws["J3"].value
+        num_students = ws_students["J3"].value
         student_row = num_students + 2
 
         num_courses = ws_courses["F4"].value
         course_row = num_courses + 2
 
-        for i in range(2, num_students + 2):
-            print(student_ID)
-            if ws["A" + str(i)].value == student_ID:
-                print('for loop')
-                fname = ws["B" + str(i)].value
-                lname = ws["C" + str(i)].value
-                ws_student_courses["B" + str(student_courses_row)] = fname
-                ws_student_courses["C" + str(student_courses_row)] = lname
-                print('student if works')
+        # for i in range(2, num_students + 2):
+        #     print(student_id)
+        #     if ws_students["A" + str(i)].value == student_id:
+        #         print('for loop')
+        #         fname = ws_students["B" + str(i)].value
+        #         lname = ws_students["C" + str(i)].value
+        #         ws_student_courses["B" + str(student_courses_row)] = fname
+        #         ws_student_courses["C" + str(student_courses_row)] = lname
+        #         print(fname, lname)
+        #         print('student if works')
+        #
+        #     else:
+        #         print('student if does not work')
+        #
+        # for k in range(2, num_courses + 2):
+        #     if ws_courses["B" + str(k)].value == course_name:
+        #         course_id = ws_courses["A" + str(k)].value
+        #         ws_student_courses["D" + str(student_courses_row)] = course_id
+        #
+        #
+        #     else:
+        #         print('Courses if does not work')
+        #
+        #
+        # ws_student_courses["A" + str(student_courses_row)] = student_id
+        # ws_student_courses["E" + str(student_courses_row)] = course_name
 
-            else:
-                print('student if does not work')
+        def notification():
+            #For loop to get the student name
+            for i in range(2, num_students+2):
+                if ws_students["A" + str(i)].value == student_id:
+                    student_name = ws_students["B" + str(i)].value
 
-        for k in range(2, num_courses + 2):
-            if int(ws_courses["A" + str(k)].value) == course_ID:
-                course_name = ws_courses["B" +str(k)].value
-                ws_student_courses["E" + str(student_courses_row)] = course_name
-                print('courses if works')
-
-            else:
-                print('Courses if does not work')
-
-
-        ws_student_courses["A" + str(student_courses_row)] = student_ID
-        ws_student_courses["D" + str(student_courses_row)] = course_ID
+            #For loop to get the course instructor name
+            for i in range(2, num_courses + 2):
+                if ws_courses["B" + str(i)].value == course_name:
+                    instructor_name = ws_courses["E" + str(i)].value
 
 
 
@@ -389,7 +391,7 @@ class clubs(students):
         ws_student_clubs["C" + str(student_club_row)] = cls.subject[list_index]
         ws_student_clubs["D" + str(student_club_row)] = cls.description[list_index]
 
-        ws["F4"] = num_student_clubs + 1
+        ws_students["F4"] = num_student_clubs + 1
 
         wb.save(filename="university.xlsx")
 
@@ -463,14 +465,14 @@ class teachers:
                     ws_teachers["H" + str(i)] = ""
 
                     for x in range(i, num_teachers + 2):
-                        ws["A" + str(x)] = ws["A" + str(x + 1)].value
-                        ws["B" + str(x)] = ws["B" + str(x + 1)].value
-                        ws["C" + str(x)] = ws["C" + str(x + 1)].value
-                        ws["D" + str(x)] = ws["D" + str(x + 1)].value
-                        ws["E" + str(x)] = ws["E" + str(x + 1)].value
-                        ws["F" + str(x)] = ws["F" + str(x + 1)].value
-                        ws["G" + str(x)] = ws["G" + str(x + 1)].value
-                        ws["H" + str(x)] = ws["H" + str(x + 1)].value
+                        ws_students["A" + str(x)] = ws_students["A" + str(x + 1)].value
+                        ws_students["B" + str(x)] = ws_students["B" + str(x + 1)].value
+                        ws_students["C" + str(x)] = ws_students["C" + str(x + 1)].value
+                        ws_students["D" + str(x)] = ws_students["D" + str(x + 1)].value
+                        ws_students["E" + str(x)] = ws_students["E" + str(x + 1)].value
+                        ws_students["F" + str(x)] = ws_students["F" + str(x + 1)].value
+                        ws_students["G" + str(x)] = ws_students["G" + str(x + 1)].value
+                        ws_students["H" + str(x)] = ws_students["H" + str(x + 1)].value
 
                     current_num_teachers = ws_teachers["H4"].value
                     ws_teachers["H4"] = current_num_teachers - 1

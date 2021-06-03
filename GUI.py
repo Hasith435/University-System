@@ -145,25 +145,21 @@ class second_screen_students:
 
             register_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-            # course_ID_lbl = Label(register_frame, text="Course ID", font=corbel_13, bg="#2e2e2d", foreground="white")
-            # course_ID_entry = Entry(register_frame, font=corbel_13, bg=dark_bg, foreground="white", borderwidth=0)
-            #
-            # course_ID_lbl.grid(row=0, column=0, padx= 10, pady= 10)
-            # course_ID_entry.grid(row=0, column=1, padx= 10, pady= 10)
-
             courses_lbl = Label(register_frame, text="COURSES", font=corbel_13, bg="#2e2e2d", fg='white')
             courses_lbl.grid(row=0, column=0)
 
             options = courses.view_all_course_names()
+            print(options)
 
             clicked = StringVar()
             clicked.set('PLEASE CHOOSE THE COURSE')
             course_list = OptionMenu(register_frame, clicked, *options)
+            course_list.config(bg=dark_bg, fg='white', width=26)
             course_list.grid(row=0, column=1)
 
             def enter():
-                course_ID = int(clicked.get())
-                courses.add_student_courses(student_admission_number, course_ID)
+                course_name = clicked.get()
+                courses.add_student_courses(student_admission_number, course_name)
 
                 def registered_lbl():
                     registered_lbl = Label(register_frame, text= "REGISTERED", bg="#2e2e2d", foreground="white", font=corbel_13)
@@ -611,14 +607,14 @@ class admin_functions:
             guardian_telephone_entry.delete(first=0, last=100)
             address_entry.delete(first=0, last=22)
 
-            def back():
-                register_student_frame.grid_forget()
+        def back():
+            register_student_frame.grid_forget()
 
-            register_button = HoverButton(register_student_frame, text="REGISTER", bg="#1aeb8d", foreground="black", width=40,font=corbel_13, command=register, borderwidth=0, activebackground=enter_button_hover_color)
-            register_button.grid(row=7, column=1, pady=10, padx=10)
+        register_button = HoverButton(register_student_frame, text="REGISTER", bg="#1aeb8d", foreground="black", width=40,font=corbel_13, command=register, borderwidth=0, activebackground=enter_button_hover_color)
+        register_button.grid(row=7, column=1, pady=10, padx=10)
 
-            back_button = HoverButton(register_student_frame, text="BACK", bg="#e84d1a", foreground="white", width=10,font=corbel_13, command=back, borderwidth=0, activebackground=back_button_hover_color)
-            back_button.grid(row=7, column=0, pady=10)
+        back_button = HoverButton(register_student_frame, text="BACK", bg="#e84d1a", foreground="white", width=10,font=corbel_13, command=back, borderwidth=0, activebackground=back_button_hover_color)
+        back_button.grid(row=7, column=0, pady=10)
 
     @staticmethod
     def view_student_details():
