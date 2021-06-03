@@ -572,8 +572,24 @@ class admin_functions:
             guardian_telephone = guardian_telephone_entry.get()
             address = address_entry.get()
 
-            submit_label = Label(window, text="Registered", bg="#393939", foreground="white")
-            submit_label.grid(columnspan=2, pady=10)
+            def registered_lbl():
+                registered_lbl = Label(register_student_frame, text="REGISTERED", bg="#2e2e2d", foreground="white",font=corbel_13)
+                registered_lbl.grid(row=10, columnspan=2)
+
+            registering_lbl = Label(register_student_frame, text="REGISTERING...", font=corbel_13, bg="#2e2e2d",
+                                    foreground="white")
+            registering_lbl.grid(row=8, columnspan=2)
+
+            course_register_progress_bar = ttk.Progressbar(register_student_frame, orient=HORIZONTAL, length=300,
+                                                           mode="determinate")
+            course_register_progress_bar.grid(row=9, columnspan=2)
+
+            for i in range(5):
+                course_register_progress_bar['value'] += 20
+                root.update_idletasks()
+                time.sleep(1)
+
+            registered_lbl()
 
             students(fname, lname, DoB, gender, guardian_names, guardian_telephone, address)
 
@@ -585,30 +601,28 @@ class admin_functions:
             guardian_telephone_entry.delete(first=0, last=100)
             address_entry.delete(first=0, last=22)
 
-        def back():
-            register_student_frame.grid_forget()
+            def back():
+                register_student_frame.grid_forget()
 
-        register_button = HoverButton(register_student_frame, text="REGISTER", bg="#1aeb8d", foreground="black", width=40,font=corbel_13, command=register, borderwidth=0, activebackground=enter_button_hover_color)
-        register_button.grid(row=7, column=1, pady=10, padx=10)
+            register_button = HoverButton(register_student_frame, text="REGISTER", bg="#1aeb8d", foreground="black", width=40,font=corbel_13, command=register, borderwidth=0, activebackground=enter_button_hover_color)
+            register_button.grid(row=7, column=1, pady=10, padx=10)
 
-        back_button = HoverButton(register_student_frame, text="BACK", bg="#e84d1a", foreground="white", width=10,font=corbel_13, command=back, borderwidth=0, activebackground=back_button_hover_color)
-        back_button.grid(row=7, column=0, pady=10)
+            back_button = HoverButton(register_student_frame, text="BACK", bg="#e84d1a", foreground="white", width=10,font=corbel_13, command=back, borderwidth=0, activebackground=back_button_hover_color)
+            back_button.grid(row=7, column=0, pady=10)
 
     @staticmethod
-    def view_details_get_entry():
+    def view_student_details():
         student_ID_get = 0
 
-        window_details_ID = Toplevel()
-        window_details_ID.configure(bg="#393939")
-        window_details_ID.title("View student Details")
+        view_student_details_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-        student_ID_label = Label(window_details_ID, text="Student ID:", font=font_style_main_entry, pady=2,
-                                 bg="#393939", foreground="white")
+        student_ID_label = Label(view_student_details_frame, text="Student ID:", font=corbel_13, pady=2,
+                                 bg="#2e2e2d", foreground="white")
         student_ID_label.grid(row=0, column=0)
-        student_ID_entry = Entry(window_details_ID, width=50, bg="#393939", foreground="white")
+        student_ID_entry = Entry(view_student_details_frame, width=50, bg=dark_bg, foreground="white", borderwidth=0)
         student_ID_entry.grid(row=0, column=1)
 
-        def view_details():
+        def enter():
 
             try:
                 student_ID_get = int(student_ID_entry.get())
@@ -618,33 +632,33 @@ class admin_functions:
                 # view_details_window = Toplevel()
                 # view_details_window.configure(bg="#393939")
 
-                student_ID_details_lbl = Label(window_details_ID, text="Student ID:", bg="#393939", foreground="white")
-                fname_details_lbl = Label(window_details_ID, text="First Name:", bg="#393939", foreground="white")
-                lname_details_lbl = Label(window_details_ID, text="Last Name:", bg="#393939", foreground="white")
-                DoB_details_lbl = Label(window_details_ID, text="Date of Birth:", bg="#393939", foreground="white")
-                gender_details_lbl = Label(window_details_ID, text="Gender:", bg="#393939", foreground="white")
-                guardian_details_lbl = Label(window_details_ID, text="Guardain Names:", bg="#393939",
+                student_ID_details_lbl = Label(view_student_details_frame, text="Student ID:", bg="#2e2e2d", foreground="white", font=corbel_13)
+                fname_details_lbl = Label(view_student_details_frame, text="First Name:", bg="#2e2e2d", foreground="white", font=corbel_13)
+                lname_details_lbl = Label(view_student_details_frame, text="Last Name:", bg="#2e2e2d", foreground="white", font=corbel_13)
+                DoB_details_lbl = Label(view_student_details_frame, text="Date of Birth:", bg="#2e2e2d", foreground="white", font=corbel_13)
+                gender_details_lbl = Label(view_student_details_frame, text="Gender:", bg="#2e2e2d", foreground="white", font=corbel_13)
+                guardian_details_lbl = Label(view_student_details_frame, text="Guardain Names:", bg="#2e2e2d", font=corbel_13,
                                              foreground="white")
-                guardian_telephone_lbl = Label(window_details_ID, text="Guardian Telephone:", bg="#393939",
+                guardian_telephone_lbl = Label(view_student_details_frame, text="Guardian Telephone:", bg="#2e2e2d", font=corbel_13,
                                                foreground="white")
-                address_details_lbl = Label(window_details_ID, text="Address:", bg="#393939", foreground="white")
+                address_details_lbl = Label(view_student_details_frame, text="Address:", bg="#2e2e2d", foreground="white", font=corbel_13)
 
                 print(students.view_student_details(student_ID_get))
-                student_ID_details = Label(window_details_ID, text=returned_list[0], bg="#393939", foreground="white",
+                student_ID_details = Label(view_student_details_frame, text=returned_list[0], bg="#2e2e2d", foreground="white",
                                            width=50)
-                fname_details = Label(window_details_ID, text=returned_list[1], bg="#393939", foreground="white",
+                fname_details = Label(view_student_details_frame, text=returned_list[1], bg="#2e2e2d", foreground="white",
                                       width=50)
-                lname_details = Label(window_details_ID, text=returned_list[2], bg="#393939", foreground="white",
+                lname_details = Label(view_student_details_frame, text=returned_list[2], bg="#2e2e2d", foreground="white",
                                       width=50)
-                DoB_details = Label(window_details_ID, text=returned_list[3], bg="#393939", foreground="white",
+                DoB_details = Label(view_student_details_frame, text=returned_list[3], bg="#2e2e2d", foreground="white",
                                     width=50)
-                gender_details = Label(window_details_ID, text=returned_list[4], bg="#393939", foreground="white",
+                gender_details = Label(view_student_details_frame, text=returned_list[4], bg="#2e2e2d", foreground="white",
                                        width=50)
-                guardian_names_details = Label(window_details_ID, text=returned_list[5], bg="#393939",
+                guardian_names_details = Label(view_student_details_frame, text=returned_list[5], bg="#2e2e2d",
                                                foreground="white", width=50)
-                guardian_telephone_details = Label(window_details_ID, text=returned_list[6], bg="#393939",
+                guardian_telephone_details = Label(view_student_details_frame, text=returned_list[6], bg="#2e2e2d",
                                                    foreground="white", width=50)
-                address_details = Label(window_details_ID, text=returned_list[7], bg="#393939", foreground="white",
+                address_details = Label(view_student_details_frame, text=returned_list[7], bg="#2e2e2d", foreground="white",
                                         width=50)
 
                 student_ID_details_lbl.grid(row=1, column=0, sticky= W)
@@ -666,62 +680,56 @@ class admin_functions:
                 address_details.grid(row=8, column=1, sticky=W)
 
             except:
-                student_not_found_lbl = Label(window_details_ID, text="Student Not Found!", bg="#393939",
+                student_not_found_lbl = Label(view_student_details_frame, text="Student Not Found!", bg="#393939",
                                               foreground="white")
                 student_not_found_lbl.grid(columnspan=2)
                 print('Student Not found')
 
-            print(type(student_ID_get))
 
-        enter_button = Button(window_details_ID, text="Enter", font=font_style_popup_button, command=view_details,
-                              bg="#393939", foreground="white", width=30)
+        enter_button = HoverButton(view_student_details_frame, text="Enter", font=corbel_13, command=enter,
+                              bg="#1aeb8d", foreground="black", width=30, activebackground=enter_button_hover_color)
         enter_button.grid(row=9, column=1, pady=10)
 
         def back():
-            window_details_ID.destroy()
+            view_student_details_frame.grid_forget()
 
-        back_button = Button(window_details_ID, text="Back", bg="#e84d1a", foreground="white", width=10,
-                             font=font_style_submit_button, command=back, borderwidth=0)
+        back_button = Button(view_student_details_frame, text="Back", bg="#e84d1a", foreground="white", width=10,
+                             font=corbel_13, command=back, borderwidth=0, activebackground=back_button_hover_color)
         back_button.grid(row=9, column=0, pady=10)
 
     @staticmethod
     def remove_student():
-        window_remove_student = Toplevel()
-        window_remove_student.configure(bg="#393939")
-        window_remove_student.title('Remove Student')
+        remove_student_frame = create_frame(root, "#2e2e2d", row=0, column=2)
 
-        Student_ID_lbl = Label(window_remove_student, text="Student ID:", bg="#393939", foreground="white",
-                               font=font_style_main_entry)
+        Student_ID_lbl = Label(remove_student_frame, text="Student ID:", bg="#2e2e2d", foreground="white",
+                               font=corbel_13)
         Student_ID_lbl.grid(row=0, column=0)
 
-        Student_ID_entry = Entry(window_remove_student, width=50, bg="#393939", foreground="white")
+        Student_ID_entry = Entry(remove_student_frame, width=50, bg=dark_bg, foreground="white", borderwidth=0)
         Student_ID_entry.grid(row=0, column=1)
 
-        def enter_button():
+        def enter():
             try:
                 student_ID = int(Student_ID_entry.get())
                 print(student_ID)
                 students.remove_student_function(student_ID)
 
-                removed_lbl = Label(window_remove_student, text="Removed", bg="#393939", foreground="white")
+                removed_lbl = Label(remove_student_frame, text="Removed", bg="#393939", foreground="white")
                 removed_lbl.grid(columnspan=2)
 
             except:
-                student_not_found_lbl = Label(window_remove_student, text="Student Not Found!", bg="#393939",
-                                              foreground="white")
+                student_not_found_lbl = Label(remove_student_frame, text="Student Not Found!", bg="#393939",foreground="white")
                 student_not_found_lbl.grid(columnspan=2)
                 print('Student Not found')
 
         def back():
-            window_remove_student.destroy()
+            remove_student_frame.grid_forget()
 
-        back_button = Button(window_remove_student, text="Back", bg="#e84d1a", foreground="white", width=10,
-                             font=font_style_submit_button, command=back, borderwidth=0)
+        back_button = HoverButton(remove_student_frame, text="Back", bg="#e84d1a", foreground="white", width=10,font=font_style_submit_button, command=back, borderwidth=0, activebackground=back_button_hover_color)
         back_button.grid(row=1, column=0, pady=10)
 
-        enter_button = Button(window_remove_student, text="Enter", font=font_style_popup_button, command=enter_button,
-                              bg="#393939", foreground="white", width=30)
-        enter_button.grid(row=1, column=1)
+        enter_button = HoverButton(remove_student_frame, text="Enter", font=font_style_popup_button, command=enter,bg="#1aeb8d", foreground="black", width=30, activebackground=enter_button_hover_color)
+        enter_button.grid(row=1, column=1, padx=10)
 
 
     #THESE ARE THE ADMIN FUNCTIONS FOR TEACHERS
@@ -864,6 +872,10 @@ class admin_functions:
         back_button = HoverButton(remove_teacher_frame, text="Back", font=font_style_enter_button, command=back, bg="#e84d1a",foreground="white", width=10, borderwidth=0, activebackground=back_button_hover_color)
         back_button.grid(row=2, column=0, padx=10, pady=10)
 
+    @staticmethod
+    def view_grades():
+        pass
+
 
 class admin_second_screen:
 
@@ -873,7 +885,7 @@ class admin_second_screen:
         admin_students_frame = create_frame(root, dark_bg, row=0, column=1)
 
         register_student_button = HoverButton(admin_students_frame, text="REGISTER STUDENTS", width=72, font=corbel_15, bg=bg_colour1, foreground="white", command=admin_functions.register_students, borderwidth=0, activebackground=sidebar_button_hover_color)
-        view_student_details_button = HoverButton(admin_students_frame, text="VIEW DETAILS", width=35, font=corbel_15, bg=bg_colour1, foreground="white", command=admin_functions.view_details_get_entry, borderwidth=0, activebackground=sidebar_button_hover_color)
+        view_student_details_button = HoverButton(admin_students_frame, text="VIEW DETAILS", width=35, font=corbel_15, bg=bg_colour1, foreground="white", command=admin_functions.view_student_details, borderwidth=0, activebackground=sidebar_button_hover_color)
         remove_student_button = HoverButton(admin_students_frame, text="UNREGISTER STUDENT", width=35, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, command=admin_functions.remove_student, activebackground=sidebar_button_hover_color)
         view_grades_button = HoverButton(admin_students_frame, text="VIEW GRADES", width=72, font=corbel_15, bg=bg_colour1, foreground="white", borderwidth=0, activebackground=sidebar_button_hover_color)
 
