@@ -11,6 +11,8 @@ ws_student_clubs = wb['student_clubs']
 ws_removed_students = wb["removed_students"]
 ws_student_psswd = wb["student_pswd"]
 ws_teachers = wb["Teachers"]
+ws_notifications = wb["notifications"]
+ws_teacher_passwd = wb["teacher_psswd"]
 
 
 num_student_clubs = ws_student_clubs["H4"].value
@@ -244,6 +246,9 @@ class courses(students):
         num_student_courses = ws_student_courses["L4"].value
         student_courses_row = num_student_courses + 2
 
+        num_notifications = ws_notifications["H3"].value
+        notifications_row = num_notifications + 2
+
         num_students = ws_students["J3"].value
         student_row = num_students + 2
 
@@ -277,7 +282,11 @@ class courses(students):
         # ws_student_courses["A" + str(student_courses_row)] = student_id
         # ws_student_courses["E" + str(student_courses_row)] = course_name
 
+
+
         def notification():
+            student_name = ""
+            instructor_name = ""
             #For loop to get the student name
             for i in range(2, num_students+2):
                 if ws_students["A" + str(i)].value == student_id:
@@ -288,6 +297,22 @@ class courses(students):
                 if ws_courses["B" + str(i)].value == course_name:
                     instructor_name = ws_courses["E" + str(i)].value
 
+            for i in range(2, num_notifications + 2):
+                description = f"{student_name} would like to enroll in the {course_name}"
+
+                ws_notifications["B" + str(i)] = "Course Enrollment"
+                ws_notifications["C" + str(i)] = student_name
+                ws_notifications["D" + str(i)] = instructor_name
+                ws_notifications["E" + str(i)] = description
+
+                ws_notifications["H3"] = num_notifications + 1
+                notification_id = ws_notifications["H3"].value
+
+                ws_notifications["A" + str(i)] = notification_id
+
+                wb.save(filename="university.xlsx")
+
+        notification()
 
 
         ws_student_courses["L4"] = num_student_courses + 1
@@ -426,20 +451,36 @@ class clubs(students):
 class teachers:
 
     num_teachers = ws_teachers["H4"].value
-    num_teachers_row = num_teachers + 2
+    teacher_row = num_teachers + 2
 
     @classmethod
     def register_teacher(cls, first_name, last_name, qualifications, experience):
 
-        ws_teachers["B" + str(cls.num_teachers_row)] = first_name
-        ws_teachers["C" + str(cls.num_teachers_row)] = last_name
-        ws_teachers["D" + str(cls.num_teachers_row)] = qualifications
-        ws_teachers["E" + str(cls.num_teachers_row)] = experience
+        ws_teachers["B" + str(cls.teacher_row)] = first_name
+        ws_teachers["C" + str(cls.teacher_row)] = last_name
+        ws_teachers["D" + str(cls.teacher_row)] = qualifications
+        ws_teachers["E" + str(cls.teacher_row)] = experience
 
         print(first_name)
 
         ws_teachers["H4"] = cls.num_teachers + 1
-        ws_teachers["A" + str(cls.num_teachers_row)] = ws_teachers["H4"].value
+        #teacher index number
+        ws_teachers["A" + str(cls.teacher_row)] = ws_teachers["H4"].value
+
+        #This is the section to add the teacher to the teahcer_passwd sheet
+        num_teacher_psswd = ws_student_psswd["F4"].value
+        teacher_psswd_row = num_teacher_psswd + 2
+
+        teacher_index = ws_teachers["A" + str(cls.teacher_row)].value
+
+        # This is the student ID
+        ws_teacher_passwd["A" + str(teacher_psswd_row)] = teacher_index
+        # This is the student password
+        ws_teacher_passwd["B" + str(teacher_psswd_row)] = f"lecturer{teacher_index}"
+        # This is the student's First Name
+        ws_teacher_passwd["C" + str(teacher_psswd_row)] = first_name
+
+        ws_teacher_passwd["G6"] = num_teacher_psswd + 1
 
         wb.save(filename="university.xlsx")
 
@@ -498,3 +539,15 @@ class teachers:
 
             else:
                 continue
+
+    @staticmethod
+    def get_name_for_password (student_ID):
+        num_teacher_passwd = ws_teacher_passwd["F4"].value
+        print(num_teacher_passwd)
+
+        for i in range(2, num_teacher_passwd + 2):
+            if ws_teacher_passwd["A" + str(i)].value == student_ID:
+                return ws_teacher_passwd["C" + str(i)].value
+
+            else:
+                print('invalid teacher id')

@@ -18,6 +18,7 @@ ws_student_courses = wb['student_courses']
 ws_student_clubs = wb['student_clubs']
 ws_student_psswd = wb["student_pswd"]
 ws_teachers = wb["Teachers"]
+ws_teacher_passwd = wb["teacher_psswd"]
 
 num_students = ws["J3"].value
 student_row = num_students + 2
@@ -36,6 +37,9 @@ num_student_psswd_row = num_student_psswd + 2
 
 num_teachers = ws_teachers["H4"].value
 num_teachers_row = num_teachers + 2
+
+num_teacher_passwd = ws_teacher_passwd["F4"].value
+teacher_passwd_row = num_teacher_passwd + 2
 
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
 
@@ -102,7 +106,7 @@ def home():
     welcome_lbl = Label(welcome_lbl_frame, text= "UNIVERSITY SYSTEM", font= font_style_title, bg=dark_bg, foreground= "white"  )
 
     student_button = HoverButton(home_buttons_frame, text= "STUDENT ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", command= student_admission_number_and_pswd, borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
-    teacher_button = HoverButton(home_buttons_frame, text= "TEACHER  ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
+    teacher_button = HoverButton(home_buttons_frame, text= "TEACHER  ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", command=teacher_password_check, borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
     admin_button = HoverButton(home_buttons_frame, text= "ADMIN       ", font= corbel_15, bg=bg_colour1, foreground="#ed9339", command= admin_button_root_password, borderwidth= 0, width= 9, activebackground= sidebar_button_hover_color)
     parent_button = HoverButton(home_buttons_frame, text="PARENT     ", font=corbel_15, bg=bg_colour1, foreground="#ed9339", borderwidth=0, width= 9, activebackground= sidebar_button_hover_color)
     random_button = Button(home_buttons_frame,bg=bg_colour1, borderwidth=0, height=20)
@@ -389,6 +393,14 @@ class second_screen_students:
         back_button = HoverButton(change_password_frame, text="Back", font=font_style_enter_button, bg="#e84d1a", foreground="white", width=10, command= back, borderwidth=0, activebackground=back_button_hover_color)
         back_button.grid(row=3, column=0, padx=10, pady=10)
 
+    @staticmethod
+    def view_details():
+        pass
+
+    @staticmethod
+    def clubs():
+        pass
+
 
 #ADD THE COMMANDS TO THE BUTTONS HERE
 def student_button_root():
@@ -495,12 +507,8 @@ def student_admission_number_and_pswd():
 
 
             else:
-                admission_number_entry.delete(0,100)
                 password_entry_stdnt.delete(0,100)
-
-                admission_number_entry.insert(0, "Incorrect")
-                password_entry_stdnt.insert(0, "Incorrect")
-                continue
+                password_entry_stdnt.insert(0, 'INCORRECT PASSWORD')
 
 
     enter_button = Button(passwd_frame_student, text="ENTER", font=font_style_enter_button, borderwidth=0, width=50,command=password_verify, bg="#1aeb8d")
@@ -511,12 +519,109 @@ def student_admission_number_and_pswd():
 
 
 def teacher_button_root():
-    pass
+    #view student details
+    #add grades
+    #add homework
+    #enter course
+    #View current courses
+
+    teacher_buttons_frame = create_frame(root, dark_bg, row=0, column=1)
+
+    def back():
+        teacher_buttons_frame.grid_forget()
+
+    view_student_details_button = HoverButton(teacher_buttons_frame, text='STUDENT DETAILS', font= corbel_15, borderwidth= 0, width= 70, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+    enter_into_course_button = HoverButton(teacher_buttons_frame, text='COURSES', font= corbel_15, borderwidth= 0, width= 35, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+    credentials_button = HoverButton(teacher_buttons_frame, text='CHANGE PASSWORD', font= corbel_15, borderwidth= 0, width= 35, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+
+    back_button_root = HoverButton(student_buttons_frame, text="BACK", font=font_style_enter_button, borderwidth=0,width=78, bg="#e84d1a", foreground="white", command=back,activebackground=sidebar_button_hover_color)
+
+    view_student_details_button.grid(row=0, columnspan=2, padx=10, pady=10)
+    enter_into_course_button.grid(row=1, column=0, padx=10, pady=10)
+    credentials_button.grid(row=1, column=1, padx=10, pady=10)
 
 #Features that Teachers can Access
 class teacher_functions:
     pass
 
+def teacher_password_check():
+    welcome_lbl_frame.grid_forget()
+
+    passwd_frame_teacher = Frame(root, bg="#4f4f4d")
+    passwd_frame_teacher.grid(row=0, column=1, padx=90)
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_rowconfigure(2, weight=1)
+    root.grid_columnconfigure(0, weight=1)
+    root.grid_columnconfigure(2, weight=1)
+
+    instructions_lbl = Label(passwd_frame_teacher, text="Please enter your index No. and Password",
+                             font=font_style_popup_button, bg="#4f4f4d", foreground="white")
+    instructions_lbl.grid(row=0, columnspan=2, padx=10)
+
+    admission_number_lbl = Label(passwd_frame_teacher, text="INDEX NO.", font=corbel_13, bg="#4f4f4d",
+                                 foreground="#FFFFFF")
+    admission_number_entry = Entry(passwd_frame_teacher, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=55,
+                                   font=font_style_passwd_entry_field)
+
+    def toggle_password():
+        if password_entry_teacher.cget('show') == "":
+            password_entry_teacher.config(show="*")
+            show_hide_password_button['image'] = close_eye_image
+        else:
+            password_entry_teacher.config(show='')
+            show_hide_password_button['image'] = open_eye_image
+
+    password_label_teacher = Label(passwd_frame_teacher, text="PASSWORD", font=corbel_13, bg="#4f4f4d",
+                                 foreground="#FFFFFF")
+    password_entry_teacher = Entry(passwd_frame_teacher, bg="#2e2e2d", foreground="#FFFFFF", borderwidth=0, width=55,
+                                 font=font_style_passwd_entry_field, show="*")
+
+    show_hide_password_button = HoverButton(passwd_frame_teacher, image=close_eye_image, bg="#4f4f4d",
+                                            command=toggle_password, borderwidth=0,
+                                            activebackground=sidebar_button_hover_color)
+    show_hide_password_button.grid(row=2, column=2, padx=5, sticky=W)
+
+    admission_number_lbl.grid(row=1, column=0, pady=10)
+    admission_number_entry.grid(row=1, column=1, padx=10)
+
+    password_label_teacher.grid(row=2, column=0, padx=10, sticky=W)
+    password_entry_teacher.grid(row=2, column=1, padx=10, pady=10)
+
+    def password_verify():
+        global student_name, student_admission_number
+
+        teacher_admission_number = int(admission_number_entry.get())
+        print(teacher_admission_number)
+        teacher_password = password_entry_teacher.get()
+
+        for i in range(2, num_student_psswd + 2):
+            print('For loop works')
+            admission_number_in_spreadsheet = ws_teacher_passwd["A" + str(i)].value
+            password_in_spreadsheet = ws_teacher_passwd["B" + str(i)].value
+
+            if admission_number_in_spreadsheet == teacher_admission_number:
+
+                if password_in_spreadsheet == teacher_password:
+                    passwd_frame_teacher.grid_forget()
+                    enter_button.grid_forget()
+                    print('correct')
+
+                    student_name = teachers.get_name_for_password(teacher_admission_number)
+                    print(student_name)
+
+                    teacher_button_root()
+
+                else:
+                    print('incorrect')
+
+
+            else:
+                password_entry_stdnt.delete(0, 100)
+                password_entry_stdnt.insert(0, 'INCORRECT PASSWORD')
+
+    enter_button = Button(passwd_frame_teacher, text="ENTER", font=font_style_enter_button, borderwidth=0, width=50,
+                          command=password_verify, bg="#1aeb8d")
+    enter_button.grid(columnspan=4, pady=10, padx=10)
 
 
 
@@ -881,7 +986,6 @@ class admin_functions:
     @staticmethod
     def view_grades():
         pass
-
 
 class admin_second_screen:
 
