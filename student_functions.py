@@ -255,69 +255,87 @@ class courses(students):
         num_courses = ws_courses["F4"].value
         course_row = num_courses + 2
 
-        # for i in range(2, num_students + 2):
-        #     print(student_id)
-        #     if ws_students["A" + str(i)].value == student_id:
-        #         print('for loop')
-        #         fname = ws_students["B" + str(i)].value
-        #         lname = ws_students["C" + str(i)].value
-        #         ws_student_courses["B" + str(student_courses_row)] = fname
-        #         ws_student_courses["C" + str(student_courses_row)] = lname
-        #         print(fname, lname)
-        #         print('student if works')
-        #
-        #     else:
-        #         print('student if does not work')
-        #
-        # for k in range(2, num_courses + 2):
-        #     if ws_courses["B" + str(k)].value == course_name:
-        #         course_id = ws_courses["A" + str(k)].value
-        #         ws_student_courses["D" + str(student_courses_row)] = course_id
-        #
-        #
-        #     else:
-        #         print('Courses if does not work')
-        #
-        #
-        # ws_student_courses["A" + str(student_courses_row)] = student_id
-        # ws_student_courses["E" + str(student_courses_row)] = course_name
+        for i in range(2, num_students + 2):
+            print(student_id)
+            if ws_students["A" + str(i)].value == student_id:
+                print('for loop')
+                fname = ws_students["B" + str(i)].value
+                lname = ws_students["C" + str(i)].value
+                ws_student_courses["B" + str(student_courses_row)] = fname
+                ws_student_courses["C" + str(student_courses_row)] = lname
+                print(fname, lname)
+                print('student if works')
+        
+            else:
+                print('student if does not work')
+        
+        for k in range(2, num_courses + 2):
+            if ws_courses["B" + str(k)].value == course_name:
+                course_id = ws_courses["A" + str(k)].value
+                ws_student_courses["D" + str(student_courses_row)] = course_id
+        
+        
+            else:
+                print('Courses if does not work')
+        
+        
+        ws_student_courses["A" + str(student_courses_row)] = student_id
+        ws_student_courses["E" + str(student_courses_row)] = course_name
 
 
 
-        def notification():
-            student_name = ""
-            instructor_name = ""
-            #For loop to get the student name
-            for i in range(2, num_students+2):
-                if ws_students["A" + str(i)].value == student_id:
-                    student_name = ws_students["B" + str(i)].value
-
-            #For loop to get the course instructor name
-            for i in range(2, num_courses + 2):
-                if ws_courses["B" + str(i)].value == course_name:
-                    instructor_name = ws_courses["E" + str(i)].value
-
-            for i in range(2, num_notifications + 2):
-                description = f"{student_name} would like to enroll in the {course_name}"
-
-                ws_notifications["B" + str(i)] = "Course Enrollment"
-                ws_notifications["C" + str(i)] = student_name
-                ws_notifications["D" + str(i)] = instructor_name
-                ws_notifications["E" + str(i)] = description
-
-                ws_notifications["H3"] = num_notifications + 1
-                notification_id = ws_notifications["H3"].value
-
-                ws_notifications["A" + str(i)] = notification_id
-
-                wb.save(filename="university.xlsx")
-
-        notification()
+        
 
 
         ws_student_courses["L4"] = num_student_courses + 1
 
         wb.save(filename="university.xlsx")
+    
+    @staticmethod
+    def add_notification_details(student_id, course_name):
+
+        num_student_courses = ws_student_courses["L4"].value
+        student_courses_row = num_student_courses + 2
+
+        num_notifications = ws_notifications["H3"].value
+        notifications_row = num_notifications + 2
+
+        num_students = ws_students["J3"].value
+        student_row = num_students + 2
+
+        num_courses = ws_courses["F4"].value
+        course_row = num_courses + 2
+
+       
+        student_name = ""
+        instructor_name = ""
+        #For loop to get the student name
+        for i in range(2, num_students+2):
+            if ws_students["A" + str(i)].value == student_id:
+                student_name = ws_students["B" + str(i)].value
+
+        #For loop to get the course instructor name
+        for i in range(2, num_courses + 2):
+            if ws_courses["B" + str(i)].value == course_name:
+                instructor_name = ws_courses["E" + str(i)].value
+
+        for i in range(2, num_notifications + 2):
+            description = f"{student_name} would like to enroll in the {course_name}"
+
+            ws_notifications["B" + str(i)] = "Course Enrollment"
+            ws_notifications["C" + str(i)] = student_name
+            ws_notifications["D" + str(i)] = instructor_name
+            ws_notifications["E" + str(i)] = description
+
+            ws_notifications["H3"] = num_notifications + 1
+            notification_id = ws_notifications["H3"].value
+
+            ws_notifications["A" + str(i)] = notification_id
+
+            wb.save(filename="university.xlsx")
+
+
+
 
     @staticmethod
     def remove_student_courses(student_ID, Course_ID):
