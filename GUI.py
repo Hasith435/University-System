@@ -19,6 +19,7 @@ ws_student_clubs = wb['student_clubs']
 ws_student_psswd = wb["student_pswd"]
 ws_teachers = wb["Teachers"]
 ws_teacher_passwd = wb["teacher_psswd"]
+ws_notifications = wb["notifications"]
 
 num_students = ws["J3"].value
 student_row = num_students + 2
@@ -164,6 +165,7 @@ class second_screen_students:
             def enter():
                 course_name = clicked.get()
                 courses.add_student_courses(student_admission_number, course_name)
+                courses.add_notification_details(student_admission_number, course_name)
 
                 def registered_lbl():
                     registered_lbl = Label(register_frame, text= "REGISTERED", bg="#2e2e2d", foreground="white", font=corbel_13)
@@ -525,6 +527,9 @@ def teacher_button_root():
     #enter course
     #View current courses
 
+    num_notifications = ws_notifications["H3"].value
+    notifications_row = num_notifications + 2
+
     teacher_buttons_frame = create_frame(root, dark_bg, row=0, column=1)
 
     def back():
@@ -540,11 +545,28 @@ def teacher_button_root():
     enter_into_course_button.grid(row=1, column=0, padx=10, pady=10)
     credentials_button.grid(row=1, column=1, padx=10, pady=10)
 
+
+    for i in range(2, num_notifications + 2):
+        if ws_notifications["D" + str(i)].value == teacher_name:
+            course_register_notification_frame = create_frame(passwd_frame_teacher, '#4f4f4d', row=4, columnspan=2, padx=20, pady=10)
+
+            topic_lbl = Label(course_register_notification_frame, text=ws_notifications["B" + str(i)].value, font=corbel_15, bg='#4f4f4d', fg='white')
+            description_lbl = Label(course_register_notification_frame, text=ws_notifications["E" + str(i)].value, font=corbel_13, bg='#4f4f4d', fg='white')
+
+            topic_lbl.grid(row=0, column=0, sticky=NSEW)
+            description_lbl.grid(row=1, column=0, sticky=W)
+
+        else:
+            print('soemthing went wrong')
+
+
 #Features that Teachers can Access
 class teacher_functions:
     pass
 
 def teacher_password_check():
+    global passwd_frame_teacher
+
     welcome_lbl_frame.grid_forget()
 
     passwd_frame_teacher = Frame(root, bg="#4f4f4d")
@@ -588,7 +610,7 @@ def teacher_password_check():
     password_entry_teacher.grid(row=2, column=1, padx=10, pady=10)
 
     def password_verify():
-        global student_name, student_admission_number
+        global student_name, student_admission_number, teacher_name
 
         teacher_admission_number = int(admission_number_entry.get())
         print(teacher_admission_number)
@@ -606,8 +628,8 @@ def teacher_password_check():
                     enter_button.grid_forget()
                     print('correct')
 
-                    student_name = teachers.get_name_for_password(teacher_admission_number)
-                    print(student_name)
+                    teacher_name = teachers.get_name_for_password(teacher_admission_number)
+                    print(teacher_name)
 
                     teacher_button_root()
 
@@ -616,8 +638,10 @@ def teacher_password_check():
 
 
             else:
-                password_entry_stdnt.delete(0, 100)
-                password_entry_stdnt.insert(0, 'INCORRECT PASSWORD')
+                password_entry_teacher.config(show="")
+
+                password_entry_teacher.delete(0, 100)
+                password_entry_teacher.insert(0, 'INCORRECT PASSWORD')
 
     enter_button = Button(passwd_frame_teacher, text="ENTER", font=font_style_enter_button, borderwidth=0, width=50,
                           command=password_verify, bg="#1aeb8d")
