@@ -552,6 +552,10 @@ class teachers:
                 print('invalid teacher id')
 
 class notifications:
+    @staticmethod
+    def get_receiver_name():
+        pass
+
 
     @staticmethod
     def add_notification_details(student_id, course_name):
@@ -587,3 +591,24 @@ class notifications:
 
         ws_notifications["A" + str(notifications_row)] = notification_id
         wb.save(filename="university.xlsx")
+
+    @staticmethod
+    def check_name_validity(login_name):
+        num_notifications = ws_notifications["H3"].value
+        print('comes into the check name function')
+
+        for i in range(2, num_notifications + 2):
+            print('comes in for loop')
+            receiver_name = ws_notifications["D" + str(i)].value
+            print(f"login name: {login_name}")
+            print(f"Receiver_name: {receiver_name}")
+
+            print(f"login_name type is: {type(login_name)}")
+            print(f"Receiver_name type is: {type(receiver_name)}")
+
+            if login_name == receiver_name:
+                print("login_name = receiver name")
+                return True
+            else:
+                print('login_name does not = receiver_name')
+                continue
