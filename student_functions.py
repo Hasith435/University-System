@@ -18,7 +18,24 @@ ws_teacher_passwd = wb["teacher_psswd"]
 num_student_clubs = ws_student_clubs["H4"].value
 student_club_row = num_student_clubs + 2
 
+num_students = ws_students["J3"].value
+num_courses = ws_courses["F4"].value
+
 column_headers = ["A", "B", "C", "D", "E", "F","G", "H","I"]
+
+#THESE ARE THE GLOBAL FUNCTIONS THAT ARE GONNA BE USEFUL AT THE END
+def get_student_name(student_id):
+    for i in range(2, num_students + 2):
+        if ws_students["A" + str(i)].value == student_id:
+            student_name = ws_students["B" + str(i)].value
+            return student_name
+
+def get_instructor_name(course_name):
+    for i in range(2, num_courses + 2):
+        if ws_courses["B" + str(i)].value == course_name:
+            instructor_name = ws_courses["E" + str(i)].value
+            return instructor_name
+
 
 #THESE ARE THE CLASSES THAT ARE RELATED TO THE STUDENTS
 class students:
@@ -159,11 +176,13 @@ class students:
 
     @staticmethod
     def change_password(student_ID, currentPassword, newPassword):
+        print('change password functioln')
 
         num_student_psswd = ws_student_psswd["G6"].value
         student_psswd_row = num_student_psswd + 2
 
-        for i in range(2, num_student_psswd):
+        for i in range(2, num_student_psswd + 2):
+            print('for loop change password')
             if ws_student_psswd["A" + str(i)].value == student_ID :
 
                 if ws_student_psswd["B" + str(i)].value == currentPassword:
@@ -265,74 +284,29 @@ class courses(students):
                 ws_student_courses["C" + str(student_courses_row)] = lname
                 print(fname, lname)
                 print('student if works')
-        
+
             else:
                 print('student if does not work')
-        
+
         for k in range(2, num_courses + 2):
             if ws_courses["B" + str(k)].value == course_name:
                 course_id = ws_courses["A" + str(k)].value
                 ws_student_courses["D" + str(student_courses_row)] = course_id
-        
-        
+
+
             else:
                 print('Courses if does not work')
-        
-        
+
+
         ws_student_courses["A" + str(student_courses_row)] = student_id
         ws_student_courses["E" + str(student_courses_row)] = course_name
-
-
-
-        
 
 
         ws_student_courses["L4"] = num_student_courses + 1
 
         wb.save(filename="university.xlsx")
-    
-    @staticmethod
-    def add_notification_details(student_id, course_name):
 
-        num_student_courses = ws_student_courses["L4"].value
-        student_courses_row = num_student_courses + 2
 
-        num_notifications = ws_notifications["H3"].value
-        notifications_row = num_notifications + 2
-
-        num_students = ws_students["J3"].value
-        student_row = num_students + 2
-
-        num_courses = ws_courses["F4"].value
-        course_row = num_courses + 2
-
-       
-        student_name = ""
-        instructor_name = ""
-        #For loop to get the student name
-        for i in range(2, num_students+2):
-            if ws_students["A" + str(i)].value == student_id:
-                student_name = ws_students["B" + str(i)].value
-
-        #For loop to get the course instructor name
-        for i in range(2, num_courses + 2):
-            if ws_courses["B" + str(i)].value == course_name:
-                instructor_name = ws_courses["E" + str(i)].value
-
-        for i in range(2, num_notifications + 2):
-            description = f"{student_name} would like to enroll in the {course_name}"
-
-            ws_notifications["B" + str(i)] = "Course Enrollment"
-            ws_notifications["C" + str(i)] = student_name
-            ws_notifications["D" + str(i)] = instructor_name
-            ws_notifications["E" + str(i)] = description
-
-            ws_notifications["H3"] = num_notifications + 1
-            notification_id = ws_notifications["H3"].value
-
-            ws_notifications["A" + str(i)] = notification_id
-
-            wb.save(filename="university.xlsx")
 
 
 
@@ -413,6 +387,13 @@ class courses(students):
                 print('Student ID or course ID is wrong!')
 
 
+
+    #THESE ARE THE FUNCTIONS THAT ARE GOING TO BE USED UP
+    @staticmethod
+    def get_student_name():
+        pass
+
+
 class clubs(students):
 
     club_id = []
@@ -486,7 +467,7 @@ class teachers:
         ws_teachers["A" + str(cls.teacher_row)] = ws_teachers["H4"].value
 
         #This is the section to add the teacher to the teahcer_passwd sheet
-        num_teacher_psswd = ws_student_psswd["F4"].value
+        num_teacher_psswd = ws_teacher_passwd["F4"].value
         teacher_psswd_row = num_teacher_psswd + 2
 
         teacher_index = ws_teachers["A" + str(cls.teacher_row)].value
@@ -498,7 +479,7 @@ class teachers:
         # This is the student's First Name
         ws_teacher_passwd["C" + str(teacher_psswd_row)] = first_name
 
-        ws_teacher_passwd["G6"] = num_teacher_psswd + 1
+        ws_teacher_passwd["F4"] = num_teacher_psswd + 1
 
         wb.save(filename="university.xlsx")
 
@@ -559,13 +540,50 @@ class teachers:
                 continue
 
     @staticmethod
-    def get_name_for_password (student_ID):
+    def get_name_for_password (teacher_id):
         num_teacher_passwd = ws_teacher_passwd["F4"].value
         print(num_teacher_passwd)
 
         for i in range(2, num_teacher_passwd + 2):
-            if ws_teacher_passwd["A" + str(i)].value == student_ID:
+            if ws_teacher_passwd["A" + str(i)].value == teacher_id:
                 return ws_teacher_passwd["C" + str(i)].value
 
             else:
                 print('invalid teacher id')
+
+class notifications:
+
+    @staticmethod
+    def add_notification_details(student_id, course_name):
+
+        print('Notification function is called')
+
+        num_student_courses = ws_student_courses["L4"].value
+        student_courses_row = num_student_courses + 2
+
+        num_notifications = ws_notifications["H3"].value
+        notifications_row = num_notifications + 2
+
+        num_students = ws_students["J3"].value
+        student_row = num_students + 2
+
+        num_courses = ws_courses["F4"].value
+        course_row = num_courses + 2
+
+
+        student_name = get_student_name(student_id)
+        instructor_name = get_instructor_name(course_name)
+
+        # for i in range(2, num_notifications + 2):
+        description = f"{student_name} would like to enroll in the {course_name}"
+
+        ws_notifications["B" + str(notifications_row)] = "COURSE ENROLLMENT"
+        ws_notifications["C" + str(notifications_row)] = student_name
+        ws_notifications["D" + str(notifications_row)] = instructor_name
+        ws_notifications["E" + str(notifications_row)] = description
+
+        ws_notifications["H3"] = num_notifications + 1
+        notification_id = ws_notifications["H3"].value
+
+        ws_notifications["A" + str(notifications_row)] = notification_id
+        wb.save(filename="university.xlsx")

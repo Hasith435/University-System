@@ -10,6 +10,7 @@ from student_functions import students
 from student_functions import courses
 from student_functions import clubs
 from student_functions import teachers
+from student_functions import notifications
 
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
@@ -61,6 +62,8 @@ dark_bg = "#1C1C1C"
 sidebar_button_hover_color = '#636363'
 enter_button_hover_color = "#63ed28"
 back_button_hover_color = "#eb6709"
+enter_button_color = "#1aeb8d"
+back_button_color = "#e84d1a"
 
 root.configure(bg=dark_bg)
 
@@ -165,7 +168,7 @@ class second_screen_students:
             def enter():
                 course_name = clicked.get()
                 courses.add_student_courses(student_admission_number, course_name)
-                courses.add_notification_details(student_admission_number, course_name)
+                notifications.add_notification_details(student_admission_number, course_name)
 
                 def registered_lbl():
                     registered_lbl = Label(register_frame, text= "REGISTERED", bg="#2e2e2d", foreground="white", font=corbel_13)
@@ -379,6 +382,7 @@ class second_screen_students:
 
 
             final_decision = students.change_password(int(student_ID), current_password, new_password)
+            print(f"This is the final decision: {final_decision}")
 
             if final_decision == False:
                 incorrect_lbl = Label(change_password_frame, text="Incorrect", font=corbel_13, bg="#2e2e2d", foreground="white")
@@ -531,30 +535,48 @@ def teacher_button_root():
     notifications_row = num_notifications + 2
 
     teacher_buttons_frame = create_frame(root, dark_bg, row=0, column=1)
+    greetings_lbl_teachers = Label(teacher_buttons_frame, text=f"Hello, {teacher_name}, what is you task related to:", bg=dark_bg, fg='white', font=corbel_15)
+    greetings_lbl_teachers.grid(row=0, columnspan=2)
 
     def back():
         teacher_buttons_frame.grid_forget()
 
     view_student_details_button = HoverButton(teacher_buttons_frame, text='STUDENT DETAILS', font= corbel_15, borderwidth= 0, width= 70, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
-    enter_into_course_button = HoverButton(teacher_buttons_frame, text='COURSES', font= corbel_15, borderwidth= 0, width= 35, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
-    credentials_button = HoverButton(teacher_buttons_frame, text='CHANGE PASSWORD', font= corbel_15, borderwidth= 0, width= 35, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+    enter_into_course_button = HoverButton(teacher_buttons_frame, text='COURSES', font= corbel_15, borderwidth= 0, width= 34, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
+    credentials_button = HoverButton(teacher_buttons_frame, text='CHANGE PASSWORD', font= corbel_15, borderwidth= 0, width= 34, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
 
-    back_button_root = HoverButton(student_buttons_frame, text="BACK", font=font_style_enter_button, borderwidth=0,width=78, bg="#e84d1a", foreground="white", command=back,activebackground=sidebar_button_hover_color)
+    back_button_root = HoverButton(teacher_buttons_frame, text="BACK", font=font_style_enter_button, borderwidth=0,width=78, bg="#e84d1a", foreground="white", command=back,activebackground=sidebar_button_hover_color)
 
-    view_student_details_button.grid(row=0, columnspan=2, padx=10, pady=10)
-    enter_into_course_button.grid(row=1, column=0, padx=10, pady=10)
-    credentials_button.grid(row=1, column=1, padx=10, pady=10)
+    view_student_details_button.grid(row=1, columnspan=2, padx=10, pady=10)
+    enter_into_course_button.grid(row=2, column=0, padx=10, pady=10)
+    credentials_button.grid(row=2, column=1, padx=10, pady=10)
+    back_button_root.grid(row=3, columnspan=2, padx=10, pady=10)
 
 
     for i in range(2, num_notifications + 2):
-        if ws_notifications["D" + str(i)].value == teacher_name:
-            course_register_notification_frame = create_frame(passwd_frame_teacher, '#4f4f4d', row=4, columnspan=2, padx=20, pady=10)
+        print("notification for loop")
+        receiver_name = ws_notifications["D" + str(i)].value
+        print("dfdfdfdfd" + receiver_name)
+        print("dfdfdfdfdfd" + teacher_name)
 
-            topic_lbl = Label(course_register_notification_frame, text=ws_notifications["B" + str(i)].value, font=corbel_15, bg='#4f4f4d', fg='white')
-            description_lbl = Label(course_register_notification_frame, text=ws_notifications["E" + str(i)].value, font=corbel_13, bg='#4f4f4d', fg='white')
+        if receiver_name == teacher_name:
+            print('notification if')
 
-            topic_lbl.grid(row=0, column=0, sticky=NSEW)
+            course_register_notification_frame = create_frame(teacher_buttons_frame, dark_bg, row=5, columnspan=2)
+
+            random_button = Button(teacher_buttons_frame, bg=dark_bg, height=10, borderwidth=0)
+            topic_lbl = Label(course_register_notification_frame, text=ws_notifications["B" + str(i)].value, font=corbel_15, bg=dark_bg, fg='white')
+            description_lbl = Label(course_register_notification_frame, text=ws_notifications["E" + str(i)].value, font=corbel_13, bg=dark_bg, fg='white')
+
+            accept_button = HoverButton(course_register_notification_frame, text="ACCEPT", font=corbel_13, bg=enter_button_color, fg='black', borderwidth=0, width=10)
+            deny_button = HoverButton(course_register_notification_frame, text='DENY', font=corbel_13, bg=back_button_color, fg='White', borderwidth=0, width=10)
+
+            random_button.grid(row=4, columnspan=2)
+            topic_lbl.grid(row=0, column=0, sticky=W)
             description_lbl.grid(row=1, column=0, sticky=W)
+
+            accept_button.grid(row=0, column=1, padx=10, pady=7)
+            deny_button.grid(row=1, column=1, padx=10, pady=7)
 
         else:
             print('soemthing went wrong')
