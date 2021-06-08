@@ -597,7 +597,11 @@ def teacher_button_root():
             description_lbl = Label(course_register_notification_frame, text=name_validity_returns[3], font=corbel_13, bg=dark_bg, fg='white')
 
             def accept_button():
-                notifications.remove_notification(teacher_name)
+                splited_description = name_validity_returns[3].split()
+                student_name = splited_description[0]
+                course_name = splited_description[7]
+
+                notifications.remove_notification(student_name, course_name)
                 courses.add_student_courses(student_admission_number, course_name)
 
                 course_register_notification_frame.grid_forget()

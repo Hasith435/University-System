@@ -553,6 +553,19 @@ class teachers:
 
 class notifications:
     @staticmethod
+    def get_sender_name(name):
+        num_notifications = ws_notifications["H3"].value
+
+
+        for i in range(2, num_notifications + 2):
+            sender_name = ws_notifications["C" + str(i)].value
+
+            if sender_name == name:
+                return sender_name
+            else:
+                continue
+
+    @staticmethod
     def get_receiver_name(name):
         num_notifications = ws_notifications["H3"].value
 
@@ -566,19 +579,33 @@ class notifications:
                 continue
 
     @staticmethod
-    def remove_notification(login_name):
+    def get_description(course_name):
+        num_notifications = ws_notifications["H3"].value
+
+        for i in range(2, num_notifications + 2):
+            description = ws_notifications["E" + str(i)].value
+            splited_description = description.split()
+
+            if splited_description[7] == course_name:
+                course_name_description = splited_description[7]
+                return course_name_description
+
+            else:
+                continue
+
+    @staticmethod
+    def remove_notification(student_name, course_name):
         num_notifications = ws_notifications["H3"].value
 
         # receiver_name = notifications.get_receiver_name(login_name)
 
         columns = ["A", "B", "C", "D", "E"]
 
-        receiver_name = ""
-        for i in range(2, num_notifications+2):
-            receiver_name = ws_notifications["D" + str(i)].value
+        sender_name = notifications.get_sender_name(student_name)
+        course_name_description = notifications.get_description(course_name)
 
         for i in range(2, num_notifications + 2):
-            if receiver_name == ws_notifications["D" + str(i)].value:
+            if sender_name == student_name and course_name_description == course_name:
                 ws_notifications["A" + str(i)] = ""
                 ws_notifications["B" + str(i)] = ""
                 ws_notifications["C" + str(i)] = ""
@@ -598,18 +625,8 @@ class notifications:
 
         print('Notification function is called')
 
-        num_student_courses = ws_student_courses["L4"].value
-        student_courses_row = num_student_courses + 2
-
         num_notifications = ws_notifications["H3"].value
         notifications_row = num_notifications + 2
-
-        num_students = ws_students["J3"].value
-        student_row = num_students + 2
-
-        num_courses = ws_courses["F4"].value
-        course_row = num_courses + 2
-
 
         student_name = get_student_name(student_id)
         instructor_name = get_instructor_name(course_name)
