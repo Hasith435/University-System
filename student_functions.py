@@ -552,6 +552,7 @@ class teachers:
                 print('invalid teacher id')
 
 class notifications:
+    #These are some of the methods that may be useful further on
     @staticmethod
     def get_sender_name(name):
         num_notifications = ws_notifications["H3"].value
@@ -585,6 +586,7 @@ class notifications:
         for i in range(2, num_notifications + 2):
             description = ws_notifications["E" + str(i)].value
             splited_description = description.split()
+            print(splited_description)
 
             if splited_description[7] == course_name:
                 course_name_description = splited_description[7]
@@ -594,32 +596,21 @@ class notifications:
                 continue
 
     @staticmethod
-    def remove_notification(student_name, course_name):
+    def get_notification_topic(receiver_name):
         num_notifications = ws_notifications["H3"].value
 
-        # receiver_name = notifications.get_receiver_name(login_name)
-
-        columns = ["A", "B", "C", "D", "E"]
-
-        sender_name = notifications.get_sender_name(student_name)
-        course_name_description = notifications.get_description(course_name)
-
         for i in range(2, num_notifications + 2):
-            if sender_name == student_name and course_name_description == course_name:
-                ws_notifications["A" + str(i)] = ""
-                ws_notifications["B" + str(i)] = ""
-                ws_notifications["C" + str(i)] = ""
-                ws_notifications["D" + str(i)] = ""
-                ws_notifications["E" + str(i)] = ""
+            if ws_notifications["D" + str(i)].value == receiver_name:
 
-                ws_notifications["H3"] = num_notifications - 1
+                topic_name = ws_notifications["B" + str(i)].value
 
-                wb.save(filename="university.xlsx")
+                return topic_name
 
             else:
-                print('login name is wrong')
+                continue
 
 
+    #These are the functions for enrollment
     @staticmethod
     def add_notification_details(student_id, course_name):
 
@@ -669,3 +660,51 @@ class notifications:
             else:
                 print('login_name does not = receiver_name')
                 continue
+    @staticmethod
+    def remove_notification(sender_name):
+        num_notifications = ws_notifications["H3"].value
+        sender_name = notifications.get_sender_name(sender_name)
+
+        for i in range(2, num_notifications + 2):
+            if sender_name == ws_notifications["C" + str(i)].value:
+                ws_notifications["A" + str(i)] = ""
+                ws_notifications["B" + str(i)] = ""
+                ws_notifications["C" + str(i)] = ""
+                ws_notifications["D" + str(i)] = ""
+                ws_notifications["E" + str(i)] = ""
+
+                ws_notifications["H3"] = num_notifications - 1
+                break
+
+            else:
+                continue
+
+    # @staticmethod
+    # def remove_notification(student_name, course_name):
+    #     num_notifications = ws_notifications["H3"].value
+    #
+    #     # receiver_name = notifications.get_receiver_name(login_name)
+    #
+    #     columns = ["A", "B", "C", "D", "E"]
+    #
+        # sender_name = notifications.get_sender_name(student_name)
+        # course_name_description = notifications.get_description(course_name)
+    #
+    #     for i in range(2, num_notifications + 2):
+    #         if sender_name == student_name:
+    #             if course_name_description == course_name:
+    #                 ws_notifications["A" + str(i)] = ""
+    #                 ws_notifications["B" + str(i)] = ""
+    #                 ws_notifications["C" + str(i)] = ""
+    #                 ws_notifications["D" + str(i)] = ""
+    #                 ws_notifications["E" + str(i)] = ""
+    #
+    #                 ws_notifications["H3"] = num_notifications - 1
+    #
+    #                 wb.save(filename="university.xlsx")
+    #
+    #             else:
+    #                 print('Course_name wrong')
+    #
+    #         else:
+    #             print('student name wrong')
