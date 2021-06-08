@@ -166,8 +166,9 @@ class second_screen_students:
             course_list.grid(row=0, column=1)
 
             def enter():
+                global student_admission_number, course_name
+
                 course_name = clicked.get()
-                courses.add_student_courses(student_admission_number, course_name)
                 notifications.add_notification_details(student_admission_number, course_name)
 
                 def registered_lbl():
@@ -423,6 +424,29 @@ def student_button_root():
     student_buttons_frame = create_frame(root, dark_bg, row=0, column=1)
     greeting_lbl = Label(student_buttons_frame, text=f"Hello {student_name}, what is your task related to:",font=font_style_popup_button, bg=dark_bg, foreground="white")
 
+    random_button_students = Button(student_buttons_frame, bg=dark_bg, height=7, borderwidth=0)
+
+    #THIS SECTION IS TO GIVE STUDENTS NOTIFICATIONS
+    class notifications_students:
+        @staticmethod
+        def course_register_notification_students():
+            def close():
+                student_course_register_notification_frame.grid_forget()
+
+            student_course_register_notification_frame = create_frame(student_buttons_frame, dark_bg, row=6,
+                                                                      columnspan=2)
+
+            new_notification_lbl = Label(student_course_register_notification_frame, text="NEW NOTIFICATION",
+                                         bg=dark_bg,
+                                         fg='white')
+            course_register_notification = Label(student_course_register_notification_frame,
+                                                 text=f"You were registered to the {course_name} course by {teacher_name}")
+            close_button = HoverButton(student_course_register_notification_frame, text="CLOSE", bg=back_button_color,
+                                       activebackground=back_button_hover_color, command=close)
+
+            new_notification_lbl.grid(row=0, column=0, sticky=W)
+            course_register_notification.grid(row=1, column=0, sticky=W)
+            close_button.grid(columns=1, rowspan=2)
     #COMPLETE THE COMMANDS IN THESE BUTTONS
 
     #courses_button
@@ -444,6 +468,7 @@ def student_button_root():
     credentials_button.grid(row= 3, columnspan=2, padx= 10, pady= 10)
 
     back_button_root.grid(columnspan= 4, padx= 10, pady= 10)
+    random_button_students.grid(row=5, columnspan=2)
 
 def student_admission_number_and_pswd():
     global student_name, passwd_frame_student, passwd_frame_student
@@ -541,6 +566,8 @@ def teacher_button_root():
     def back():
         teacher_buttons_frame.grid_forget()
 
+        home()
+
     view_student_details_button = HoverButton(teacher_buttons_frame, text='STUDENT DETAILS', font= corbel_15, borderwidth= 0, width= 70, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
     enter_into_course_button = HoverButton(teacher_buttons_frame, text='COURSES', font= corbel_15, borderwidth= 0, width= 34, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
     credentials_button = HoverButton(teacher_buttons_frame, text='CHANGE PASSWORD', font= corbel_15, borderwidth= 0, width= 34, bg=bg_colour1, foreground="white", command= second_screen_students.courses, activebackground=sidebar_button_hover_color)
@@ -552,31 +579,46 @@ def teacher_button_root():
     credentials_button.grid(row=2, column=1, padx=10, pady=10)
     back_button_root.grid(row=3, columnspan=2, padx=10, pady=10)
 
-    name_validity = notifications.check_name_validity(teacher_name)
-    print(name_validity)
+    name_validity_returns = notifications.check_name_validity(teacher_name)
+    print(name_validity_returns[0])
     print(f"teacher name: {teacher_name}")
 
-    if name_validity == True:
-        print('notification if')
+    print(f"Num notifications: {num_notifications}")
+    for i in range(2, name_validity_returns[1] + 2):
 
-        course_register_notification_frame = create_frame(teacher_buttons_frame, dark_bg, row=5, columnspan=2)
+        print('forloop')
+        if name_validity_returns[0] == True:
+            print('notification if')
 
-        random_button = Button(teacher_buttons_frame, bg=dark_bg, height=10, borderwidth=0)
-        topic_lbl = Label(course_register_notification_frame, text=ws_notifications["B" + str(i)].value, font=corbel_15, bg=dark_bg, fg='white')
-        description_lbl = Label(course_register_notification_frame, text=ws_notifications["E" + str(i)].value, font=corbel_13, bg=dark_bg, fg='white')
+            course_register_notification_frame = create_frame(teacher_buttons_frame, dark_bg, row=5, columnspan=2)
 
-        accept_button = HoverButton(course_register_notification_frame, text="ACCEPT", font=corbel_13, bg=enter_button_color, fg='black', borderwidth=0, width=10)
-        deny_button = HoverButton(course_register_notification_frame, text='DENY', font=corbel_13, bg=back_button_color, fg='White', borderwidth=0, width=10)
+            random_button = Button(teacher_buttons_frame, bg=dark_bg, height=10, borderwidth=0)
+            topic_lbl = Label(course_register_notification_frame, text=name_validity_returns[2], font=corbel_15, bg=dark_bg, fg='white')
+            description_lbl = Label(course_register_notification_frame, text=name_validity_returns[3], font=corbel_13, bg=dark_bg, fg='white')
 
-        random_button.grid(row=4, columnspan=2)
-        topic_lbl.grid(row=0, column=0, sticky=W)
-        description_lbl.grid(row=1, column=0, sticky=W)
+            def accept_button():
+                notifications.remove_notification(teacher_name)
+                courses.add_student_courses(student_admission_number, course_name)
 
-        accept_button.grid(row=0, column=1, padx=10, pady=7)
-        deny_button.grid(row=1, column=1, padx=10, pady=7)
+                course_register_notification_frame.grid_forget()
 
-    else:
-        print('soemthing went wrong')
+
+                #This is to send the message to the student
+
+
+
+            accept_button = HoverButton(course_register_notification_frame, text="ACCEPT", font=corbel_13, bg=enter_button_color, fg='black', borderwidth=0, width=10, command=accept_button)
+            deny_button = HoverButton(course_register_notification_frame, text='DENY', font=corbel_13, bg=back_button_color, fg='White', borderwidth=0, width=10)
+
+            random_button.grid(row=4, columnspan=2)
+            topic_lbl.grid(row=0, column=0, sticky=W)
+            description_lbl.grid(row=1, column=0, sticky=W)
+
+            accept_button.grid(row=0, column=1, padx=10, pady=7)
+            deny_button.grid(row=1, column=1, padx=10, pady=7)
+
+        else:
+            print('soemthing went wrong')
 
 
 #Features that Teachers can Access

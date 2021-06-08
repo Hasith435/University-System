@@ -553,8 +553,44 @@ class teachers:
 
 class notifications:
     @staticmethod
-    def get_receiver_name():
-        pass
+    def get_receiver_name(name):
+        num_notifications = ws_notifications["H3"].value
+
+        for i in range(2, num_notifications + 2):
+            receiver_name = ws_notifications["E" + str(i)].value
+
+            if name == receiver_name:
+                return receiver_name
+
+            else:
+                continue
+
+    @staticmethod
+    def remove_notification(login_name):
+        num_notifications = ws_notifications["H3"].value
+
+        # receiver_name = notifications.get_receiver_name(login_name)
+
+        columns = ["A", "B", "C", "D", "E"]
+
+        receiver_name = ""
+        for i in range(2, num_notifications+2):
+            receiver_name = ws_notifications["D" + str(i)].value
+
+        for i in range(2, num_notifications + 2):
+            if receiver_name == ws_notifications["D" + str(i)].value:
+                ws_notifications["A" + str(i)] = ""
+                ws_notifications["B" + str(i)] = ""
+                ws_notifications["C" + str(i)] = ""
+                ws_notifications["D" + str(i)] = ""
+                ws_notifications["E" + str(i)] = ""
+
+                ws_notifications["H3"] = num_notifications - 1
+
+                wb.save(filename="university.xlsx")
+
+            else:
+                print('login name is wrong')
 
 
     @staticmethod
@@ -595,6 +631,7 @@ class notifications:
     @staticmethod
     def check_name_validity(login_name):
         num_notifications = ws_notifications["H3"].value
+        print(f"num_notifications in check_name_validity: {num_notifications}")
         print('comes into the check name function')
 
         for i in range(2, num_notifications + 2):
@@ -608,7 +645,10 @@ class notifications:
 
             if login_name == receiver_name:
                 print("login_name = receiver name")
-                return True
+                topic = ws_notifications["B" + str(i)].value
+                description = ws_notifications["E" + str(i)].value
+
+                return True, num_notifications, topic, description
             else:
                 print('login_name does not = receiver_name')
                 continue
