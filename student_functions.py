@@ -552,6 +552,8 @@ class teachers:
                 print('invalid teacher id')
 
 class notifications:
+    notification_info = []
+
     #These are some of the methods that may be useful further on
     @staticmethod
     def get_sender_name(name):
@@ -595,18 +597,33 @@ class notifications:
             else:
                 continue
 
-    @staticmethod
-    def get_notification_topic(receiver_name):
+    @classmethod
+    def check_name_validity(cls, login_name):
         num_notifications = ws_notifications["H3"].value
+        print(f"num_notifications in check_name_validity: {num_notifications}")
+        print('comes into the check name function')
 
         for i in range(2, num_notifications + 2):
-            if ws_notifications["D" + str(i)].value == receiver_name:
+            print('comes in for loop')
+            receiver_name = ws_notifications["D" + str(i)].value
+            print(f"login name: {login_name}")
+            print(f"Receiver_name: {receiver_name}")
 
-                topic_name = ws_notifications["B" + str(i)].value
+            print(f"login_name type is: {type(login_name)}")
+            print(f"Receiver_name type is: {type(receiver_name)}")
 
-                return topic_name
+            if login_name == receiver_name:
 
+                print("login_name = receiver name")
+                topic = ws_notifications["B" + str(i)].value
+                description = ws_notifications["E" + str(i)].value
+                appending_list = [topic, description]
+
+                cls.notification_info.append(appending_list)
+
+                return True, num_notifications, cls.notification_info
             else:
+                print('login_name does not = receiver_name')
                 continue
 
 
@@ -636,30 +653,7 @@ class notifications:
         ws_notifications["A" + str(notifications_row)] = notification_id
         wb.save(filename="university.xlsx")
 
-    @staticmethod
-    def check_name_validity(login_name):
-        num_notifications = ws_notifications["H3"].value
-        print(f"num_notifications in check_name_validity: {num_notifications}")
-        print('comes into the check name function')
 
-        for i in range(2, num_notifications + 2):
-            print('comes in for loop')
-            receiver_name = ws_notifications["D" + str(i)].value
-            print(f"login name: {login_name}")
-            print(f"Receiver_name: {receiver_name}")
-
-            print(f"login_name type is: {type(login_name)}")
-            print(f"Receiver_name type is: {type(receiver_name)}")
-
-            if login_name == receiver_name:
-                print("login_name = receiver name")
-                topic = ws_notifications["B" + str(i)].value
-                description = ws_notifications["E" + str(i)].value
-
-                return True, num_notifications, topic, description
-            else:
-                print('login_name does not = receiver_name')
-                continue
     @staticmethod
     def remove_notification(sender_name):
         num_notifications = ws_notifications["H3"].value
@@ -673,7 +667,16 @@ class notifications:
                 ws_notifications["D" + str(i)] = ""
                 ws_notifications["E" + str(i)] = ""
 
+
+                for x in range(i, num_notifications + 2):
+                    ws_notifications["A" + str(x)] = ws_notifications["A" + str(x + 1)].value
+                    ws_notifications["B" + str(x)] = ws_notifications["B" + str(x + 1)].value
+                    ws_notifications["C" + str(x)] = ws_notifications["C" + str(x + 1)].value
+                    ws_notifications["D" + str(x)] = ws_notifications["D" + str(x + 1)].value
+                    ws_notifications["E" + str(x)] = ws_notifications["E" + str(x + 1)].value
+
                 ws_notifications["H3"] = num_notifications - 1
+                wb.save(filename='university.xlsx')
                 break
 
             else:
