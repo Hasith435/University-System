@@ -661,19 +661,9 @@ class notifications:
 
         for i in range(2, num_notifications + 2):
             if sender_name == ws_notifications["C" + str(i)].value:
-                ws_notifications["A" + str(i)] = ""
-                ws_notifications["B" + str(i)] = ""
-                ws_notifications["C" + str(i)] = ""
-                ws_notifications["D" + str(i)] = ""
-                ws_notifications["E" + str(i)] = ""
+                row=i
 
-
-                for x in range(i, num_notifications + 2):
-                    ws_notifications["A" + str(x)] = ws_notifications["A" + str(x + 1)].value
-                    ws_notifications["B" + str(x)] = ws_notifications["B" + str(x + 1)].value
-                    ws_notifications["C" + str(x)] = ws_notifications["C" + str(x + 1)].value
-                    ws_notifications["D" + str(x)] = ws_notifications["D" + str(x + 1)].value
-                    ws_notifications["E" + str(x)] = ws_notifications["E" + str(x + 1)].value
+                ws_notifications.delete_rows(row)
 
                 ws_notifications["H3"] = num_notifications - 1
                 wb.save(filename='university.xlsx')
