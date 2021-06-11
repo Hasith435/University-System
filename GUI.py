@@ -130,6 +130,17 @@ def home():
     random_button.grid(row=5, column=0, padx=10)
     settings_button.grid(row=6, column=0, padx=10, sticky=W)
 
+#THIS IS THE FUNCTION THAT CONTAINS THE BUTTOSN THAT MAY BE INCLUDED IN THE SETTINGS MENU
+def settings():
+    settings_window = TopLevel()
+    settings_window.config(bg=dark_bg)
+    settings_window.title('SETTINGS')
+
+    settings_buttons_frame = create_frame(settings_window, dark_bg)
+
+
+
+
 
 class second_screen_students:
 
