@@ -658,10 +658,12 @@ class notifications:
     def remove_notification(sender_name):
         num_notifications = ws_notifications["H3"].value
         sender_name = notifications.get_sender_name(sender_name)
+        print(f'Sender Name: {sender_name}')
 
         for i in range(2, num_notifications + 2):
             if sender_name == ws_notifications["C" + str(i)].value:
                 row=i
+                print('remove notification for  loop works')
 
                 ws_notifications.delete_rows(row)
 

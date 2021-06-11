@@ -613,6 +613,8 @@ def teacher_button_root():
                         course_name = splited_description[7]
 
                         notifications.remove_notification(student_name)
+                        print(f'Student Admission Number: {student_admission_number}')
+                        print(f'Course Name: {course_name}')
                         courses.add_student_courses(student_admission_number, course_name)
 
                         course_register_notification_frame.grid_forget()
