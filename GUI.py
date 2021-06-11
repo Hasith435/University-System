@@ -51,6 +51,7 @@ if os.environ.get('DISPLAY','') == '':
 
 root = Tk()
 root.title("UNIVERISTY SYSTEM")
+root.eval('tk::PlaceWindow . center')
 
 
 # Accent colours
@@ -556,7 +557,7 @@ def teacher_button_root():
     #enter course
     #View current courses
 
-    num_notifications = ws_notifications["H3"].value
+    num_notifications = ws_notifications["H1"].value
     notifications_row = num_notifications + 2
 
     teacher_buttons_frame = create_frame(root, dark_bg, row=0, column=1)

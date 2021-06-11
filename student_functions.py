@@ -265,7 +265,7 @@ class courses(students):
         num_student_courses = ws_student_courses["L4"].value
         student_courses_row = num_student_courses + 2
 
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
         notifications_row = num_notifications + 2
 
         num_students = ws_students["J3"].value
@@ -274,19 +274,23 @@ class courses(students):
         num_courses = ws_courses["F4"].value
         course_row = num_courses + 2
 
+        fname=""
+        lname=""
         for i in range(2, num_students + 2):
             print(student_id)
             if ws_students["A" + str(i)].value == student_id:
                 print('for loop')
                 fname = ws_students["B" + str(i)].value
                 lname = ws_students["C" + str(i)].value
-                ws_student_courses["B" + str(student_courses_row)] = fname
-                ws_student_courses["C" + str(student_courses_row)] = lname
-                print(fname, lname)
-                print('student if works')
 
             else:
                 print('student if does not work')
+
+        ws_student_courses["B" + str(student_courses_row)] = fname
+        ws_student_courses["C" + str(student_courses_row)] = lname
+        print(fname, lname)
+        print('student if works')
+
 
         for k in range(2, num_courses + 2):
             if ws_courses["B" + str(k)].value == course_name:
@@ -557,7 +561,7 @@ class notifications:
     #These are some of the methods that may be useful further on
     @staticmethod
     def get_sender_name(name):
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
 
 
         for i in range(2, num_notifications + 2):
@@ -570,7 +574,7 @@ class notifications:
 
     @staticmethod
     def get_receiver_name(name):
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
 
         for i in range(2, num_notifications + 2):
             receiver_name = ws_notifications["E" + str(i)].value
@@ -583,7 +587,7 @@ class notifications:
 
     @staticmethod
     def get_description(course_name):
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
 
         for i in range(2, num_notifications + 2):
             description = ws_notifications["E" + str(i)].value
@@ -599,7 +603,7 @@ class notifications:
 
     @classmethod
     def check_name_validity(cls, login_name):
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
         print(f"num_notifications in check_name_validity: {num_notifications}")
         print('comes into the check name function')
 
@@ -633,7 +637,7 @@ class notifications:
 
         print('Notification function is called')
 
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
         notifications_row = num_notifications + 2
 
         student_name = get_student_name(student_id)
@@ -647,8 +651,8 @@ class notifications:
         ws_notifications["D" + str(notifications_row)] = instructor_name
         ws_notifications["E" + str(notifications_row)] = description
 
-        ws_notifications["H3"] = num_notifications + 1
-        notification_id = ws_notifications["H3"].value
+        ws_notifications["H1"] = num_notifications + 1
+        notification_id = ws_notifications["H1"].value
 
         ws_notifications["A" + str(notifications_row)] = notification_id
         wb.save(filename="university.xlsx")
@@ -656,7 +660,7 @@ class notifications:
 
     @staticmethod
     def remove_notification(sender_name):
-        num_notifications = ws_notifications["H3"].value
+        num_notifications = ws_notifications["H1"].value
         sender_name = notifications.get_sender_name(sender_name)
         print(f'Sender Name: {sender_name}')
 
@@ -667,7 +671,7 @@ class notifications:
 
                 ws_notifications.delete_rows(row)
 
-                ws_notifications["H3"] = num_notifications - 1
+                ws_notifications["H1"] = num_notifications - 1
                 wb.save(filename='university.xlsx')
                 break
 
