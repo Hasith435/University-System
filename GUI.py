@@ -580,66 +580,7 @@ def teacher_button_root():
     credentials_button.grid(row=2, column=1, padx=10, pady=10)
     back_button_root.grid(row=3, columnspan=2, padx=10, pady=10)
 
-    # name_validity returns (True, num_notifications, cls.notification_info)
-    name_validity_returns = notifications.check_name_validity(teacher_name)
-    print(name_validity_returns[2])
 
-    # try:
-    #THIS IS THE SECTION FOR THE NOTIFICATION RELATED TO COURSE ENROLLMENT
-    if name_validity_returns[2][0][0] == "COURSE ENROLLMENT":
-
-        print(name_validity_returns[0])
-        print(f"teacher name: {teacher_name}")
-
-        print(f"Num notifications: {num_notifications}")
-        for i in range(2, name_validity_returns[1] + 2):
-
-            print('forloop')
-            if name_validity_returns[0] == True:
-                print('notification if')
-
-                for k in range (0, len(name_validity_returns[2])):
-
-                    course_register_notification_frame = create_frame(teacher_buttons_frame, dark_bg, row=5, columnspan=2)
-
-                    random_button = Button(teacher_buttons_frame, bg=dark_bg, height=10, borderwidth=0)
-                    topic_lbl = Label(course_register_notification_frame, text=name_validity_returns[2][k][0], font=corbel_15,
-                                      bg=dark_bg, fg='white')
-                    description_lbl = Label(course_register_notification_frame, text=name_validity_returns[2][k][1],
-                                            font=corbel_13, bg=dark_bg, fg='white')
-
-                    def accept_button():
-                        splited_description = name_validity_returns[2][k][1].split()
-                        student_name = splited_description[0]
-                        course_name = splited_description[7]
-
-                        notifications.remove_notification(student_name)
-                        print(f'Student Admission Number: {student_admission_number}')
-                        print(f'Course Name: {course_name}')
-                        courses.add_student_courses(student_admission_number, course_name)
-
-                        course_register_notification_frame.grid_forget()
-
-                        # This is to send the message to the student
-
-                    accept_button = HoverButton(course_register_notification_frame, text="ACCEPT", font=corbel_13,
-                                                bg=enter_button_color, fg='black', borderwidth=0, width=10,
-                                                command=accept_button, activebackground=enter_button_hover_color)
-                    deny_button = HoverButton(course_register_notification_frame, text='DENY', font=corbel_13,
-                                              bg=back_button_color, fg='White', borderwidth=0, width=10,
-                                              activebackground=back_button_hover_color)
-
-                    random_button.grid(row=4, columnspan=2)
-                    topic_lbl.grid(row=0, column=0, sticky=W)
-                    description_lbl.grid(row=1, column=0, sticky=W)
-
-                    accept_button.grid(row=0, column=1, padx=10, pady=7)
-                    deny_button.grid(row=1, column=1, padx=10, pady=7)
-                    continue
-
-            else:
-                print('soemthing went wrong')
-                continue
 
     # except:
     # random_button = Button(teacher_buttons_frame, bg=dark_bg, height=10, borderwidth=0)
