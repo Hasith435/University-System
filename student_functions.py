@@ -555,3 +555,34 @@ class teachers:
             else:
                 print('invalid teacher id')
 
+class Notifications:
+
+    @staticmethod
+    def get_sender_name(sender_name_ui):
+        num_notifications = ws_notifications['H1'].value
+
+        for i in range(2, num_notifications + 2):
+            ss_sender_name = ws_notifications["C" + str(i)].value
+
+            if ss_sender_name == sender_name_ui:
+                return ss_sender_name
+
+            else:
+                continue
+
+    @staticmethod
+    def get_receiver_name(receiver_name_ui):
+        num_notifications = ws_notifications['H1'].value
+
+        for i in range(2, num_notifications + 2):
+            ss_recevier_name = ws_notifications["C" + str(i)].value
+
+            if ss_recevier_name == receiver_name_ui:
+                return ss_recevier_name
+
+            else:
+                continue
+
+    @staticmethod
+    def get_notification_topic ()
+
