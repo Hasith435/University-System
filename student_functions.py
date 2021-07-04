@@ -602,5 +602,6 @@ class Notifications:
     @staticmethod
     def add_notification_details(sender_name, receiver_name, topic):
         num_notifications = ws_notifications['H1'].value
+        notification_row = num_notifications + 2
 
 
