@@ -600,12 +600,23 @@ class Notifications:
 
     #These are some of the functional methods in the notification system
     @staticmethod
-    def add_notification_details(sender_name, receiver_name, topic):
+    def add_notification_details(sender_name, receiver_name, topic, course_name):
         num_notifications = ws_notifications['H1'].value
-        notification_row = num_notifications + 2
+        notifications_row = num_notifications + 2
 
         if topic == "COURSE ENROLLMENT":
+            description = f"{sender_name} would like to enroll in the {course_name}"
 
+            ws_notifications["B" + str(notifications_row)] = "COURSE ENROLLMENT"
+            ws_notifications["C" + str(notifications_row)] = sender_name
+            ws_notifications["D" + str(notifications_row)] = instructor_name
+            ws_notifications["E" + str(notifications_row)] = description
+
+            ws_notifications["H1"] = num_notifications + 1
+            notification_id = ws_notifications["H1"].value
+
+            ws_notifications["A" + str(notifications_row)] = notification_id
+            wb.save(filename="university.xlsx")
 
 
 
