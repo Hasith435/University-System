@@ -555,6 +555,7 @@ class teachers:
             else:
                 print('invalid teacher id')
 
+#This class contains all the methods for the notification system
 class Notifications:
 
     @staticmethod
@@ -584,5 +585,14 @@ class Notifications:
                 continue
 
     @staticmethod
-    def get_notification_topic ()
+    def get_notification_topic ():
+        pass
+
+    @staticmethod
+    def get_notification_description():
+        pass
+
+    @staticmethod
+    def get_notification_id():
+
 
