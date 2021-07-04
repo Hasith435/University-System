@@ -10,7 +10,7 @@ from student_functions import students
 from student_functions import courses
 from student_functions import clubs
 from student_functions import teachers
-from student_functions import notifications
+from student_functions import Notifications
 
 wb = xl.load_workbook("university.xlsx")
 ws = wb['students']
@@ -170,7 +170,8 @@ class second_screen_students:
                 global student_admission_number, course_name
 
                 course_name = clicked.get()
-                notifications.add_notification_details(student_admission_number, course_name)
+                # notifications.add_notification_details(student_admission_number, course_name)
+                Notifications.add_notification_details()
 
                 def registered_lbl():
                     registered_lbl = Label(register_frame, text= "REQUEST SENT", bg="#2e2e2d", foreground="white", font=corbel_13)

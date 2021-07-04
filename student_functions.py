@@ -600,15 +600,18 @@ class Notifications:
 
     #These are some of the functional methods in the notification system
     @staticmethod
-    def add_notification_details(sender_name, receiver_name, topic, course_name):
+    def add_notification_details(student_id, topic, course_name):
         num_notifications = ws_notifications['H1'].value
         notifications_row = num_notifications + 2
 
         if topic == "COURSE ENROLLMENT":
-            description = f"{sender_name} would like to enroll in the {course_name}"
+            instructor_name = get_instructor_name(course_name)
+            student_name = get_student_name(student_id)
+
+            description = f"{student_name} would like to enroll in the {course_name}"
 
             ws_notifications["B" + str(notifications_row)] = "COURSE ENROLLMENT"
-            ws_notifications["C" + str(notifications_row)] = sender_name
+            ws_notifications["C" + str(notifications_row)] = student_name
             ws_notifications["D" + str(notifications_row)] = instructor_name
             ws_notifications["E" + str(notifications_row)] = description
 
