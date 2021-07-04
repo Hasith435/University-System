@@ -558,6 +558,7 @@ class teachers:
 #This class contains all the methods for the notification system
 class Notifications:
 
+    #These are some of the necessary methods that are required for the notification system
     @staticmethod
     def get_sender_name(sender_name_ui):
         num_notifications = ws_notifications['H1'].value
@@ -594,5 +595,12 @@ class Notifications:
 
     @staticmethod
     def get_notification_id():
+        pass
+
+
+    #These are some of the functional methods in the notification system
+    @staticmethod
+    def add_notification_details(sender_name, receiver_name, topic):
+        num_notifications = ws_notifications['H1'].value
 
 
