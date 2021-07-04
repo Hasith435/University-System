@@ -604,4 +604,9 @@ class Notifications:
         num_notifications = ws_notifications['H1'].value
         notification_row = num_notifications + 2
 
+        if topic == "COURSE ENROLLMENT":
+
+
+
+
 
